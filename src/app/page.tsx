@@ -46,14 +46,8 @@ export default function Page() {
           </div>
         </div>
 
-        <p className="text-3xl text-center text-slate-300 leading-10">
-          Hi! My name is Danilo. I&apos;ve been a Front-end developer for over 9 years. Today I&apos;m specializing in Full-Stack development with React and Node.
-
-          During my career, I had the opportunity to work with agencies, startups and different types of entrepreneurs, creating all types of websites and applications.
-
-          I currently work at Greenlegis, located here in Brazil, where I have the opportunity to develop myself more and more and learn from an incredible team.
-
-          I&apos;m always looking for new challenges and I believe that technology is a powerful tool to transform people&apos;s lives.
+        <p className="text-3xl text-center text-slate-300 leading-10 font-light">
+          Yo! <span className="font-bold">I&apos;m Dan</span>, and I&apos;m so happy you&apos;re here! I&apos;m a <span className="font-bold">front-end developer</span> based in Brazil. I love writing code that <span className="font-bold">helps companies and people</span> create their products and <span className="font-bold">get their ideas</span> off the ground. I also love creating websites that <span className="font-bold">bring results</span>, capturing new leads, increasing the number of customers and sales, and having a <span className="font-bold">positive impact on the business</span>. If you want to put any ideas into practice or talk about any ideas you have, please feel free to get in touch. I&apos;d love to hear from you!
         </p>
       </section>
 
@@ -211,11 +205,11 @@ export default function Page() {
 
       <section className="pt-20 pb-60 text-center">
         <div className="flex flex-col gap-8">
-          <SparklesText text="Ready for work?" className="opacity-75" />
+          <SparklesText text="Let's build something great!" className="opacity-75" />
           <p className="text-xl">Let me help you create your amazing product</p>
 
           <Link href="mailto:oi@daniilo.dev" className="scale-125">
-            <ShinyButton text=" Yeah, lets do it!" />
+            <ShinyButton text="Yeah, lets do it!" />
           </Link>
         </div>
       </section>
