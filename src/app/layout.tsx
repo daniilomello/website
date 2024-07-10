@@ -59,7 +59,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body
         className={cn(
-          "overscroll-y-none bg-gray-900 antialiased selection:bg-violet-600/90 min-h-screen bg-gray-900 font-sans antialiased relative",
+          "overscroll-y-none selection:bg-violet-600/90 min-h-screen bg-gray-900 font-sans antialiased relative",
           fontSans.variable
         )}
       >
