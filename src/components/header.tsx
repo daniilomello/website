@@ -6,8 +6,8 @@ import Link from "next/link";
 
 export function Header() {
     return (
-        <section className="py-24 flex justify-between items-center">
-            <div className="flex items-center gap-3">
+        <header className="py-8 px-4 sm:px-0 sm:py-24 flex flex-col gap-4 sm:gap-0 sm:flex-row sm:justify-between sm:items-center">
+            <div className="flex items-center gap-3 justify-center sm:justify-normal">
                 <Link href="/">
                     <Avatar>
                         <AvatarImage className="rounded-full bg-gradient-to-tl from-purple-700/60 to-rose-400/60 p-1 shadow-lg ring-[5px] ring-purple-500/10" src="https://github.com/daniilomello.png" />
@@ -21,7 +21,7 @@ export function Header() {
                 </div>
             </div>
 
-            <nav className="flex items-center gap-4">
+            <nav className="flex items-center gap-4 justify-center sm:justify-normal">
                 <Link href="/blog" className="hover:text-rose-300 flex items-center gap-1 relative">
                     Notes
                 </Link>
@@ -31,6 +31,6 @@ export function Header() {
                 </Link>
             </nav>
             <Meteors number={30} />
-        </section>
+        </header>
     )
 }

@@ -2,8 +2,8 @@ import OrbitingCircles from "@/components/magicui/OrbitingCircles";
 
 export function Stack() {
   return (
-    <section className="py-16">
-      <div className="relative flex w-full max-w-[32rem] mx-auto items-center justify-center overflow-hidden rounded-lg scale-100" style={{height: '500px'}}>
+    <section className="py-16 scale-50">
+      <div className="relative flex w-full max-w-[32rem] mx-auto items-center justify-center overflow-hidden rounded-lg sm:scale-100" style={{height: '500px'}}>
         <span className="pointer-events-none whitespace-pre-wrap bg-gradient-to-b from-purple-900/80 to-purple-300/80 bg-clip-text text-center text-8xl font-semibold leading-none text-transparent dark:rose-300/80 dark:to-rose-900/10 opacity-50">
           Stack
         </span>

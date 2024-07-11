@@ -61,7 +61,7 @@ export default async function Blog({
   return (
     <>
       <Header />
-      <section id="blog" className="h-screen">
+      <section id="blog" className="h-screen px-8 sm:px-0">
         <script
           type="application/ld+json"
           suppressHydrationWarning

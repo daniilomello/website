@@ -6,7 +6,7 @@ import { FaDiscord, FaGithub, FaInstagram, FaLinkedin } from 'react-icons/fa';
 
 export function Social() {
     return (
-        <section className="start w-full py-28 max-w-[840px] grid-cols-1 gap-8 max-lg:flex max-lg:flex-col lg:grid xl:grid-cols-2 mx-auto">
+        <section className="px-4 start w-full py-0 sm:py-28 max-w-[840px] grid-cols-1 gap-4 sm:gap-8 flex flex-col sm:flex-row mx-auto">
             <Card className="start-center relative row-span-2  flex h-[400px] w-[400px] flex-col gap-5 overflow-hidden p-0 max-lg:w-full border-rose-200/10 transition group-hover:border-rose-200/30">
                 <div className="absolute bottom-40 left-40">
                     <div className="center relative inset-x-0 z-10 flex">
@@ -45,7 +45,7 @@ export function Social() {
                 <MapCard />
             </Card>
 
-            <div className="row-span-2 grid max-h-[400px] max-w-[400px] grid-cols-2 grid-rows-2 gap-10">
+            <div className="row-span-2 grid max-h-[400px] max-w-[400px] grid-cols-2 grid-rows-2 gap-4 sm:gap-10">
                 <a href="https://github.com/projectsdanilo" target="_blank">
                     <Card className="start-center flex h-full flex-col gap-5 p-4 max-lg:w-full border-rose-200/10 transition group-hover:border-rose-200/30 bg-purple-400/10 text-purple-300">
                         <Button
@@ -83,7 +83,6 @@ export function Social() {
                         <h6>Connect with me on Discord 🌐</h6>
                     </Card>
                 </a>
-
                 <a href="https://instagram.com/danilabs" target="_blank">
                     <Card className="start-center flex  h-full flex-col  gap-5 p-4 max-lg:w-full border-rose-200/10 transition group-hover:border-rose-200/30 bg-purple-400/10 text-purple-300">
                         <Button
