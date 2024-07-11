@@ -1,4 +1,5 @@
 import { Header } from "@/components/header";
+import { Badge } from "@/components/ui/badge";
 import { getBlogPosts } from "@/data/blog";
 import Link from "next/link";
 
@@ -14,7 +15,9 @@ export default async function BlogPage() {
     <>
       <Header />
       <section className="h-screen">
-        <h1 className="font-bold text-2xl mb-8 text-purple-100">Welcome to my articles and notes ✍️</h1>
+        <Badge variant="secondary" className="mb-4 bg-purple-600/30">Notes are currently in portuguese 🇧🇷</Badge>
+        <h1 className="font-bold text-2xl text-purple-100">Welcome to my articles and notes ✍️</h1>
+        <p className="mb-8 text-sm text-white/50">Ideas, reviews, explorations and how-to guides. <br />I write about different topics no always related to tech.</p>
 
         {posts
           .sort((a, b) => {

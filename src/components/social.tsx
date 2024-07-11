@@ -84,7 +84,7 @@ export function Social() {
                     </Card>
                 </a>
 
-                <a href="https://instagram.com/danilojsx" target="_blank">
+                <a href="https://instagram.com/danilabs" target="_blank">
                     <Card className="start-center flex  h-full flex-col  gap-5 p-4 max-lg:w-full border-rose-200/10 transition group-hover:border-rose-200/30 bg-purple-400/10 text-purple-300">
                         <Button
                             variant="secondary"
@@ -93,7 +93,7 @@ export function Social() {
                         >
                             <FaInstagram size={24} className="text-white" />
                         </Button>
-                        <h6>Watch my Reels 🛸</h6>
+                        <h6>Random Reels 💡</h6>
 
                         <Button variant="outline" size="sm" className="gap-2.5 rounded-sm bg-pink-600/80 hover:bg-pink-600/50">
                             Follow
