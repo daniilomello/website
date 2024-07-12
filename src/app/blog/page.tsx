@@ -23,24 +23,26 @@ export default async function BlogPage() {
         <h1 className="font-bold text-2xl text-purple-100">Welcome to my articles and notes ✍️</h1>
         <p className="mb-8 text-sm text-white/50">Code snippets, ideas, reviews, explorations and how-to guides. <br />I write about different topics not always related to tech.</p>
 
-        {posts
-          .sort((a, b) => {
-            if (
-              new Date(a.metadata.publishedAt) > new Date(b.metadata.publishedAt)
-            ) {
-              return -1;
-            }
-            return 1;
-          })
-          .map((post, id) => (
-            <Link
-              key={post.slug}
-              href={`/blog/${post.slug}`}
-              className="hover:text-purple-500/50 transition text-lg"
-            >
-              - {post.metadata.title}
-            </Link>
-          ))}
+        <div className="flex flex-col gap-3">
+          {posts
+            .sort((a, b) => {
+              if (
+                new Date(a.metadata.publishedAt) > new Date(b.metadata.publishedAt)
+              ) {
+                return -1;
+              }
+              return 1;
+            })
+            .map((post, id) => (
+              <Link
+                key={post.slug}
+                href={`/blog/${post.slug}`}
+                className="hover:text-purple-500/50 transition text-lg"
+              >
+                - {post.metadata.title}
+              </Link>
+            ))}
+        </div>
       </section>
     </>
   );
