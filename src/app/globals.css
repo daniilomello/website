@@ -180,3 +180,12 @@ code[data-line-numbers-max-digits="3"]>[data-line]::before {
 .blog ul {
   @apply my-5 pl-8;
 }
+
+.blog p code {
+  opacity: 0.8;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 4px 10px;
+  border-radius: 7px;
+  font-size: 15px;
+  font-weight: bold;
+}
