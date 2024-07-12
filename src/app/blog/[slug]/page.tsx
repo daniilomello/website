@@ -63,7 +63,7 @@ export default async function Blog({
   return (
     <>
       <Header />
-      <Link href="/blog" className="flex items-center gap-2 mb-4 hover:text-rose-500 transition">
+      <Link href="/blog" className="flex items-center gap-2 mb-4 px-8 sm:px-0 hover:text-rose-500 transition">
         <FaArrowLeft size={12} /> Voltar
       </Link>
       <section id="blog" className="blog h-min-screen px-8 sm:px-0 sm:max-w-2xl pb-8">
