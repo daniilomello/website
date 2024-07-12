@@ -165,6 +165,10 @@ code[data-line-numbers-max-digits="3"]>[data-line]::before {
   @apply text-lg my-5 leading-8;
 }
 
+.blog p a {
+  @apply underline text-rose-500 font-medium;
+}
+
 .blog figure[data-rehype-pretty-code-figure] {
   @apply my-5;
 }
