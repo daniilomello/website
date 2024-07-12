@@ -160,3 +160,19 @@ code[data-line-numbers-max-digits="3"]>[data-line]::before {
   rotate: -40deg;
   animation: plane 40s linear infinite;
 }
+
+.blog p {
+  @apply text-lg my-5 leading-8;
+}
+
+.blog figure[data-rehype-pretty-code-figure] {
+  @apply my-5;
+}
+
+.blog ul li {
+  @apply text-lg mb-2;
+}
+
+.blog ul {
+  @apply my-5 pl-8;
+}

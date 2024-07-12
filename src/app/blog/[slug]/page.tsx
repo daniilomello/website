@@ -2,7 +2,9 @@ import { Header } from "@/components/header";
 import { getPost } from "@/data/blog";
 import { DATA } from "@/data/resume";
 import type { Metadata } from "next";
+import Link from "next/link";
 import { notFound } from "next/navigation";
+import { FaArrowLeft } from "react-icons/fa";
 
 export async function generateMetadata({
   params,
@@ -61,7 +63,10 @@ export default async function Blog({
   return (
     <>
       <Header />
-      <section id="blog" className="h-screen px-8 sm:px-0">
+      <Link href="/blog" className="flex items-center gap-2 mb-4 hover:text-rose-500 transition">
+        <FaArrowLeft size={12} /> Voltar
+      </Link>
+      <section id="blog" className="blog h-min-screen px-8 sm:px-0 sm:max-w-2xl pb-8">
         <script
           type="application/ld+json"
           suppressHydrationWarning
