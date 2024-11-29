@@ -1,5 +1,4 @@
 import { Header } from "@/components/header";
-import { Badge } from "@/components/ui/badge";
 import { getBlogPosts } from "@/data/blog";
 import Link from "next/link";
 import { FaArrowLeft } from "react-icons/fa";
@@ -16,10 +15,9 @@ export default async function BlogPage() {
     <>
       <Header />
       <Link href="/" className="flex items-center gap-2 mb-4 px-8 sm:px-0 hover:text-rose-500 transition">
-        <FaArrowLeft size={12} /> Voltar
+        <FaArrowLeft size={12} /> Go back
       </Link>
       <section className="h-screen px-8 sm:px-0">
-        <Badge variant="secondary" className="mb-4 bg-purple-600/30">Notes are currently in portuguese 🇧🇷</Badge>
         <h1 className="font-bold text-2xl text-purple-100">Welcome to my articles and notes ✍️</h1>
         <p className="mb-8 text-sm text-white/50">Code snippets, ideas, reviews, explorations and how-to guides. <br />I write about different topics not always related to tech.</p>
 
