@@ -8,14 +8,13 @@ In order to make my life easy when I'm working, I create some alias for Git comm
 
 So I thought if it is valuable to me, it may be available for someone else too. That's why I'm gonna share with you today my personal alias.
 
-
 Open your Terminal and the first thing you have to do, is to access the Git configuration.
 
 ```bash
 git config --global --edit
 ```
 
-The first alias you are going to create it's too add items to staged and commit at the same time. For that, I use the letter C. Use the code below to create alias.
+The first alias you are going to create it's to add items to staged and commit at the same time. For that, I use the letter C. Use the code below to create alias.
 
 ```bash
 c = !git add --all && git commit -m
@@ -26,8 +25,6 @@ The second one that I like to use is to check the status on Git, and for that on
 ```bash
 s = !git status -s
 ```
-
-O próximo é o `git log`, porém de uma forma mais organizada e limpa, trazendo a hash reduzida do commit, a branch e descrição do commit, junto com o nome da pessoa e data do commit.
 
 The next one is the git log, but we are going to format in a more organized and clean and away. For that we going to bring, the branch, the name of the person, the short hash, description, and date of the commit. And we are going to apply some colors too.
 
