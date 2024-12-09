@@ -25,6 +25,9 @@ export function Header() {
                 <Link href="/blog" className="hover:text-rose-300 flex items-center gap-1 relative">
                     Notes
                 </Link>
+                <Link href="/about" className="hover:text-rose-300 flex items-center gap-1 relative">
+                    About Me
+                </Link>
                 <Link href="/resume.pdf" target="_blank" className="hover:text-rose-300">Resume</Link>
                 <Link href="mailto:oi@daniilo.dev">
                     <ShinyButton text="Hire Me" />
