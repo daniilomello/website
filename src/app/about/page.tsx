@@ -33,7 +33,7 @@ export default function Page() {
 
           <p>A place where my ideas and skills go beyond just code and ripple out into something meaningful for the whole team and company.</p>
 
-          <p>Recently, I&rsquo;ve been diving into personal projects that light me up. I built a Groceries app with React Native, looks amazing! You have to see it. (Altough, I&rsquo;m still figuring out the publishing hurdles, but hey, that&rsquo;s part of the journey, right?). </p>
+          <p>Recently, I&rsquo;ve been diving into personal projects that light me up. I built a Groceries app with React Native, looks amazing! You have to see it. (Although, I&rsquo;m still figuring out the publishing hurdles, but hey, that&rsquo;s part of the journey, right?). </p>
 
           <p>Right now, I&rsquo;m experimenting with AngularJS and playing around on AWS. I love the thrill of learning something new and figuring out how it all fits together.</p>
 
