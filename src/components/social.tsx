@@ -83,7 +83,7 @@ export function Social() {
                         <h6>Connect with me on Discord 🌐</h6>
                     </Card>
                 </a>
-                <a href="https://instagram.com/danilabs" target="_blank">
+                <a href="https://instagram.com/danilojsx" target="_blank">
                     <Card className="start-center flex  h-full flex-col  gap-5 p-4 max-lg:w-full border-rose-200/10 transition group-hover:border-rose-200/30 bg-purple-400/10 text-purple-300">
                         <Button
                             variant="secondary"
