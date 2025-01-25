@@ -41,7 +41,7 @@ export default function Page() {
 
           <p>Working with a team outside of Brazil, speaking a new language, and stepping into the global stage. I know I can bring value, but more importantly, I know there&rsquo;s so much I can learn, too.</p>
 
-          <p>Here&rsquo;s the dream: A place where the work feels exciting and the culture feels human. A role that challenges me, respects me, and gives me space to grow. A team that collaborates like friends, leaders who inspire trust, and projects that make a difference. Flexibility to balance life and work, with a focus on well-being. That&rsquo;s what I&rsquo;m looking for, and I will do my best to find it.</p>
+          <p className="bg-violet-600">Here&rsquo;s the dream: A place where the work feels exciting and the culture feels human. A role that challenges me, respects me, and gives me space to grow. A team that collaborates like friends, leaders who inspire trust, and projects that make a difference. Flexibility to balance life and work, with a focus on well-being. That&rsquo;s what I&rsquo;m looking for, and I will do my best to find it.</p>
 
           <p>I&rsquo;ll admit, though, it&rsquo;s not always easy. I&rsquo;ve had moments of doubt, wondering if I&rsquo;m doing enough, if I&rsquo;m pushing hard enough. Perseverance doesn&rsquo;t come naturally to me, but it&rsquo;s something I&rsquo;m working on.</p>
 
