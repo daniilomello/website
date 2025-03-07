@@ -27,6 +27,8 @@ export default function Page() {
 
           <p>I&rsquo;ve been thinking a lot about who I am, what drives me, and what I&rsquo;m building toward. Life has been a mix of growth and self-discovery, and honestly, I&rsquo;ve loved every messy part of it, even the bad ones.</p>
 
+          <p>I&apos;m a full stack developer based in Brazil. I enjoy helping companies and people create their products and get their ideas off the ground.</p>
+
           <p>When it comes to work, I&rsquo;m someone who goes all in. I want to grow, not just as an engineer but as someone who can lead, inspire, and make an impact.</p>
 
           <p>I wanna be part of a place where I can be useful in any role, learn like crazy, and eventually take on leadership, to inspire others like the leaders who inspired me.</p>
