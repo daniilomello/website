@@ -14,8 +14,8 @@ export function Game() {
   const [cards, setCards] = useState<Card[]>([]);
   const [flippedCards, setFlippedCards] = useState<number[]>([]);
   const [score, setScore] = useState(0);
-  const [moves, setMoves] = useState(0); // New state for moves
-
+  const [moves, setMoves] = useState(0);
+  const [highScore, setHighScore] = useState(0); // New state for high score
 
   const initializeCards = () => {
     const duplicatedEmojis = [...emojis, ...emojis];
@@ -37,16 +37,19 @@ export function Game() {
   };
 
   useEffect(() => {
+    const savedHighScore = localStorage.getItem('highScore');
+    if (savedHighScore) {
+      setHighScore(Number(savedHighScore));
+    }
     initializeCards();
   }, []);
-
 
   useEffect(() => {
     if (flippedCards.length === 2) {
       const [firstIndex, secondIndex] = flippedCards;
 
       if (cards[firstIndex].emoji === cards[secondIndex].emoji) {
-        setScore(score + 10);
+        setScore(score + 3);
         setCards((prevCards) =>
           prevCards.map((card) =>
             card.id === firstIndex || card.id === secondIndex
@@ -67,6 +70,17 @@ export function Game() {
       }
     }
   }, [flippedCards, cards, score]);
+
+  useEffect(() => {
+    // Check if all cards are matched
+    if (cards.every(card => card.isMatched)) {
+      const finalScore = moves * score;
+      if (finalScore > highScore) {
+        setHighScore(finalScore);
+        localStorage.setItem('highScore', String(finalScore));
+      }
+    }
+  }, [cards, score, moves, highScore]);
 
   function handleCardClick(index: number) {
     if (
@@ -96,8 +110,9 @@ export function Game() {
       </h2>
 
       <div className="mb-4 text-center mt-8 flex justify-between items-end text-xs">
-        <span>
-          Score: {score} | Moves: {moves}
+        <span className='text-left'>
+          <span className='block'>Score: {score} - Moves: {moves}</span>
+          <span className='block'>High Score: {highScore}</span>
         </span>
         <button
           className="ml-4 px-4 py-2 bg-rose-500/10 text-white rounded text-xs"
