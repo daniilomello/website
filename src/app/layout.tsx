@@ -70,6 +70,16 @@ export default function RootLayout({
             })(window,document,'script','dataLayer','GTM-W89NH7X');
           `}
         </Script>
+        <Script id="ga-head-src" strategy="afterInteractive" async src="https://www.googletagmanager.com/gtag/js?id=G-98RLHESESB"></Script>
+        <Script id="ga-head" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-98RLHESESB');
+          `}
+        </Script>
       </head>
       <body
         className={cn(
