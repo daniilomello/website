@@ -1,3 +1,4 @@
+import { CookiePopup } from "@/components/CookiePopup";
 import Spotlight, { SpotlightCard } from "@/components/spotlight";
 import { ThemeProvider } from "@/components/theme-provider";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -5,7 +6,9 @@ import { DATA } from "@/data/resume";
 import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
 import { Inter as FontSans } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
+
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -57,12 +60,27 @@ export default function RootLayout({
 
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <Script id="gtm-head" strategy="afterInteractive">
+          {`
+            (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+            })(window,document,'script','dataLayer','GTM-W89NH7X');
+          `}
+        </Script>
+      </head>
       <body
         className={cn(
           "overscroll-y-none selection:bg-violet-600/90 min-h-screen bg-gray-900 font-sans antialiased relative",
           fontSans.variable
         )}
       >
+        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W89NH7X" height="0" width="0" style={{
+          display: 'none',
+          visibility: 'hidden',
+        }}></iframe></noscript>
         <Spotlight>
           <SpotlightCard>
             <div className="absolute top-0 translate-y-3/2 left-1/2 -translate-x-1/2 pointer-events-none -z-0 w-1/2 aspect-square" aria-hidden="true">
@@ -76,6 +94,7 @@ export default function RootLayout({
               <TooltipProvider delayDuration={0}>
                 <main className="max-w-5xl mx-auto">
                   {children}
+                  <CookiePopup />
                 </main>
               </TooltipProvider>
             </ThemeProvider>
