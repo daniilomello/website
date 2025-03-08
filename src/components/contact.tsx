@@ -12,7 +12,7 @@ export function Contact() {
                     Let me help you bring it to life 💡
                 </p>
 
-                <Link href="mailto:oi@daniilo.dev">
+                <Link href="https://wa.me/5534984424459" target="_blank">
                     <InteractiveHoverButton>
                         Challenge Accepted
                     </InteractiveHoverButton>

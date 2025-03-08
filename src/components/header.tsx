@@ -28,7 +28,7 @@ export function Header() {
                     About
                 </Link>
                 <Link href="/resume.pdf" target="_blank" className="hover:text-rose-300">Resume</Link>
-                <Link href="mailto:oi@daniilo.dev">
+                <Link href="https://wa.me/5534984424459" target="_blank">
                     <InteractiveHoverButton className="text-xs">
                         Get in Touch
                     </InteractiveHoverButton>

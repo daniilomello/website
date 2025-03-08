@@ -29,7 +29,7 @@ export function Hero() {
                     Like Web and Mobile Apps.
                 </span>
             </p>
-            <Link href="mailto:oi@daniilo.dev" className="mt-5 block sm:mt-0">
+            <Link href="https://wa.me/5534984424459" target="_blank" className="mt-5 block sm:mt-0">
                 <InteractiveHoverButton className="text-sm sm:text-base">
                     Let&apos;s Talk
                 </InteractiveHoverButton>

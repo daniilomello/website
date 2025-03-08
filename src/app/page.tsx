@@ -5,6 +5,7 @@ import { Projects } from "@/components/projects";
 import { Social } from "@/components/social";
 import { Stack } from "@/components/stack";
 import { Testimonials } from "@/components/Testimonials";
+import { WhatsAppButton } from "@/components/WhatsAppButton";
 
 export default function Page() {
   return (
@@ -16,6 +17,7 @@ export default function Page() {
       <Social />
       <Testimonials />
       <Contact />
+      <WhatsAppButton />
     </main>
   );
 }

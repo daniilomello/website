@@ -17,7 +17,7 @@ export function Projects() {
                 <div className="h-[25rem] w-full flex items-center justify-center ">
                     <PinContainer
                         title="/dehut.com.br"
-                        href="https://www.dehut.com.br/"
+                        href="https://www.dehut.com.br/?origin=daniilodev"
                     >
                         <div className="flex basis-full flex-col p-4 tracking-tight text-slate-100/50 sm:basis-1/2 w-[18rem] h-[20rem] ">
                             <h3 className="max-w-xs !pb-2 !m-0 font-bold  text-base text-slate-100">
@@ -42,7 +42,7 @@ export function Projects() {
                 <div className="h-[25rem] w-full flex items-center justify-center ">
                     <PinContainer
                         title="/martinsatacado.com.br"
-                        href="https://www.martinsatacado.com.br/"
+                        href="https://www.martinsatacado.com.br/?origin=daniilodev"
                     >
                         <div className="flex basis-full flex-col p-4 tracking-tight text-slate-100/50 sm:basis-1/2 w-[18rem] h-[20rem] ">
                             <h3 className="max-w-xs !pb-2 !m-0 font-bold  text-base text-slate-100">
@@ -67,7 +67,7 @@ export function Projects() {
                 <div className="h-[25rem] w-full flex items-center justify-center ">
                     <PinContainer
                         title="/daniilabs"
-                        href="https://github.com/orgs/projectsdanilo/repositories"
+                        href="https://github.com/orgs/projectsdanilo/repositories/?origin=daniilodev"
                     >
                         <div className="flex basis-full flex-col p-4 tracking-tight text-slate-100/50 sm:basis-1/2 w-[18rem] h-[20rem] ">
                             <h3 className="max-w-xs !pb-2 !m-0 font-bold  text-base text-slate-100">
