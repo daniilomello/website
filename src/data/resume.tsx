@@ -1,12 +1,11 @@
 import { Icons } from "@/components/icons";
 
 export const DATA = {
-  name: "Danilo Mello",
+  name: "Danilo Mello - Full Stack Developer",
   initials: "DM",
   url: "https://daniilo.dev",
   location: "Uberlândia MG, Brazil",
-  description: "Front-end Engineer. I love building things and helping people...",
-  summary: "Let me tell you my story...",
+  description: "I'm a full-stack developer based in Uberlândia, Brazil. I have a passion for creating innovative solutions that make a difference. I can help create web and mobile apps using the latest technologies.",
   avatarUrl: "/me.png",
   skills: [
     "React & Next.js",

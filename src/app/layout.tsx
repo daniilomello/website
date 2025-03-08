@@ -29,6 +29,14 @@ export const metadata: Metadata = {
     siteName: `${DATA.name}`,
     locale: "en_US",
     type: "website",
+    images: [
+      {
+        url: "https://daniilo.dev/og.png",
+        width: 1200, // Recommended width
+        height: 630,  // Recommended height
+        alt: "Full Stack Develper Creates Digital Products"
+      }
+    ],
   },
   robots: {
     index: true,
