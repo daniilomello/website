@@ -14,7 +14,7 @@ export default async function BlogPage() {
   return (
     <>
       <Header />
-      <Link href="/" className="flex items-center gap-2 mb-4 px-8 sm:px-0 hover:text-rose-500 transition">
+      <Link href="/" className="flex items-center gap-2 mb-4 sm:-mt-8 px-8 sm:px-0 hover:text-rose-500 transition">
         <FaArrowLeft size={12} /> Go back
       </Link>
       <section className="h-screen px-8 sm:px-0">

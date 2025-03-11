@@ -63,10 +63,10 @@ export default async function Blog({
   return (
     <>
       <Header />
-      <Link href="/blog" className="flex items-center gap-2 mb-4 px-8 sm:px-0 hover:text-rose-500 transition">
+      <Link href="/blog" className="flex items-center gap-2 mb-4 sm:-mt-8 px-8 sm:px-0 hover:text-rose-500 transition">
         <FaArrowLeft size={12} /> Go Back
       </Link>
-      <section id="blog" className="blog h-min-screen px-8 sm:px-0 sm:max-w-2xl pb-8">
+      <section id="blog" className="blog h-min-screen px-8 sm:px-0 sm:max-w-[35rem] pb-8 sm:mx-auto sm:mt-10">
         <script
           type="application/ld+json"
           suppressHydrationWarning
@@ -89,7 +89,7 @@ export default async function Blog({
             }),
           }}
         />
-        <h1 className="font-bold text-3xl mb-8 text-purple-100">{post.metadata.title}</h1>
+        <h1 className="font-bold text-3xl sm:text-4xl mb-8 text-purple-100">{post.metadata.title}</h1>
 
         <article dangerouslySetInnerHTML={{ __html: post.source }}></article>
       </section>
