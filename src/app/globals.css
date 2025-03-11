@@ -189,3 +189,7 @@ code[data-line-numbers-max-digits="3"]>[data-line]::before {
   font-size: 15px;
   font-weight: bold;
 }
+
+.blog h2 {
+  @apply text-lg;
+}
