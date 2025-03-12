@@ -7,49 +7,66 @@ This post is a friendly guide to help you quickly find the most essential Git co
 
 ## Git Configuration
 
-**Setting up an username and email:**
+Before you start using Git, you have to set up your username to sign into your repository on every commit you've made. It is important to work collaboratively with your team.
+
+Setting up an username and email:
+
+You can use the flag `--global` to set up your Git user globally. But if you don't pass any flag, your user can be set for a specific repository.
+
 ```bash
 git config --global user.name "Danilo Mello"
 git config --global user.email "danilo@email.com"
 ```
 
-**Checking user configurations:**
+Checking user configurations:
+
+You can also check the user you have created globally, or you can check the specific user for a specific repository
+
 ```bash
 git config user.name
 git config user.email
 git config --list
 ```
 
-**Creating alias:**
+Creating alias:
+
+In order to make your life easier, it is possible to create alias to reduce the size or the number of commands you run every time.
+
 ```bash
 git config --global alias.s status
 ```
 
 ## Creating a new respository
 
-**Initializing a new respository**
+Now let's learn how to create and manipulate your repository.
+
+Initializing a new respository:
+
 ```bash
 git init
 ```
 
-**Add remote repository**
+Add remote repository:
+
 ```bash
 git remote add origin git@github.com:username/reponame.git
 ```
 
-**Cloning a repository**
+Cloning a repository:
+
 ```bash
 git clone git@github.com/username/reponame.git foldername # or use . for current folder
 ```
 
-**Checking your remotes**
+Checking your remotes:
+
 ```bash
 git remote -v
 ```
 
-**Checkting the status of the files**
+Checking the status of the files:
 
-Here is the life cycle of the files on Git:
+It is important to understand how the status of your files inside your repository works and behave. Here is the life cycle of the files on Git:
 
 - Untracked: file was created but git it's not tracking;
 - Unmodified: files was recognized but it wasn't modified;
@@ -60,13 +77,14 @@ Here is the life cycle of the files on Git:
 git status
 ```
 
-**Adding files to staged**
+Adding files to staged:
+
 ```bash
 git add filename
 git add . # To add all files
 ```
 
-**Commiting files**
+Commiting files:
 
 First, what is a commit? It's basically a snapshot off the current state of one or multiple files.
 
@@ -85,7 +103,7 @@ git add -p
 
 ## Analyzing your commits
 
-**Checking your commits log**
+Checking your commits log:
 
 You can see your commit history and filter through a bunch of options like: commit hash, author, date, or a commit message. And, see everything in a graph format.
 
@@ -105,18 +123,19 @@ git shortlog
 git shortlog -sn
 ```
 
-**Advanced log**
+Advanced log:
+
 ```bash
 git reflog
 ```
 
-**Getting more information about one commit**
+Getting more information about one commit:
 
 ```bash
 git show commitHashHere
 ```
 
-**Checking the files modifications by comparing changes**
+Checking the files modifications by comparing changes:
 
 ```bash
 git diff
@@ -125,20 +144,23 @@ git diff --name-only # To see files that was modified
 
 ## Manipulating commits
 
-**Editing a commit message**
+As you work, you will have different needs for your commits, now here we are going to approach the most common ones that you might use every day.
+
+Editing a commit message:
+
 ```bash
 git commit --amend
 ```
 
-**Removing changes from a file**
+Removing changes from a file:
 
 ```bash
 git checkout filename
 ```
 
-**Removing a file from staged**
+Removing a file from staged:
 
-**Undo files changes**
+Undo files changes:
 
 ```bash
 git reset HEAD filename
@@ -158,25 +180,30 @@ git reset --mixed commitHash
 git reset --hard commitHash
 ```
 
-**Adding a commit change to your Branch**
+Adding a commit change to your Branch:
+
 Use cherry-pick to apply a specific commit to your current branch (Learn about branch on next topic). It works by taking the changes from the commit and applying to your current branch. This is useful when you want to take a single commit from a branch and apply it to another branch.
+
 ```bash
 git cherry-pick commitHash
 ```
 
-**Combining commits**
+Combining commits:
+
 The flag `-i` is to open menu where you have to where to inicial commit to be combined start, and number 2 is to decide how many commits will be combined. Use the squash option on thoses that you want to combine.
 
 ```bash
 git rebase -i HEAD~2
 ```
 
-**Fixing commits**
+Fixing commits:
+
 ```bash
 git commit --fixup commitHash
 ```
 
-**Combining the fixup commits**
+Combining the fixup commits:
+
 hash of the commit has to be previous of the one you want to combine.
 
 ```bash
@@ -189,35 +216,42 @@ What is a branch? I like to describe a branch like a line of development. The mo
 
 Is an incredible way to work with multiple people, without touching the core of the project and avoid conflicts.
 
-**Creating an new brach**
+Creating an new brach:
+
 ```bash
 git checkout -b branchName
 ```
 
-**Checking the list of branches**
+Checking the list of branches:
+
 ```bash
 git branch
 ```
 
-**Navigating to a branch**
+Navigating to a branch:
+
 ```bash
 git checkout branchName
 ```
 
-**Going back a branch**
+Going back a branch:
+
 ```bash
 git checkout -
 ```
 
-**Removing a branch**
+Removing a branch:
+
 ```bash
 git branch -D branchName
 ```
 
-**Merging a branch**
+Merging a branch:
+
 A Merge is when you are ready to integrate your current separate line of development into main line of development. By doing the merge, you have to create commit and define merge message.
 
-**Rebase a branch**
+Rebase a branch:
+
 It works in the same way as the merge, but without creating a commit, keeping the commit history more clean.
 
 ```bash
@@ -225,13 +259,14 @@ git merge branchName
 git rebase branchName
 ```
 
-**Pulling with Rebase to evoid conflict**
+Pulling with Rebase to evoid conflict:
+
 ```bash
 git pull origin main --rebase
 ```
 
+Finalizing an conflict on git:
 
-**Finalizing an conflict on git**
 The `--continue` flag is used to proceed with a merge or rebase operation after resolving conflicts
 
 ```bash
@@ -243,40 +278,47 @@ git rebase --continue
 
 Useful when you're navigating between branches and you don't want to commit your changes.
 
-**Stashing your current changes**
+Stashing your current changes:
+
 ```bash
 git stash
 ```
 
-**Applying an stashed change**
+Applying an stashed change:
+
 ```bash
 git stash apply
 ```
 
-**Seeing your stashed changes**
+Seeing your stashed changes:
+
 ```bash
 git stash list
 ```
 
-**Cleating all your stashed changes**
+Cleating all your stashed changes:
+
 ```bash
 git stash clear
 ```
 
 ## Pushing your changes
-Sending your changes to a remote respository.
+
+Now that you know how to manipulate your commits, create branches, and do many different things using Git, it is time to push your updates to a repository
 
 ```bash
 git push origin main
 ```
 
-**Creating version tags for your release or pushes**
+Creating version tags for your release or pushes:
+
 ```bash
 git tag -a 1.0.0 -m "My first relesase version"
 git push origin main --tags
 ```
 
-**Undo an push**
+Undo an push:
+
 You can undo a push by reverting to an specific commit before the push.
 ```bash
 git revert commitHash

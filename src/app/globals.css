@@ -162,7 +162,7 @@ code[data-line-numbers-max-digits="3"]>[data-line]::before {
 }
 
 .blog p {
-  @apply text-lg my-5 leading-8;
+  @apply text-2xl my-5 leading-8;
 }
 
 .blog p a {
@@ -175,7 +175,7 @@ code[data-line-numbers-max-digits="3"]>[data-line]::before {
 }
 
 .blog ul li {
-  @apply text-lg mb-2;
+  @apply text-2xl mb-2;
 }
 
 .blog ul {
@@ -187,12 +187,21 @@ code[data-line-numbers-max-digits="3"]>[data-line]::before {
   background: rgba(0, 0, 0, 0.5);
   padding: 4px 10px;
   border-radius: 7px;
-  font-size: 15px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.blog li code {
+  opacity: 0.8;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 4px 10px;
+  border-radius: 7px;
+  font-size: 18px;
   font-weight: bold;
 }
 
 .blog h2 {
-  @apply text-2xl font-bold mt-12 mb-1;
+  @apply text-3xl font-bold mt-12 mb-1;
 }
 
 .blog ul {
