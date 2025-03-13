@@ -162,7 +162,7 @@ code[data-line-numbers-max-digits="3"]>[data-line]::before {
 }
 
 .blog p {
-  @apply text-2xl my-5 leading-8;
+  @apply text-lg my-5 leading-8;
 }
 
 .blog p a {
@@ -175,7 +175,7 @@ code[data-line-numbers-max-digits="3"]>[data-line]::before {
 }
 
 .blog ul li {
-  @apply text-2xl mb-2;
+  @apply text-lg mb-2;
 }
 
 .blog ul {
@@ -201,7 +201,7 @@ code[data-line-numbers-max-digits="3"]>[data-line]::before {
 }
 
 .blog h2 {
-  @apply text-3xl font-bold mt-12 mb-1;
+  @apply text-2xl font-bold mt-12 mb-1;
 }
 
 .blog ul {
