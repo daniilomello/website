@@ -1,0 +1,77 @@
+---
+title: Git Flow, Conventional Commit and Semantic Versioning
+publishedAt: 2025-03-12
+---
+
+## Working with Git Flow
+
+Git Flow is a workflow pattern with Git that helps organize collaborative application development. It defines rules for how to create, manage, and merge branches in a repository.
+
+With it, you can create an organized workflow, avoiding conflicts between team members, allowing the development of features in parallel.
+
+The result is a more structured process for delivering new versions of the application and stable code in production.
+
+In Git flows we have the following branches:
+
+1. **main** – Has the code ready to be used in production.
+2. **develop** – Where continuous development of the application is carried out.
+3. **feature** – Used to create new features.
+4. **release** – Used to define the delivery of a new pre-production version.
+5. **hotfix** – Used to define urgent bugs made in production.
+
+## Conventional Commits
+
+Conventional Commit is a standard for writing commit messages in a clear and standardized way. It defines a simple message format where any developer would be able to understand the changes made to the project repository.
+
+With it, you can keep your commit history organized and readable, facilitating collaboration, version automation with CI/CD tools, and automatic changelog generation.
+
+The pattern:
+
+```
+<tipo>[escopo opcional]: <descrição>
+
+[corpo opcional]
+
+[rodapé opcional]
+```
+
+The most common types are:
+
+- **feat** – To add a new feature.
+- **fix** – To fix a bug.
+- **cry** – For changes that do not affect the code (e.g. configurations).
+- **docs** – For documentation updates.
+- **style** – For formatting adjustments (without changing logic).
+- **refactor** – To improve code without changing behavior.
+- **test** – To add or modify tests.
+- **BREAKING CHANGE** in the footer or **!** in the type indicates break in the current version
+
+## Semantic Versioning
+
+Semantic Versioning is a standard for defining versions of an application or product. It uses the XYZ format (e.g. 1.2.3), where each number has a specific meaning. The first is MAJOR , the second is MINOR , and the third is PATCH .
+
+It helps you quickly understand the impact of a new version on your project, facilitates compatibility between dependencies, and makes updates more predictable and organized.
+
+What each one means:
+
+- **MAJOR - X.0.0** : used to describe a major change that may break compatibility. If it is a package update, for example, a change must be made to your code.
+- **MINOR - 0.Y.0** : used to describe the addition of new features, but which do not break compatibility, and no updates are required in the code.
+- **PATCH - 0.0.Z** : used to describe the addition of improvements or bug fixes that do not require code updates and do not break compatibility.
+
+Example of versioning an application:
+
+- 1.0.0: First stable version of the application.
+- 1.1.0: Added a new feature, but no compatibility changes.
+- 1.1.1: Fixed a bug without changing anything in the software's operation.
+- 2.0.0: Deep changes that require updates to users’ code.
+
+There are additional labels that indicate the development stage of the version. These labels are mainly used before the official release of a new version.
+
+Examples of labels:
+
+- **Alpha (-alpha)**: Example: 1.0.0-alpha. Defines the first phase of internal testing, with new features still under development, it may contain many bugs and is not stable.
+- **Beta (-beta)**: Example: 2.0.0-beta. Used for more advanced testing, still unstable, with features already implemented, but may change or contain problems. Available for external testing by selected users.
+- **Release Candidate (-rc)**: Example: 3.0.0-rc. Used for final testing before release, on a near-final version. If there are no major issues, this version will become official.
+- **Stable**: Official, production-ready version. When it reaches XYZ without a suffix (1.0.0), it means it is tested and ready for general use.
+
+Following these standards in a project will bring organization, predictability and efficient collaboration, improving project maintenance, reducing errors and making development more professional and agile.
