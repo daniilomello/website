@@ -3,24 +3,28 @@ title: Git Essentials
 publishedAt: 2025-03-09
 ---
 
-This post is a friendly guide to help you quickly find the most essential Git commands. I've got you covered!
+## Introduction
 
-## Git Configuration
+Git is an essential tool for devs, enabling efficient version control and collaboration. This guide provides an overview of the most important Git commands to help you manage repositories, track changes, and collaborate with your team.
 
-Before you start using Git, you have to set up your username. This way people will know what commit you made. It is important to work collaboratively with your team. 
+## Prerequisites
 
-Setting up an username and email:
+Before getting started, ensure that:
+- Git is installed on your system.
+- You have basic knowledge of the command line.
 
-You can use the flag `--global` to set up your Git user globally. But if you don't pass any flag, your user can be set for a specific repository.
+## Getting Started
+
+### Configuring Git
+
+Before using Git, set up your username and email so your commits are properly attributed.
 
 ```bash
 git config --global user.name "Danilo Mello"
 git config --global user.email "danilo@email.com"
 ```
 
-Checking user configurations:
-
-You can also check the user you have created globally, or you can check the specific user for a specific repository
+To check your configurations:
 
 ```bash
 git config user.name
@@ -28,298 +32,207 @@ git config user.email
 git config --list
 ```
 
-Creating alias:
-
-In order to make your life easier, it is possible to create alias to reduce the size or the number of commands you run every time.
+You can also create aliases to simplify commands:
 
 ```bash
 git config --global alias.s status
 ```
 
-## Creating a new respository
+### Creating and Managing Repositories
 
-Now let's learn how to create and manipulate your repository.
-
-Initializing a new respository:
+#### Initializing a Repository
 
 ```bash
 git init
 ```
 
-Add remote repository:
+#### Adding a Remote Repository
 
 ```bash
 git remote add origin git@github.com:username/reponame.git
 ```
 
-Cloning a repository:
+#### Cloning a Repository
 
 ```bash
-git clone git@github.com/username/reponame.git foldername # or use . for current folder
+git clone git@github.com/username/reponame.git foldername
 ```
 
-Checking your remotes:
+#### Checking Remote Repositories
 
 ```bash
 git remote -v
 ```
 
-Checking the status of the files:
+### Tracking File Changes
 
-It is important to understand how the status of your files inside your repository works and behave. Here is the life cycle of the files on Git:
-
-- Untracked: file was created but git it's not tracking;
-- Unmodified: files was recognized but it wasn't modified;
-- Modified: files was recognized and modified;
-- Staged: files was recognized and ready to be commited;
+#### Checking File Status
 
 ```bash
 git status
 ```
 
-Adding files to staged:
+#### Staging Files
 
 ```bash
 git add filename
-git add . # To add all files
+git add . # Add all files
 ```
 
-Commiting files:
-
-First, what is a commit? It's basically a snapshot off the current state of one or multiple files.
-
-When creating a commit you have to pass the `-m` flag to indicate that is receiving a commit message. You can also add to stage and commit at the same time using the `-am` flag.
+#### Committing Changes
 
 ```bash
-git commmit -m "My first commit right here"
-git commit -am "Adding to stage and commiting at the same time"
+git commit -m "My first commit"
+git commit -am "Add and commit changes"
 ```
 
-You can also commit pieces of chages by using the `-p` flag. Press `y` to accept the change or `n` to deny.
+To commit specific changes interactively:
 
 ```bash
 git add -p
 ```
 
-## Analyzing your commits
+### Analyzing Commit History
 
-Checking your commits log:
-
-You can see your commit history and filter through a bunch of options like: commit hash, author, date, or a commit message. And, see everything in a graph format.
-
+#### Viewing Commit Logs
 
 ```bash
 git log
 git log --author="Danilo"
 git log --since="Jan 01 2025" --until="March 01 2025"
 git log --graph
-git log --pretty=oneline --graph --all # All details in graph about your commits
 ```
 
-You can get a short version of your commits using the shortlog. And use the `-sn` flag to get the numbers of commits per contributor.
+#### Viewing Short Logs
 
 ```bash
-git shortlog
 git shortlog -sn
 ```
 
-Advanced log:
-
-```bash
-git reflog
-```
-
-Getting more information about one commit:
+#### Viewing Specific Commit Details
 
 ```bash
 git show commitHashHere
 ```
 
-Checking the files modifications by comparing changes:
+#### Comparing Changes
 
 ```bash
 git diff
-git diff --name-only # To see files that was modified
+git diff --name-only
 ```
 
-## Manipulating commits
+### Managing Commits
 
-As you work, you will have different needs for your commits, now here we are going to approach the most common ones that you might use every day.
-
-Editing a commit message:
+#### Amending the Last Commit
 
 ```bash
 git commit --amend
 ```
 
-Removing changes from a file:
+#### Undoing Changes
 
 ```bash
 git checkout filename
-```
-
-Removing a file from staged:
-
-Undo files changes:
-
-```bash
 git reset HEAD filename
 ```
 
-To reset a commit you have to use the reset, but you can also pass different flags to manipulate your command.
-
-- The flag `--soft`, will undo your commit and send files back to staged;
-- The flag `--mixed`, will unedo your commit and send files back to modified;
-- The flag `--hard`, will remove all the changes forever;
-
-When you use the `--hard` flag, you will modify your commit history wich can create a problem on pushing your changes, in this you can use `--force` flag to force a push.
+#### Resetting Commits
 
 ```bash
-git reset --soft commitHash
-git reset --mixed commitHash
-git reset --hard commitHash
+git reset --soft commitHash # Moves changes to staging
+git reset --mixed commitHash # Moves changes to modified
+git reset --hard commitHash # Removes changes permanently
 ```
 
-Adding a commit change to your Branch:
-
-Use cherry-pick to apply a specific commit to your current branch (Learn about branch on next topic). It works by taking the changes from the commit and applying to your current branch. This is useful when you want to take a single commit from a branch and apply it to another branch.
+#### Applying a Specific Commit to Another Branch
 
 ```bash
 git cherry-pick commitHash
 ```
 
-Combining commits:
-
-The flag `-i` is to open menu where you have to where to inicial commit to be combined start, and number 2 is to decide how many commits will be combined. Use the squash option on thoses that you want to combine.
+#### Combining Commits
 
 ```bash
 git rebase -i HEAD~2
 ```
 
-Fixing commits:
+### Working with Branches
 
-```bash
-git commit --fixup commitHash
-```
-
-Combining the fixup commits:
-
-hash of the commit has to be previous of the one you want to combine.
-
-```bash
-git reabase -i --autosquash commitHash 
-```
-
-## Manipulating Branches
-
-What is a branch? I like to describe a branch like a line of development. The most common use of branches is to isolate a new feature or bug-fix from the main line of development (usually called "main") until it is ready to be merged in.
-
-Is an incredible way to work with multiple people, without touching the core of the project and avoid conflicts.
-
-Creating an new brach:
+#### Creating and Switching Branches
 
 ```bash
 git checkout -b branchName
-```
-
-Checking the list of branches:
-
-```bash
-git branch
-```
-
-Navigating to a branch:
-
-```bash
 git checkout branchName
-```
-
-Going back a branch:
-
-```bash
 git checkout -
 ```
 
-Removing a branch:
+#### Listing and Deleting Branches
 
 ```bash
+git branch
 git branch -D branchName
 ```
 
-Merging a branch:
-
-A Merge is when you are ready to integrate your current separate line of development into main line of development. By doing the merge, you have to create commit and define merge message.
-
-Rebase a branch:
-
-It works in the same way as the merge, but without creating a commit, keeping the commit history more clean.
+#### Merging and Rebasing Branches
 
 ```bash
 git merge branchName
 git rebase branchName
 ```
 
-Pulling with Rebase to evoid conflict:
+#### Pulling Changes with Rebase
 
 ```bash
 git pull origin main --rebase
 ```
 
-Finalizing an conflict on git:
-
-The `--continue` flag is used to proceed with a merge or rebase operation after resolving conflicts
+#### Resolving Conflicts
 
 ```bash
 git merge --continue
 git rebase --continue
 ```
 
-## Saving modifications
+### Saving Work Without Committing
 
-Useful when you're navigating between branches and you don't want to commit your changes.
-
-Stashing your current changes:
+#### Stashing Changes
 
 ```bash
 git stash
 ```
 
-Applying an stashed change:
+#### Applying Stashed Changes
 
 ```bash
 git stash apply
-```
-
-Seeing your stashed changes:
-
-```bash
 git stash list
-```
-
-Cleating all your stashed changes:
-
-```bash
 git stash clear
 ```
 
-## Pushing your changes
+### Pushing and Managing Remote Changes
 
-Now that you know how to manipulate your commits, create branches, and do many different things using Git, it is time to push your updates to a repository
+#### Pushing Changes to a Repository
 
 ```bash
 git push origin main
 ```
 
-Creating version tags for your release or pushes:
+#### Tagging Releases
 
 ```bash
-git tag -a 1.0.0 -m "My first relesase version"
+git tag -a 1.0.0 -m "First release"
 git push origin main --tags
 ```
 
-Undo an push:
+#### Reverting a Push
 
-You can undo a push by reverting to an specific commit before the push.
 ```bash
 git revert commitHash
 ```
+
+## Conclusion
+
+Mastering Git commands is essential for efficient development and collaboration. By using these commands regularly, you'll improve your workflow and avoid common version control issues.
+
+If this guide helped you, let me know your feedback! Share it with a friend or post it on social media to help others improve their Git skills. Thank you for reading! 🚀

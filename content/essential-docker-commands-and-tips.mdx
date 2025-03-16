@@ -3,109 +3,108 @@ title: Essential Docker commands and tips
 publishedAt: 2025-03-15
 ---
 
-The aim of this article is to serve as a guide for you who use Docker in your daily life. Here are the main Docker features you need to know.
+## Introduction
 
-### Basic Docker commands
+Docker is a powerful tool that simplifies application deployment by using containerization. This guide aims to help you understand and efficiently use Docker in your daily development workflow. By the end of this article, you will have a basic understanding about Docker commands and best practices.
 
-To run the first container, run docker run image-name. It will look for the most up-to-date version of the image (latest) on your machine, if it doesn't exist, it will download it by pulling the image, and then it will run the image with the run.
+## Prerequisites
+
+Before diving into the commands: 
+1. Ensure you have Docker installed on your machine. You can download it from the [official Docker website](https://www.docker.com/get-started). 
+2. Basic knowledge of the command line will also be helpful.
+
+## Getting Started with Docker
+
+### Basic Docker Commands
+
+To run your first container, use the `docker run` command. It will check if the image is available locally; if not, it will download it and then execute the container.
 
 ```bash
 docker run hello-world
 ```
 
-To view the containers running on your machine, use the `docker ps` command.
+To view active containers:
 
 ```bash
 docker ps
 ```
 
-To view the history of containers that have been executed, use the `docker ps -a` command.
+To view all containers, including stopped ones:
 
 ```bash
 docker ps -a
 ```
 
-To run a container and access the terminal, use the `it` flag, which means that we want to interact with the terminal.
-
-To run a created container, use the command `docker start container-name`, and to stop running a container, `docker stop container-name`.
+To start and stop containers:
 
 ```bash
-docker start hello-world 
+docker start container-name
+docker stop container-name
 ```
 
-```bash
-docker stop hello-world
-```
-
-To execute a container and delete it after the process has ended, use the `rm` flag. 
+To run a container and delete it after execution:
 
 ```bash
 docker run -it --rm ubuntu bash
 ```
 
-To enter the terminal of a container that is already running, use the `docker exec -it name-of-container bash` command. 
+To access a running container:
 
 ```bash
-docker exec -it ubuntu bash
+docker exec -it container-name bash
 ```
 
-To delete a container, first stop the container, and then use the command, `docker remove or docker rm`. To force the removal of a container, use the `-f` flag to force it.
+To remove a container:
 
 ```bash
-docker remove hellow-world -f
+docker rm container-name -f
 ```
 
-You can remove all running containers by nesting commands. It will execute the one in parentheses first, which lists the container ids, then it will execute the remove command.
+To remove all containers at once:
 
 ```bash
 docker rm $(docker ps -a -q) -f
 ```
 
-To expose a container's port, use the `-p` flag, followed by the port number on your machine (host) and then the container's port. This will direct the host port to the container.
+### Working with Volumes and Mounts
 
-```bash
-docker run -d -p 80:80 nginx
-```
+#### Bind Mounts
 
-### Bind e Mount in Docker
-
-Every time a container is deleted, its files are deleted together. However, it is possible to define a bind, which is a local folder that Docker will monitor and bring into the container.
-
-To make a bind, use the `-v` volume flag, then pass the local path and the container path, `-v folder-local:folder-container`.
+Bind mounts allow you to map a local directory to a container directory, ensuring persistent storage.
 
 ```bash
 docker run -d --name nginx -p 80:80 -v /c/users/danilo/www/html:/usr/share/nginx/html nginx
 ```
 
-Another way to bind is to use the mount command, which will validate whether the folder exists locally or inside the container. If it doesn't, Docker will return an error.
+Using the `mount` flag:
 
 ```bash
 docker run -d --name nginx -p 80:80 --mount type=bind,source=/c/users/danilo/www/html,target=/usr/share/nginx/html nginx
 ```
 
-### Volumes in Docker
+#### Docker Volumes
 
-The volume command is the best way to work with volumes in Docker, for performance reasons, ease of sharing the same volume with different containers and much more.
+Docker volumes are the preferred way to handle persistent data.
 
-To create a volume, use the `create` command followed by the volume name.
+To create a volume:
 
 ```bash
 docker volume create volume-name
 ```
 
-To get more details about the volume created, you can use the `inspect` command. 
+To inspect a volume:
 
 ```bash
 docker volume inspect volume-name
 ```
 
-To link a volume to a container you have to say the `type=volume` and `source=volume-name` 
+To attach a volume to a container:
 
 ```bash
-docker run --name nginx -d --mount type=volume,source=volumen-name,target=/app nginx
+docker run --name nginx -d --mount type=volume,source=volume-name,target=/app nginx
 ```
 
-To remove files on the volume that are not being used or are just cached and gain more space, use the `prune` command.
+To clean up unused volumes:
 
 ```bash
 docker volume prune
@@ -113,10 +112,11 @@ docker volume prune
 
 ### Docker Compose
 
-It is a tool based on a `yml` file, which can take all the containers you want to upload described in that file, and create them automatically. In other words, with just a single command you can create several containers.
+Docker Compose allows you to define multi-container applications using a YAML file.
+
+Example `docker-compose.yml`:
 
 ```yml
-# docker-compose.yml
 version: '3'
 
 services: 
@@ -145,49 +145,39 @@ networks:
     driver: bridge
 ```
 
-To create the containers, use the `docker-compose up -d` command. If you have updated the Dockerfile, use the `--build` flag to re-generate the build of the images.
+To start the containers:
 
 ```bash
 docker-compose up -d --build
 ```
 
-To see the containers running `docker-compose ps`
-
-```bash
-docker-compose ps
-```
-
-If you want to stop the containers, use `docker-compose down`
+To stop the containers:
 
 ```bash
 docker-compose down
 ```
 
-### Images and Dockerfile
+### Working with Docker Images
 
-Images in Docker are a set of dependencies for creating containers. 
-
-To download an image, without running any containers, you can use the `pull` command.
+To download an image:
 
 ```bash
 docker pull image-name
 ```
 
-To view the images you have on your machine, use the `images` command.
+To list available images:
 
 ```bash
 docker images
 ```
 
-To remove an image, use `rmi` command.
+To remove an image:
 
 ```bash
 docker rmi image-name
 ```
 
-To create an image we need an image definition file, a Dockerfile.  This is a declarative file where we can describe what the image we want to build should look like
-
-Example of a Dockerfile:
+Example `Dockerfile` for creating a custom image:
 
 ```Dockerfile
 FROM nginx:latest
@@ -195,7 +185,7 @@ FROM nginx:latest
 WORKDIR /app
 
 RUN apt-get update && \
-	apt-get install vim -y
+    apt-get install vim -y
 
 COPY html/ /usr/share/nginx/html
 
@@ -203,127 +193,74 @@ ENTRYPOINT ["/docker-entrypoint.sh"]
 CMD ["nginx", "-g", "daemon off;"]
 ```
 
-1. When creating an image in the Dockerfile you must start from an existing image using `FROM` to define it.
-2. To run commands you must use `RUN`.
-3. To define and create the work folder inside the container use `WORKDIR`
-4. To copy the local folder into the container, use `COPY`
-5. To define variable and fixed commands, you can use `CMD` for variable and `ENTRYPOINT` for fixed.
-
-To generate an image you must use build, followed by the -t flag which will define the name of the image (use your Docker hub user as a reference) and at the end you must say in which folder the Dockerfile is, if the terminal is open in the same folder as the file, just pass the dot.
+To build and run your custom image:
 
 ```bash
 docker build -t daniilomello/image-name .
-```
-
-Now run the created image
-
-```bash
 docker run --rm -d -p 8080:80 daniilomello/image-name
 ```
 
-To create a Docker Hub account, use `docker login`, then use `docker push` to send the image to the Docker hub
+To push your image to Docker Hub:
 
 ```bash
 docker push daniilomello/image-name
 ```
 
-### Network in Docker
+### Docker Networking
 
-It's an internal network running inside it, with the main purpose of making the containers communicate with each other. In other words, if you have a container with a Node application and another with MySQL that need to communicate, they should be using the same network.
+Docker provides different network types for container communication.
 
-To delete the networks that are not being used and keep only the standard networks, use prune
+To clean up unused networks:
 
 ```bash
 docker network prune
 ```
 
-**Brigde**
-
-In Docker we have a few types of network, the most common being `--brige`, which is used to make it easy for one container to communicate with another.
-
-To find out which containers are using certain networks, use the `inspect` command following the network type, such as bridge, for example.
+To inspect an existing network:
 
 ```bash
 docker network inspect bridge
 ```
 
-To create a new network, use `create`, followed by the network type with the `--driver` flag and define a new one for your network.
+To create a new network:
 
 ```bash
-docker network create --driver brigde network-name
+docker network create --driver bridge network-name
 ```
 
-When creating a new container you need to pass the created network using the `--network` flag.
+To run a container within a network:
 
 ```bash
 docker run -dit --name ubuntu1 --network network-name bash
 ```
 
-```bash
-docker run -dit --name ubuntu2 --network network-name branches
-```
-
-Access one of the containers created and ping it to check that it is connected to the same network.
-
-```bash
-docker exec -it ubuntu1 bash
-```
-
-```bash
-ping ubuntu2
-```
-
-To connect an existing container to a created network, use `connect`.
-
-```bash
-docker run -dit --name ubuntu3 --network network-name bash
-```
+To connect an existing container to a network:
 
 ```bash
 docker network connect network-name ubuntu3
 ```
 
-Use `inspect` to check that all containers are using the defined networks.
+### Creating a Node.js API in Docker
 
-**Host**
-
-The `--host`, it merges the Docker network with that of the Host (Local Machine). In other words, we can connect without having to expose a port.
-
-The network host only works on Linux and WSL2, it doesn't work on native Windows or Mac.
-
-To make a container port work locally without having to expose it, use the `--network` host flag
+Create a container with a volume for your Node.js project:
 
 ```bash
-docker run --rm -d --name nginx --network host nginx
+docker run --rm -it -v //c/Users/danilo/www/docker/node/:/usr/src/app -p 3001:3001 node:15 bash
 ```
 
-**Overlay**
-
-Imagine a context where you have several Dockers installed on different machines and you need to make them appear to be using the same network, in which case you would have to use the `overlay`.
-
-I won't cover the Overlay in details, because I neve personally use, but you can search more about it.
-
-### Creating a Node API in Docker
-
-Let's create an image by passing an application folder as the volume.
-
-```bash
-docker run --rm -it -v //c/Users/danilo/www/docker/node/:/usr/src/app -p 3001:3001 node:15 bash 
-```
-
-Initialize the package.json
+Initialize a `package.json` file:
 
 ```bash
 npm init -y
 ```
 
-Install Express
+Install Express:
 
 ```bash
 npm install express
 ```
 
-Create an index.js file and start an app with express
+Create an `index.js` file:
 
 ```javascript
 const express = require('express');
@@ -339,8 +276,7 @@ app.listen(port, () => {
 });
 ```
 
-Now automate the image creation process using a Dockerfile.
-
+Create a `Dockerfile` for your Node.js API:
 
 ```Dockerfile
 FROM node:15
@@ -354,30 +290,22 @@ EXPOSE 3001
 CMD ["node", "index.js"]
 ```
 
-Create an image from the Dockerfile
+Build and run the image:
 
 ```bash
 docker build -t daniilomello/api-node .
-```
-
-Run the image created
-
-```bash
 docker run --name api-node daniilomello/api-node
 ```
 
-Push the image to the Docker Hub
+Push it to Docker Hub:
 
 ```bash
 docker push daniilomello/api-node
 ```
 
-You could have two Dockerfiles, one for development and one for production in Docker Hub. To do this, keep the production one named Dockerfile.prod and push it.
+## Conclusion
 
-```bash
-docker build -t daniilomello/api-node . -f ./Dockerfile.prod
-```
+With this guide, you now have a basic foundation about Docker, from basic commands to topics like networking and Docker Compose. This knowledge will help you containerize your applications efficiently and collaborate on projects that use Docker.
 
-To improve your knowledge, feel free to go into more detail on each topic mentioned here.
+If you found this guide helpful, I would love to hear your feedback! Feel free to share it with a friend or post it on your social media to help others learn Docker. Thank you for reading! 🚀
 
-You now have a basic knowledge of Docker, enough to work on your applications and contribute to projects that use Docker. 

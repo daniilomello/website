@@ -3,75 +3,121 @@ title: Git Flow, Conventional Commit and Semantic Versioning
 publishedAt: 2025-03-12
 ---
 
-## Working with Git Flow
+## Introduction
 
-Git Flow is a workflow pattern with Git that helps organize collaborative application development. It defines rules for how to create, manage, and merge branches in a repository.
+Git Flow is a branching model that helps teams manage and streamline collaborative development. It defines structured workflows to create, manage, and merge branches effectively, ensuring a well-organized development process and a stable production environment.
 
-With it, you can create an organized workflow, avoiding conflicts between team members, allowing the development of features in parallel.
+This guide will introduce Git Flow, Conventional Commits, and Semantic Versioning, which together create a standardized and efficient workflow for software development.
 
-The result is a more structured process for delivering new versions of the application and stable code in production.
+## Git Flow
 
-In Git flows we have the following branches:
+Git Flow organizes development into different branches, each with a specific purpose. This structure allows multiple developers to work on features concurrently while keeping the main branch stable.
 
-- **main** – Has the code ready to be used in production.
-- **develop** – Where continuous development of the application is carried out.
-- **feature** – Used to create new features.
-- **release** – Used to define the delivery of a new pre-production version.
-- **hotfix** – Used to define urgent bugs made in production.
+### Branches in Git Flow:
+
+- **main** – Stores the production-ready code.
+- **develop** – The integration branch where ongoing development takes place.
+- **feature** – Dedicated to developing new features before merging into `develop`.
+- **release** – Prepares new versions for deployment.
+- **hotfix** – Used for urgent bug fixes in production.
+
+### Setting Up Git Flow
+
+To initialize Git Flow in a repository:
+
+```bash
+git flow init
+```
+
+Creating a new feature branch:
+
+```bash
+git flow feature start feature-name
+```
+
+Merging and deleting the feature branch:
+
+```bash
+git flow feature finish feature-name
+```
+
+Creating a release branch:
+
+```bash
+git flow release start version-number
+```
+
+Finalizing a release:
+
+```bash
+git flow release finish version-number
+```
 
 ## Conventional Commits
 
-Conventional Commit is a standard for writing commit messages in a clear and standardized way. It defines a simple message format where any developer would be able to understand the changes made to the project repository.
+Conventional Commits establish a consistent structure for commit messages, making it easier to understand the history of changes, automate versioning, and generate changelogs.
 
-With it, you can keep your commit history organized and readable, facilitating collaboration, version automation with CI/CD tools, and automatic changelog generation.
+### Commit Message Format:
 
-The pattern:
+```plaintext
+<type>[optional scope]: <description>
 
-```
-<tipo>[escopo opcional]: <descrição>
+[optional body]
 
-[corpo opcional]
-
-[rodapé opcional]
+[optional footer]
 ```
 
-The most common types are:
+### Common Commit Types:
 
-- **feat** – To add a new feature.
-- **fix** – To fix a bug.
-- **cry** – For changes that do not affect the code (e.g. configurations).
-- **docs** – For documentation updates.
-- **style** – For formatting adjustments (without changing logic).
-- **refactor** – To improve code without changing behavior.
-- **test** – To add or modify tests.
-- **BREAKING CHANGE** in the footer or **!** in the type indicates break in the current version
+- **feat** – Adds a new feature.
+- **fix** – Fixes a bug.
+- **chore** – Changes that do not affect the code (e.g., configurations).
+- **docs** – Documentation updates.
+- **style** – Formatting changes without altering logic.
+- **refactor** – Code improvements without changing behavior.
+- **test** – Adds or updates tests.
+- **BREAKING CHANGE** – Indicates a breaking change (can also be marked with `!` in the type).
+
+### Example Commits:
+
+```plaintext
+feat(auth): add JWT authentication
+fix(cart): resolve issue with item removal
+chore: update CI/CD pipeline configuration
+```
 
 ## Semantic Versioning
 
-Semantic Versioning is a standard for defining versions of an application or product. It uses the XYZ format (e.g. 1.2.3), where each number has a specific meaning. The first is MAJOR , the second is MINOR , and the third is PATCH .
+Semantic Versioning (SemVer) provides a standardized way to assign version numbers to software releases, making updates predictable and ensuring compatibility across dependencies.
 
-It helps you quickly understand the impact of a new version on your project, facilitates compatibility between dependencies, and makes updates more predictable and organized.
+### Version Number Format: `MAJOR.MINOR.PATCH`
 
-What each one means:
+Each segment has a specific meaning:
 
-- **MAJOR - X.0.0** : used to describe a major change that may break compatibility. If it is a package update, for example, a change must be made to your code.
-- **MINOR - 0.Y.0** : used to describe the addition of new features, but which do not break compatibility, and no updates are required in the code.
-- **PATCH - 0.0.Z** : used to describe the addition of improvements or bug fixes that do not require code updates and do not break compatibility.
+- **MAJOR (X.0.0)** – Introduces breaking changes requiring updates to dependent code.
+- **MINOR (0.Y.0)** – Adds new features without breaking compatibility.
+- **PATCH (0.0.Z)** – Introduces bug fixes or small improvements that maintain compatibility.
 
-Example of versioning an application:
+### Example Versioning:
 
-- 1.0.0: First stable version of the application.
-- 1.1.0: Added a new feature, but no compatibility changes.
-- 1.1.1: Fixed a bug without changing anything in the software's operation.
-- 2.0.0: Deep changes that require updates to users’ code.
+- `1.0.0` – Initial stable release.
+- `1.1.0` – Added a new feature without breaking changes.
+- `1.1.1` – Fixed a bug without modifying functionality.
+- `2.0.0` – Major update requiring code changes.
 
-There are additional labels that indicate the development stage of the version. These labels are mainly used before the official release of a new version.
+### Pre-Release Labels:
 
-Examples of labels:
+- **Alpha (`-alpha`)** – Early-stage testing, unstable.
+- **Beta (`-beta`)** – More stable but still subject to changes.
+- **Release Candidate (`-rc`)** – Final pre-release testing.
+- **Stable** – Official, production-ready release (e.g., `1.0.0`).
 
-- **Alpha (-alpha)**: Example: 1.0.0-alpha. Defines the first phase of internal testing, with new features still under development, it may contain many bugs and is not stable.
-- **Beta (-beta)**: Example: 2.0.0-beta. Used for more advanced testing, still unstable, with features already implemented, but may change or contain problems. Available for external testing by selected users.
-- **Release Candidate (-rc)**: Example: 3.0.0-rc. Used for final testing before release, on a near-final version. If there are no major issues, this version will become official.
-- **Stable**: Official, production-ready version. When it reaches XYZ without a suffix (1.0.0), it means it is tested and ready for general use.
+## Conclusion
 
-Following these standards in a project will bring organization, predictability and efficient collaboration, improving project maintenance, reducing errors and making development more professional and agile.
+Using Git Flow, Conventional Commits, and Semantic Versioning together ensures an organized and predictable development process. These best practices enhance collaboration, reduce errors, and streamline version management, leading to more maintainable and professional software development.
+
+By following these guidelines, you can improve your team's efficiency and maintain a clean and structured project history.
+
+If this post helped you, share it with a friend or post it on social media.
+
+Thank you for reading! 🚀
