@@ -203,11 +203,11 @@ ENTRYPOINT ["/docker-entrypoint.sh"]
 CMD ["nginx", "-g", "daemon off;"]
 ```
 
-- When creating an image in the Dockerfile you must start from an existing image using `FROM` to define it.
-- To run commands you must use `RUN`.
-- To define and create the work folder inside the container use `WORKDIR`
-- To copy the local folder into the container, use `COPY`
-- To define variable and fixed commands, you can use `CMD` for variable and `ENTRYPOINT` for fixed.
+1. When creating an image in the Dockerfile you must start from an existing image using `FROM` to define it.
+2. To run commands you must use `RUN`.
+3. To define and create the work folder inside the container use `WORKDIR`
+4. To copy the local folder into the container, use `COPY`
+5. To define variable and fixed commands, you can use `CMD` for variable and `ENTRYPOINT` for fixed.
 
 To generate an image you must use build, followed by the -t flag which will define the name of the image (use your Docker hub user as a reference) and at the end you must say in which folder the Dockerfile is, if the terminal is open in the same folder as the file, just pass the dot.
 

@@ -2,6 +2,23 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+  .scrollbar-custom::-webkit-scrollbar {
+    width: 1px;
+    height: 4px;
+  }
+
+  .scrollbar-custom::-webkit-scrollbar-track {
+    @apply shadow-inner bg-purple-200;
+    cursor: pointer;
+  }
+
+  .scrollbar-custom::-webkit-scrollbar-thumb {
+    @apply bg-purple-500 border border-purple-700;
+    cursor: pointer;
+  }
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -170,8 +187,10 @@ code[data-line-numbers-max-digits="3"]>[data-line]::before {
 }
 
 .blog figure[data-rehype-pretty-code-figure] {
-  @apply my-5 overflow-hidden overflow-x-auto py-3 pr-4;
-  scrollbar-width: thin;
+  @apply scrollbar-custom my-5 overflow-hidden overflow-x-auto py-3 pr-4;
+  background: rgba(0, 0, 0, 0.2);
+  padding: 8px 10px;
+  border-radius: 7px;
 }
 
 .blog ul li {
@@ -182,13 +201,23 @@ code[data-line-numbers-max-digits="3"]>[data-line]::before {
   @apply my-5 pl-8;
 }
 
+.blog ol {
+  @apply my-5 pl-8 list-decimal;
+}
+
+.blog ol li {
+  @apply text-lg mb-2;
+}
+
 .blog p code {
   opacity: 0.8;
   background: rgba(0, 0, 0, 0.5);
   padding: 4px 10px;
   border-radius: 7px;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: bold;
+  white-space-collapse: break-spaces;
+  box-decoration-break: clone;
 }
 
 .blog li code {
@@ -196,11 +225,17 @@ code[data-line-numbers-max-digits="3"]>[data-line]::before {
   background: rgba(0, 0, 0, 0.5);
   padding: 4px 10px;
   border-radius: 7px;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: bold;
+  white-space-collapse: break-spaces;
+  box-decoration-break: clone;
 }
 
 .blog h2 {
+  @apply text-3xl font-bold mt-12 mb-1;
+}
+
+.blog h3 {
   @apply text-2xl font-bold mt-12 mb-1;
 }
 
