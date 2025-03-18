@@ -1,0 +1,148 @@
+---
+title: Torne seu código Javascript mais legível
+publishedAt: 2025-03-18
+language: 🇧🇷
+---
+
+## 💡 Introdução
+
+Você já olhou para o seu código e teve dificuldade para entender o que escreveu? Talvez tenha adicionado alguns comentários explicando para o seu futuro eu o que aquele código significa, mas ainda assim ele é difícil de ler.
+
+Neste artigo, vou compartilhar algumas dicas que podem ajudar a melhorar a escrita do seu código ao criar um aplicativo com JavaScript.
+
+## ⚙️ Pré-requisitos
+
+Se você souber o básico de JavaScript já ajuda bastante.
+
+## ✍️ Começando
+
+**👉 Use o operador ternário:** permite escrever instruções if/else de forma mais simples em uma única linha.
+
+```js
+let isLoggedIn = true;
+
+const message = isLoggedIn ? 'Bem-vindo de volta!' : 'Por favor, faça login.';
+```
+
+**👉 Use template literals:** torna a concatenação de strings mais limpa, usando crases e `${expressions}` em vez de sinais de adição.
+
+```js
+const firstname = 'Danilo';
+const lastname = 'Mello';
+
+const welcome = `Bem-vindo ${firstname} ${lastname}!`;
+```
+
+**👉 Use desestruturação de objetos:** permite extrair dados de objetos em variáveis distintas, evitando a necessidade de acessar propriedades repetidamente.
+
+```js
+const person = {
+  name: 'Danilo',
+  job: 'Desenvolvedor Full Stack'
+};
+
+const { name, job } = person;
+
+const username = person.name;
+```
+
+**👉 Use parâmetros padrão:** para definir valores padrão para parâmetros de funções caso nenhum seja fornecido. Isso torna as funções mais flexíveis.
+
+```js
+function welcome(name = 'Visitante') {
+  console.log('Olá ' + name);
+}
+
+welcome(); // Olá Visitante
+welcome('Danilo'); // Olá Danilo
+```
+
+**👉 Use desestruturação de arrays:** funciona de maneira semelhante à desestruturação de objetos, permitindo extrair elementos de um array para variáveis.
+
+```js
+const fruits = ['🍎', '🍊', '🍍', '🍋', '🍉'];
+
+const [fruit1, fruit2] = fruits;
+```
+
+**👉 Use métodos de array:** para escrever um código mais limpo. O JavaScript possui métodos úteis, como map, filter, find, reduce, etc. Evite usar muitos loops e torne seu código mais expressivo:
+
+```js
+const users = [
+  {
+    name: 'Danilo',
+    lastname: 'Mello'
+  },
+  {
+    name: 'John',
+    lastname: 'Doe'
+  },
+  {
+    name: 'Jane',
+    lastname: 'Doe'
+  },
+];
+
+const names = users.map(user => user.name); // extrai os nomes dos usuários
+```
+
+**👉 Use métodos de objeto:** como Object.keys, Object.values ou JSON.stringify para evitar reimplementar tarefas repetitivas.
+
+```js
+const users = [
+  {
+    name: 'Danilo',
+    lastname: 'Mello'
+  },
+  {
+    name: 'John',
+    lastname: 'Doe'
+  }
+];
+
+const keys = Object.keys(users[0]);
+const values = Object.values(users[0]);
+```
+
+**👉 Use a propriedade rest/spread:** permite manipular parâmetros de funções e elementos de arrays de forma flexível.
+
+```js
+// rest (...users)
+function showUsers(...users) {
+  return users.map(user => user.name);
+}
+
+// spread (...users)
+const newUsers = [...users, { name: 'John', lastname: 'Smith' }];
+```
+
+**👉 Use let e const:** eles garantem escopo de bloco e evitam que constantes sejam redefinidas. Evite usar `var`, pois ele pode criar comportamentos inesperados difíceis de depurar e identificar.
+
+No exemplo abaixo, eu declaro uma variável `var` chamada `fruit` dentro de uma condição e consigo acessá-la fora da condição, o que não era esperado e não deveria funcionar.
+
+```js
+if (true) {
+  var fruit = '🍎';
+}
+
+console.log(fruit);
+```
+
+Agora, se eu tentar o mesmo código, mas em vez de `var`, usar `let` ou `const`, receberei um erro ou um aviso.
+
+```js
+if (true) {
+  const fruit = '🍎';
+  let food = ['🍎', '🥕'];
+}
+
+console.log(fruit);
+console.log(food);
+```
+
+## 🤝 Conclusão
+
+Se este artigo te ajudou, compartilhe com um amigo ou poste nas redes sociais.
+
+Obrigado por ler! 🚀
+
