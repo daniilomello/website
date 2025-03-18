@@ -43,20 +43,23 @@ export default function BlogClient({ posts }: { posts: any[] }) {
           {filteredPosts
             .sort((a, b) => new Date(b.metadata.publishedAt as string).getTime() - new Date(a.metadata.publishedAt as string).getTime())
             .map((post) => (
-              <Link
-                key={post.slug}
-                href={`/blog/${post.slug}`}
-                className="hover:text-purple-500/50 transition text-lg"
-              >
-                <strong className="flex items-center justify-between">
-                  <span>
-                    {post.metadata.language} &nbsp; {post.metadata.title}
-                  </span>
-                  <span className="hidden sm:block text-xs">
-                    {new Date(post.metadata.publishedAt).getFullYear()}
-                  </span>
-                </strong>
-              </Link>
+              <>
+                <Link
+                  key={post.slug}
+                  href={`/blog/${post.slug}`}
+                  className="hover:text-purple-500/50 transition text-lg"
+                >
+                  <strong className="flex items-center justify-between">
+                    <span>
+                      {post.metadata.language} &nbsp; {post.metadata.title}
+                    </span>
+                    <span className="hidden sm:block text-xs">
+                      {new Date(post.metadata.publishedAt).getFullYear()}
+                    </span>
+                  </strong>
+                </Link>
+                <hr className="opacity-[0.05]" />
+              </>
             ))}
         </div>
       </section>
