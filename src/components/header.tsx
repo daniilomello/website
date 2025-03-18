@@ -20,14 +20,17 @@ export function Header() {
                 </Link>
             </div>
 
-            <nav className="flex items-center gap-4 justify-center sm:justify-normal mt-10 sm:mt-0">
+            <nav className="flex items-center gap-3 justify-center sm:justify-normal mt-10 sm:mt-0">
                 <Link href="/blog" className="hover:text-rose-300 flex items-center gap-1 relative">
                     Posts
                 </Link>
+                <span>•</span>
                 <Link href="/about" className="hover:text-rose-300 flex items-center gap-1 relative">
                     About
                 </Link>
+                <span>•</span>
                 <Link href="/resume.pdf" target="_blank" className="hover:text-rose-300">Resume</Link>
+                <span>•</span>
                 <Link href="https://wa.me/5534984424459" target="_blank">
                     <InteractiveHoverButton className="text-xs">
                         Get in Touch
