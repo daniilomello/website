@@ -182,8 +182,14 @@ code[data-line-numbers-max-digits="3"]>[data-line]::before {
   @apply text-lg my-5 leading-8;
 }
 
-.blog p a {
+.blog p a,
+.blog a {
   @apply underline text-rose-500 font-medium;
+}
+
+.blog hr {
+  opacity: 0.05;
+  margin-top: 3.125rem;
 }
 
 .blog figure[data-rehype-pretty-code-figure] {

@@ -1,27 +1,28 @@
 ---
 title: Git Flow, Conventional Commit and Semantic Versioning
 publishedAt: 2025-03-12
+language: 🇺🇸
 ---
 
-## Introduction
+## 💡 Introduction
 
 Git Flow is a branching model that helps teams manage and streamline collaborative development. It defines structured workflows to create, manage, and merge branches effectively, ensuring a well-organized development process and a stable production environment.
 
 This guide will introduce Git Flow, Conventional Commits, and Semantic Versioning, which together create a standardized and efficient workflow for software development.
 
-## Git Flow
+## ⚖️ Git Flow
 
 Git Flow organizes development into different branches, each with a specific purpose. This structure allows multiple developers to work on features concurrently while keeping the main branch stable.
 
-### Branches in Git Flow:
+### 👉 Branches in Git Flow:
 
-- **main** – Stores the production-ready code.
-- **develop** – The integration branch where ongoing development takes place.
-- **feature** – Dedicated to developing new features before merging into `develop`.
-- **release** – Prepares new versions for deployment.
-- **hotfix** – Used for urgent bug fixes in production.
+- **main**: Stores the production-ready code.
+- **develop**: The integration branch where ongoing development takes place.
+- **feature**: Dedicated to developing new features before merging into `develop`.
+- **release**: Prepares new versions for deployment.
+- **hotfix**: Used for urgent bug fixes in production.
 
-### Setting Up Git Flow
+### 👉 Setting Up Git Flow
 
 To initialize Git Flow in a repository:
 
@@ -53,11 +54,11 @@ Finalizing a release:
 git flow release finish version-number
 ```
 
-## Conventional Commits
+## 🧬 Conventional Commits
 
 Conventional Commits establish a consistent structure for commit messages, making it easier to understand the history of changes, automate versioning, and generate changelogs.
 
-### Commit Message Format:
+### 👉 Commit Message Format:
 
 ```plaintext
 <type>[optional scope]: <description>
@@ -67,18 +68,18 @@ Conventional Commits establish a consistent structure for commit messages, makin
 [optional footer]
 ```
 
-### Common Commit Types:
+### 👉 Common Commit Types:
 
-- **feat** – Adds a new feature.
-- **fix** – Fixes a bug.
-- **chore** – Changes that do not affect the code (e.g., configurations).
-- **docs** – Documentation updates.
-- **style** – Formatting changes without altering logic.
-- **refactor** – Code improvements without changing behavior.
-- **test** – Adds or updates tests.
-- **BREAKING CHANGE** – Indicates a breaking change (can also be marked with `!` in the type).
+- **feat**: Adds a new feature.
+- **fix**: Fixes a bug.
+- **chore**: Changes that do not affect the code (e.g., configurations).
+- **docs**: Documentation updates.
+- **style**: Formatting changes without altering logic.
+- **refactor**: Code improvements without changing behavior.
+- **test**: Adds or updates tests.
+- **BREAKING CHANGE**: Indicates a breaking change (can also be marked with `!` in the type).
 
-### Example Commits:
+### 👉 Example Commits:
 
 ```plaintext
 feat(auth): add JWT authentication
@@ -86,33 +87,33 @@ fix(cart): resolve issue with item removal
 chore: update CI/CD pipeline configuration
 ```
 
-## Semantic Versioning
+## 💎 Semantic Versioning
 
 Semantic Versioning (SemVer) provides a standardized way to assign version numbers to software releases, making updates predictable and ensuring compatibility across dependencies.
 
-### Version Number Format: `MAJOR.MINOR.PATCH`
+### 👉 Version Number Format: `MAJOR.MINOR.PATCH`
 
 Each segment has a specific meaning:
 
-- **MAJOR (X.0.0)** – Introduces breaking changes requiring updates to dependent code.
-- **MINOR (0.Y.0)** – Adds new features without breaking compatibility.
-- **PATCH (0.0.Z)** – Introduces bug fixes or small improvements that maintain compatibility.
+- **MAJOR (X.0.0)**: Introduces breaking changes requiring updates to dependent code.
+- **MINOR (0.Y.0)**: Adds new features without breaking compatibility.
+- **PATCH (0.0.Z)**: Introduces bug fixes or small improvements that maintain compatibility.
 
-### Example Versioning:
+### 👉 Example Versioning:
 
-- `1.0.0` – Initial stable release.
-- `1.1.0` – Added a new feature without breaking changes.
-- `1.1.1` – Fixed a bug without modifying functionality.
-- `2.0.0` – Major update requiring code changes.
+- `1.0.0`: Initial stable release.
+- `1.1.0`: Added a new feature without breaking changes.
+- `1.1.1`: Fixed a bug without modifying functionality.
+- `2.0.0`: Major update requiring code changes.
 
-### Pre-Release Labels:
+### 👉 Pre-Release Labels:
 
-- **Alpha (`-alpha`)** – Early-stage testing, unstable.
-- **Beta (`-beta`)** – More stable but still subject to changes.
-- **Release Candidate (`-rc`)** – Final pre-release testing.
-- **Stable** – Official, production-ready release (e.g., `1.0.0`).
+- **Alpha (`-alpha`)**: Early-stage testing, unstable.
+- **Beta (`-beta`)**: More stable but still subject to changes.
+- **Release Candidate (`-rc`)**: Final pre-release testing.
+- **Stable**: Official, production-ready release (e.g., `1.0.0`).
 
-## Conclusion
+## 🤝 Conclusion
 
 Using Git Flow, Conventional Commits, and Semantic Versioning together ensures an organized and predictable development process. These best practices enhance collaboration, reduce errors, and streamline version management, leading to more maintainable and professional software development.
 

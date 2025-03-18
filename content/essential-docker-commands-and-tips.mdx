@@ -1,21 +1,24 @@
 ---
 title: Essential Docker commands and tips
 publishedAt: 2025-03-15
+language: 🇺🇸
 ---
 
-## Introduction
+## 💡 Introduction
 
 Docker is a powerful tool that simplifies application deployment by using containerization. This guide aims to help you understand and efficiently use Docker in your daily development workflow. By the end of this article, you will have a basic understanding about Docker commands and best practices.
 
-## Prerequisites
+## ⚙️ Prerequisites
 
 Before diving into the commands: 
 1. Ensure you have Docker installed on your machine. You can download it from the [official Docker website](https://www.docker.com/get-started). 
 2. Basic knowledge of the command line will also be helpful.
 
-## Getting Started with Docker
+----
 
-### Basic Docker Commands
+## ✍️ Getting Started with Docker
+
+### 👉 Basic Docker Commands
 
 To run your first container, use the `docker run` command. It will check if the image is available locally; if not, it will download it and then execute the container.
 
@@ -66,9 +69,7 @@ To remove all containers at once:
 docker rm $(docker ps -a -q) -f
 ```
 
-### Working with Volumes and Mounts
-
-#### Bind Mounts
+### 👉 Bind Mounts
 
 Bind mounts allow you to map a local directory to a container directory, ensuring persistent storage.
 
@@ -82,7 +83,7 @@ Using the `mount` flag:
 docker run -d --name nginx -p 80:80 --mount type=bind,source=/c/users/danilo/www/html,target=/usr/share/nginx/html nginx
 ```
 
-#### Docker Volumes
+### 👉 Docker Volumes
 
 Docker volumes are the preferred way to handle persistent data.
 
@@ -110,11 +111,11 @@ To clean up unused volumes:
 docker volume prune
 ```
 
-### Docker Compose
+### 👉 Docker Compose
 
 Docker Compose allows you to define multi-container applications using a YAML file.
 
-Example `docker-compose.yml`:
+Below has an example of a `docker-compose.yml` file, for **laravel** and **nginx** container application services, where the images is coming from my Docker Hub account.
 
 ```yml
 version: '3'
@@ -157,7 +158,7 @@ To stop the containers:
 docker-compose down
 ```
 
-### Working with Docker Images
+### 👉 Working with Docker Images
 
 To download an image:
 
@@ -206,7 +207,7 @@ To push your image to Docker Hub:
 docker push daniilomello/image-name
 ```
 
-### Docker Networking
+### 👉 Docker Networking
 
 Docker provides different network types for container communication.
 
@@ -240,7 +241,9 @@ To connect an existing container to a network:
 docker network connect network-name ubuntu3
 ```
 
-### Creating a Node.js API in Docker
+----
+
+## 🚀 Creating a NodeJS Express API
 
 Create a container with a volume for your Node.js project:
 
@@ -303,9 +306,11 @@ Push it to Docker Hub:
 docker push daniilomello/api-node
 ```
 
-## Conclusion
+----
 
-With this guide, you now have a basic foundation about Docker, from basic commands to topics like networking and Docker Compose. This knowledge will help you containerize your applications efficiently and collaborate on projects that use Docker.
+## 🤝 Conclusion
 
-If you found this guide helpful, I would love to hear your feedback! Feel free to share it with a friend or post it on your social media to help others learn Docker. Thank you for reading! 🚀
+With this guide, you now have a basic foundation about Docker. This knowledge will help you containerize your applications efficiently and collaborate on projects that use Docker.
+
+If you found this guide helpful, feel free to share it with a friend or post it on your social media to help others learn Docker. Thank you for reading! 🚀
 

@@ -1,21 +1,20 @@
 ---
 title: Git Essentials
 publishedAt: 2025-03-09
+language: 🇺🇸
 ---
 
-## Introduction
+## 💡 Introduction
 
 Git is an essential tool for devs, enabling efficient version control and collaboration. This guide provides an overview of the most important Git commands to help you manage repositories, track changes, and collaborate with your team.
 
-## Prerequisites
+## ⚙️ Prerequisites
 
 Before getting started, ensure that:
-- Git is installed on your system.
+- [Git](https://git-scm.com/downloads) is installed on your system.
 - You have basic knowledge of the command line.
 
-## Getting Started
-
-### Configuring Git
+## ✍️ Getting Started
 
 Before using Git, set up your username and email so your commits are properly attributed.
 
@@ -38,48 +37,48 @@ You can also create aliases to simplify commands:
 git config --global alias.s status
 ```
 
-### Creating and Managing Repositories
+### 👉 Creating and Managing Repositories
 
-#### Initializing a Repository
+Initializing a Repository
 
 ```bash
 git init
 ```
 
-#### Adding a Remote Repository
+Adding a Remote Repository
 
 ```bash
 git remote add origin git@github.com:username/reponame.git
 ```
 
-#### Cloning a Repository
+Cloning a Repository
 
 ```bash
 git clone git@github.com/username/reponame.git foldername
 ```
 
-#### Checking Remote Repositories
+Checking Remote Repositories
 
 ```bash
 git remote -v
 ```
 
-### Tracking File Changes
+### 👉 Tracking File Changes
 
-#### Checking File Status
+Checking File Status
 
 ```bash
 git status
 ```
 
-#### Staging Files
+Staging Files
 
 ```bash
 git add filename
 git add . # Add all files
 ```
 
-#### Committing Changes
+Committing Changes
 
 ```bash
 git commit -m "My first commit"
@@ -92,9 +91,9 @@ To commit specific changes interactively:
 git add -p
 ```
 
-### Analyzing Commit History
+### 👉 Analyzing Commit History
 
-#### Viewing Commit Logs
+Viewing Commit Logs
 
 ```bash
 git log
@@ -103,41 +102,41 @@ git log --since="Jan 01 2025" --until="March 01 2025"
 git log --graph
 ```
 
-#### Viewing Short Logs
+Viewing Short Logs
 
 ```bash
 git shortlog -sn
 ```
 
-#### Viewing Specific Commit Details
+Viewing Specific Commit Details
 
 ```bash
 git show commitHashHere
 ```
 
-#### Comparing Changes
+Comparing Changes
 
 ```bash
 git diff
 git diff --name-only
 ```
 
-### Managing Commits
+### 👉 Managing Commits
 
-#### Amending the Last Commit
+Amending the Last Commit
 
 ```bash
 git commit --amend
 ```
 
-#### Undoing Changes
+Undoing Changes
 
 ```bash
 git checkout filename
 git reset HEAD filename
 ```
 
-#### Resetting Commits
+Resetting Commits
 
 ```bash
 git reset --soft commitHash # Moves changes to staging
@@ -145,21 +144,21 @@ git reset --mixed commitHash # Moves changes to modified
 git reset --hard commitHash # Removes changes permanently
 ```
 
-#### Applying a Specific Commit to Another Branch
+Applying a Specific Commit to Another Branch
 
 ```bash
 git cherry-pick commitHash
 ```
 
-#### Combining Commits
+Combining Commits
 
 ```bash
 git rebase -i HEAD~2
 ```
 
-### Working with Branches
+### 👉 Working with Branches
 
-#### Creating and Switching Branches
+Creating and Switching Branches
 
 ```bash
 git checkout -b branchName
@@ -167,42 +166,42 @@ git checkout branchName
 git checkout -
 ```
 
-#### Listing and Deleting Branches
+Listing and Deleting Branches
 
 ```bash
 git branch
 git branch -D branchName
 ```
 
-#### Merging and Rebasing Branches
+Merging and Rebasing Branches
 
 ```bash
 git merge branchName
 git rebase branchName
 ```
 
-#### Pulling Changes with Rebase
+Pulling Changes with Rebase
 
 ```bash
 git pull origin main --rebase
 ```
 
-#### Resolving Conflicts
+Resolving Conflicts
 
 ```bash
 git merge --continue
 git rebase --continue
 ```
 
-### Saving Work Without Committing
+### 👉 Saving Work Without Committing
 
-#### Stashing Changes
+Stashing Changes
 
 ```bash
 git stash
 ```
 
-#### Applying Stashed Changes
+Applying Stashed Changes
 
 ```bash
 git stash apply
@@ -210,28 +209,28 @@ git stash list
 git stash clear
 ```
 
-### Pushing and Managing Remote Changes
+### 👉 Pushing and Managing Remote Changes
 
-#### Pushing Changes to a Repository
+Pushing Changes to a Repository
 
 ```bash
 git push origin main
 ```
 
-#### Tagging Releases
+Tagging Releases
 
 ```bash
 git tag -a 1.0.0 -m "First release"
 git push origin main --tags
 ```
 
-#### Reverting a Push
+Reverting a Push
 
 ```bash
 git revert commitHash
 ```
 
-## Conclusion
+## 🤝 Conclusion
 
 Mastering Git commands is essential for efficient development and collaboration. By using these commands regularly, you'll improve your workflow and avoid common version control issues.
 
