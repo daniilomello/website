@@ -7,43 +7,43 @@ In order to make my life easy when I'm working, I create some alias for Git comm
 
 So I thought if it is valuable to me, it may be valuable for someone else too. That's why I'm gonna share with you today my personal alias.
 
-Open your Terminal and the first thing you have to do, is to access the Git configuration.
+**01 - Opening Git config file:** Open your Terminal and the first thing you have to do, is to access the Git configuration.
 
 ```bash
 git config --global --edit
 ```
 
-The first alias you are going to create it's to add items to staged and commit at the same time. For that, I use the letter C. Use the code below to create alias.
+**02 - Add all files to staged and commit:** The first alias you are going to create it's to add items to staged and commit at the same time. For that, I use the letter C. Use the code below to create alias.
 
 ```bash
 c = !git add --all && git commit -m
 ```
 
-The second one that I like to use is to check the status on Git, and for that one I use the letter S.
+**03 - Checking the status:** The second one that I like to use is to check the status on Git, and for that one I use the letter S.
 
 ```bash
 s = !git status -s
 ```
 
-The next one is the git log, but we are going to format in a more organized and clean and away. For that we going to bring, the branch, the name of the person, the short hash, description, and date of the commit. And we are going to apply some colors too.
+**04 - Checking the log (customized):** The next one is the git log, but we are going to format in a more organized and clean and away. For that we going to bring, the branch, the name of the person, the short hash, description, and date of the commit. And we are going to apply some colors too.
 
 ```bash
 l = !git log --pretty=format:'%C(blue)%h%C(red)%d %C(white)%s - %C(cyan)%cn, %C(white)$cr'
 ```
 
-Another one that I use very often, is the git amend, the combines the current commit with the previous one. Perfect for situations where you forget to add a file on the previous commit.
+**05 - Combining Commits:** Another one that I use very often, is the git amend, the combines the current commit with the previous one. Perfect for situations where you forget to add a file on the previous commit.
 
 ```bash
 amend = !git add --all && git commit --amend --no-edit
 ```
 
-I also like to create an alias to check my history of commits based on a specific word. It's perfect if you're using semantic commits, and you want to see how many specific commits you did it.
+**06 - Combining Commits:** I also like to create an alias to check my history of commits based on a specific word. It's perfect if you're using semantic commits, and you want to see how many specific commits you did it.
 
 ```bash
 count = !git shortlog -s --grep feat
 ```
 
-lastly it's a series of alias that help me navigate through my branches. I'm able to create, enter or delete one branch.
+**07 - Managing branches:** lastly it's a series of alias that help me navigate through my branches. I'm able to create, enter or delete one branch.
 
 ```bash
 b = !git checkout
@@ -52,4 +52,4 @@ bl = !git branch
 bd = !git branch -D
 ```
 
-And there we go! Feel free to change their name of the alias to your needs, but this is basic how I like to use it.
+And there we go! Feel free to change their name of the alias to your needs, but this is basic how I like to use it. 🚀
