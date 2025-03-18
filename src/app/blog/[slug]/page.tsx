@@ -34,8 +34,11 @@ export async function generateMetadata({
       url: `${DATA.url}/blog/${post.slug}`,
       images: [
         {
-          url: ogImage,
-        },
+          url: "https://daniilo.dev/og.png",
+          width: 1200, // Recommended width
+          height: 630,  // Recommended height
+          alt: "Full Stack Develper Creates Digital Products"
+        }
       ],
     },
     twitter: {
