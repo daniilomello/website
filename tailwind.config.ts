@@ -65,6 +65,10 @@ const config = {
   			md: 'calc(var(--radius) - 2px)',
   			sm: 'calc(var(--radius) - 4px)'
   		},
+			backgroundImage: {
+				"instagram-gradient":
+					"linear-gradient(to top right, #f09433, #e6683c, #dc2743, #cc2366, #bc1888, #f09433)",
+			},
   		keyframes: {
   			'accordion-down': {
   				from: {
@@ -118,7 +122,12 @@ const config = {
   				to: {
   					transform: 'translateY(calc(-100% - var(--gap)))'
   				}
-  			}
+				},
+				"gradient-border": {
+					"0%": { backgroundPosition: "0% 50%" },
+					"50%": { backgroundPosition: "100% 50%" },
+					"100%": { backgroundPosition: "0% 50%" },
+				},
   		},
   		animation: {
   			'accordion-down': 'accordion-down 0.2s ease-out',
@@ -126,7 +135,8 @@ const config = {
   			orbit: 'orbit calc(var(--duration)*1s) linear infinite',
   			meteor: 'meteor 5s linear infinite',
   			marquee: 'marquee var(--duration) infinite linear',
-  			'marquee-vertical': 'marquee-vertical var(--duration) linear infinite'
+				'marquee-vertical': 'marquee-vertical var(--duration) linear infinite',
+				"gradient-border": "gradient-border 3s ease infinite",
   		}
   	}
   },

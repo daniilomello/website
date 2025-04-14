@@ -4,6 +4,7 @@ import LanguageFilter from "@/components/LanguageFilter";
 import Link from "next/link";
 import { useState } from "react";
 import { FaArrowLeft } from "react-icons/fa";
+import Stories, { Story } from "./Stories";
 
 interface IPost {
   slug: string;
@@ -15,6 +16,14 @@ interface IPost {
     language: string;
   };
 }
+
+const storiesData: Story[] = [
+  {
+    id: 1,
+    thumbnail: "https://img.youtube.com/vi/5OFVArgGgdI/mqdefault.jpg",
+    youtubeVideoId: "5OFVArgGgdI",
+  },
+];
 
 export default function BlogClient({ posts }: { posts: any[] }) {
   const [filteredLanguage, setFilteredLanguage] = useState<string | null>("🇺🇸");
@@ -31,6 +40,14 @@ export default function BlogClient({ posts }: { posts: any[] }) {
       </Link>
 
       <section className="h-screen px-8 sm:px-0">
+        <section className="mb-8">
+          <h1 className="font-bold text-2xl text-purple-100">Stories ✍️</h1>
+          <p className="text-sm text-white/50">
+            Random videos about random stuff
+          </p>
+          <Stories storiesData={storiesData} />
+        </section>
+
         <h1 className="font-bold text-2xl text-purple-100">Welcome to my articles and notes ✍️</h1>
         <p className="mb-8 text-sm text-white/50">
           Code snippets, ideas, reviews, explorations, and how-to guides.
