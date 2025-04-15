@@ -17,12 +17,14 @@ export function Header() {
     return (
         <header className="py-8 px-4 sm:px-0 sm:py-24 flex flex-col gap-4 sm:gap-0 sm:flex-row sm:justify-between sm:items-center">
             <div className="flex items-center gap-9 justify-center sm:justify-normal relative -left-6 sm:-left-0">
-                <span className="block w-[80px] h-[80px] relative left-6 -top-2">
-                    <Stories storiesData={storiesData} />
-                </span>
-                <SpinningText className="absolute top-12 left-16 text-lg">
-                    Frontend ⚡ Backend ⚡ Mobile ⚡ UI & UX ⚡
-                </SpinningText>
+                <div className="relative">
+                    <span className="block w-[80px] h-[80px] relative left-6 -top-2">
+                        <Stories storiesData={storiesData} />
+                    </span>
+                    <SpinningText className="absolute top-12 left-16 text-lg">
+                        Frontend ⚡ Backend ⚡ Mobile ⚡ UI & UX ⚡
+                    </SpinningText>
+                </div>
             </div>
 
             <nav className="flex items-center gap-3 justify-center sm:justify-normal mt-10 sm:mt-0">

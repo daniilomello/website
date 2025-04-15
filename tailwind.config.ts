@@ -67,7 +67,7 @@ const config = {
   		},
 			backgroundImage: {
 				"instagram-gradient":
-					"linear-gradient(to top right, #f09433, #e6683c, #dc2743, #cc2366, #bc1888, #f09433)",
+					"linear-gradient(to top right, #f09433, #e6683c, #dc2743, #cc2366, #bc1888, #f09433)"
 			},
   		keyframes: {
   			'accordion-down': {
@@ -127,7 +127,7 @@ const config = {
 					"0%": { backgroundPosition: "0% 50%" },
 					"50%": { backgroundPosition: "100% 50%" },
 					"100%": { backgroundPosition: "0% 50%" },
-				},
+				}
   		},
   		animation: {
   			'accordion-down': 'accordion-down 0.2s ease-out',
