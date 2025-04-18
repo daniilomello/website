@@ -28,6 +28,10 @@ export function Header() {
             </div>
 
             <nav className="flex items-center gap-3 justify-center sm:justify-normal mt-10 sm:mt-0">
+                <Link href="/" className="hover:text-rose-300 flex items-center gap-1 relative">
+                    Home
+                </Link>
+                <span>•</span>
                 <Link href="/blog" className="hover:text-rose-300 flex items-center gap-1 relative">
                     Posts
                 </Link>
