@@ -2,7 +2,7 @@ import { Marquee } from "./magicui/marquee";
 
 export function Stack() {
   return (
-    <section className="py-16">
+    <section className="py-16 mb-[2rem]">
       <h2 className="mb-10 text-center">
         <span className="text-sm leading-8 sm:text-base block">
           Creating great apps with modern technologies 🔥

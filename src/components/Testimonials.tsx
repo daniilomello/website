@@ -11,7 +11,7 @@ export function Testimonials() {
   ];
 
   return (
-    <section className="py-2 mb-[10rem]">
+    <section className="py-2 mt-[4rem] mb-[8rem]">
       <div>
         {data.map((item) => (
           <article key={item.name} className="flex flex-col items-center">

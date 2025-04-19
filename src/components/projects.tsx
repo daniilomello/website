@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { PinContainer } from "./ui/3dPin";
 
 export function Projects() {
     return (
@@ -15,7 +14,8 @@ export function Projects() {
 
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:gap-8">
                 <div className="h-[25rem] w-full flex items-center justify-center ">
-                    <PinContainer
+                    <a
+                        className="rounded-2xl  shadow-[0_8px_16px_rgb(0_0_0/0.4)] bg-black/30 border border-white/[0.1] group-hover/pin:border-white/[0.2] transition duration-700 overflow-hidden pb-4 hover:-translate-y-4 hover:border-white/[0.8]"
                         title="/dehut.com.br"
                         href="https://www.dehut.com.br/?origin=daniilodev"
                     >
@@ -36,13 +36,14 @@ export function Projects() {
                                 className="flex flex-1 w-full rounded-lg mt-4"
                             />
                         </div>
-                    </PinContainer>
+                    </a>
                 </div>
 
                 <div className="h-[25rem] w-full flex items-center justify-center ">
-                    <PinContainer
+                    <a
                         title="/martinsatacado.com.br"
                         href="https://www.martinsatacado.com.br/?origin=daniilodev"
+                        className="rounded-2xl  shadow-[0_8px_16px_rgb(0_0_0/0.4)] bg-black/30 border border-white/[0.1] group-hover/pin:border-white/[0.2] transition duration-700 overflow-hidden pb-4 hover:-translate-y-4 hover:border-white/[0.8]"
                     >
                         <div className="flex basis-full flex-col p-4 tracking-tight text-slate-100/50 sm:basis-1/2 w-[18rem] h-[20rem] ">
                             <h3 className="max-w-xs !pb-2 !m-0 font-bold  text-base text-slate-100">
@@ -61,13 +62,14 @@ export function Projects() {
                                 className="flex flex-1 w-full rounded-lg mt-4"
                             />
                         </div>
-                    </PinContainer>
+                    </a>
                 </div>
 
                 <div className="h-[25rem] w-full flex items-center justify-center ">
-                    <PinContainer
+                    <a
                         title="/daniilabs"
                         href="https://github.com/orgs/projectsdanilo/repositories/?origin=daniilodev"
+                        className="rounded-2xl  shadow-[0_8px_16px_rgb(0_0_0/0.4)] bg-black/30 border border-white/[0.1] group-hover/pin:border-white/[0.2] transition duration-700 overflow-hidden pb-4 hover:-translate-y-4 hover:border-white/[0.8]"
                     >
                         <div className="flex basis-full flex-col p-4 tracking-tight text-slate-100/50 sm:basis-1/2 w-[18rem] h-[20rem] ">
                             <h3 className="max-w-xs !pb-2 !m-0 font-bold  text-base text-slate-100">
@@ -86,7 +88,7 @@ export function Projects() {
                                 className="flex flex-1 w-full rounded-lg mt-4"
                             />
                         </div>
-                    </PinContainer>
+                    </a>
                 </div>
             </div>
         </section>
