@@ -20,7 +20,8 @@ interface IPost {
 const storiesData: Story[] = [
   {
     id: 1,
-    thumbnail: "https://img.youtube.com/vi/5OFVArgGgdI/mqdefault.jpg",
+    thumbnail: "https://github.com/daniilomello.png",
+    // thumbnail: "https://img.youtube.com/vi/5OFVArgGgdI/mqdefault.jpg",
     youtubeVideoId: "5OFVArgGgdI",
   },
 ];
