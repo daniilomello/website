@@ -20,7 +20,7 @@ export async function generateMetadata({
     publishedAt: publishedTime,
     summary: description,
     image,
-  } = post.metadata;
+  } = post!.metadata;
   let ogImage = image ? `${DATA.url}${image}` : `${DATA.url}/og?title=${title}`;
 
   return {
@@ -31,14 +31,15 @@ export async function generateMetadata({
       description,
       type: "article",
       publishedTime,
-      url: `${DATA.url}/blog/${post.slug}`,
+      url: `${DATA.url}/blog/${post!.slug}`,
+      locale: post!.metadata.language === "🇧🇷" ? "pt_BR" : "en_US", // example
       images: [
         {
           url: "https://daniilo.dev/og.png",
-          width: 1200, // Recommended width
-          height: 630,  // Recommended height
-          alt: "Full Stack Develper Creates Digital Products"
-        }
+          width: 1200,
+          height: 630,
+          alt: "Full Stack Developer Creates Digital Products",
+        },
       ],
     },
     twitter: {

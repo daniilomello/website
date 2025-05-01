@@ -1,68 +1,77 @@
-import fs from "fs";
-import matter from "gray-matter";
-import path from "path";
-import rehypePrettyCode from "rehype-pretty-code";
-import rehypeStringify from "rehype-stringify";
-import remarkParse from "remark-parse";
-import remarkRehype from "remark-rehype";
-import { unified } from "unified";
-
-type Metadata = {
-  title: string;
-  publishedAt: string;
-  summary: string;
-  image?: string;
-};
-
-function getMDXFiles(dir: string) {
-  return fs.readdirSync(dir).filter((file) => path.extname(file) === ".mdx");
-}
-
-export async function markdownToHTML(markdown: string) {
-  const p = await unified()
-    .use(remarkParse)
-    .use(remarkRehype)
-    .use(rehypePrettyCode, {
-      // https://rehype-pretty.pages.dev/#usage
-      theme: {
-        light: "min-light",
-        dark: "min-dark",
-      },
-      keepBackground: false,
-    })
-    .use(rehypeStringify)
-    .process(markdown);
-
-  return p.toString();
-}
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0"; 
 
 export async function getPost(slug: string) {
-  const filePath = path.join("content", `${slug}.mdx`);
-  let source = fs.readFileSync(filePath, "utf-8");
-  const { content: rawContent, data: metadata } = matter(source);
-  const content = await markdownToHTML(rawContent);
+  const res = await fetch(
+    `https://ghostwhite-starling-589299.hostingersite.com/wp-json/wp/v2/posts?slug=${slug}`
+  );
+  if (!res.ok) {
+    return null;
+  }
+  const posts = await res.json();
+  if (!posts.length) return null;
+
+  const post = posts[0];
+  const tags = post._embedded?.["wp:term"]?.flat() || [];
+  const languageTag = tags.find((tag: any) =>
+    ["🇺🇸", "🇧🇷"].includes(tag.name)
+  );
+
   return {
-    source: content,
-    metadata,
-    slug,
+    slug: post.slug,
+    metadata: {
+      title: post.title.rendered,
+      publishedAt: post.date,
+      summary: post.excerpt.rendered,
+      image:
+        post._embedded?.["wp:featuredmedia"]?.[0]?.source_url || undefined,
+      language: languageTag?.name || "🇺🇸",
+    },
+    source: post.content.rendered,
   };
 }
 
-async function getAllPosts(dir: string) {
-  let mdxFiles = getMDXFiles(dir);
-  return Promise.all(
-    mdxFiles.map(async (file) => {
-      let slug = path.basename(file, path.extname(file));
-      let { metadata, source } = await getPost(slug);
-      return {
-        metadata,
-        slug,
-        source,
-      };
-    })
-  );
-}
-
 export async function getBlogPosts() {
-  return getAllPosts(path.join(process.cwd(), "content"));
+  const allPosts: any[] = [];
+  let page = 1;
+  const perPage = 100;
+
+  while (true) {
+    const res = await fetch(
+      `https://ghostwhite-starling-589299.hostingersite.com/wp-json/wp/v2/posts?_embed&per_page=${perPage}&page=${page}`
+    );
+
+    // Interrompe se a página não existe
+    if (res.status === 400 || res.status === 404) break;
+
+    if (!res.ok) {
+      throw new Error(`Failed to fetch posts on page ${page}`);
+    }
+
+    const posts = await res.json();
+
+    if (posts.length === 0) break;
+
+    allPosts.push(...posts);
+    page++;
+  }
+
+  return allPosts.map((post: any) => {
+    const tags = post._embedded?.["wp:term"]?.flat() || [];
+    const languageTag = tags.find((tag: any) =>
+      ["🇺🇸", "🇧🇷"].includes(tag.name)
+    );
+
+    return {
+      slug: post.slug,
+      metadata: {
+        title: post.title.rendered,
+        publishedAt: post.date,
+        summary: post.excerpt.rendered,
+        image:
+          post._embedded?.["wp:featuredmedia"]?.[0]?.source_url || undefined,
+        language: languageTag?.name || "🇺🇸",
+      },
+      content: post.content.rendered,
+    };
+  });
 }

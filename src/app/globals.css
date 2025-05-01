@@ -83,8 +83,11 @@
   }
 }
 
-pre>code {
+pre.wp-block-code > code {
   counter-reset: line;
+  background: rgba(0, 0, 0, 0.2);
+  padding: 12px 8px;
+  border-radius: 8px;
 }
 
 code[data-theme*=" "],
