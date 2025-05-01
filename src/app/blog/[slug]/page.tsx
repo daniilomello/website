@@ -1,5 +1,3 @@
-
-
 import CodeBlock from "@/components/CodeBlock";
 import { Header } from "@/components/header";
 import { getPost } from "@/data/blog";
