@@ -1,6 +1,7 @@
 "use client";
 
 import LanguageFilter from "@/components/LanguageFilter";
+import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { useState } from "react";
 import { FaArrowLeft } from "react-icons/fa";
@@ -12,6 +13,7 @@ type Post = {
     title: string;
     language: string;
     publishedAt: string;
+    category: string;
   };
 };
 
@@ -22,6 +24,13 @@ const storiesData: Story[] = [
     youtubeVideoId: "5OFVArgGgdI",
   },
 ];
+
+const categoriesColors: Record<string, string> = {
+  "career": "text-pink-400",
+  "code": "text-indigo-400",
+  "notes": "text-fuchsia-600",
+  "product": "text-sky-400",
+}
 
 export default function BlogClient({ posts }: { posts: Post[] }) {
   const [filteredLanguage, setFilteredLanguage] = useState<string | null>("🇺🇸");
@@ -69,8 +78,18 @@ export default function BlogClient({ posts }: { posts: Post[] }) {
                     <span>
                       {post.metadata.language} &nbsp; {post.metadata.title}
                     </span>
-                    <span className="hidden sm:block text-xs">
-                      {new Date(post.metadata.publishedAt).getFullYear()}
+                    <span className="hidden sm:flex text-[10px] gap-2">
+                      <span className={cn
+                        (
+                          "rounded-full",
+                          categoriesColors[post.metadata.category]
+                        )
+                      }>
+                        {post.metadata.category}
+                      </span>
+                      &bull;
+                      <span>
+                        {new Date(post.metadata.publishedAt).getFullYear()}</span>
                     </span>
                   </strong>
                 </Link>

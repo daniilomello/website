@@ -61,11 +61,18 @@ export async function getBlogPosts() {
       ["🇺🇸", "🇧🇷"].includes(tag.name)
     );
 
+    const categories = post._embedded?.["wp:term"]?.flat()
+      .filter((tag: any) => tag.taxonomy === "category")
+      .map((tag: any) => tag.name);
+
+    console.log(categories[0]);
+
     return {
       slug: post.slug,
       metadata: {
         title: post.title.rendered,
         publishedAt: post.date,
+        category: categories[0],
         summary: post.excerpt.rendered,
         image:
           post._embedded?.["wp:featuredmedia"]?.[0]?.source_url || undefined,
