@@ -1,5 +1,7 @@
 'use client';
+import Link from 'next/link';
 import { useEffect, useState } from 'react';
+import { InteractiveHoverButton } from './magicui/InteractiveHoverButton';
 
 const emojis = ['🐙', '🦋', '🐢', '🦅', '🐣', '🦥'];
 
@@ -158,6 +160,14 @@ export function Game() {
             `}</style>
           </div>
         ))}
+      </div>
+
+      <div className="grid place-items-center mt-8">
+        <Link href="https://daniilogamesjs.netlify.app/" target="_blank" rel="noopener noreferrer">
+          <InteractiveHoverButton>
+            See all Games
+          </InteractiveHoverButton>
+        </Link>
       </div>
     </div>
   );

@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { MapCard } from "@/components/ui/map";
 import Image from "next/image";
-import { FaDiscord, FaGithub, FaInstagram, FaLinkedin } from 'react-icons/fa';
+import { FaDiscord, FaGithub, FaLinkedin, FaYoutube } from 'react-icons/fa';
 
 export function Social() {
     return (
@@ -55,7 +55,7 @@ export function Social() {
                 </Card>
 
                 <div className="row-span-2 grid max-h-[400px] max-w-[400px] grid-cols-2 grid-rows-2 gap-4 sm:gap-10">
-                    <a href="https://github.com/projectsdanilo" target="_blank">
+                    <a href="https://github.com/projectsdanilo" target="_blank" rel="noopener noreferrer">
                         <Card className="start-center flex h-full flex-col gap-5 p-4 max-lg:w-full border-rose-200/10 transition group-hover:border-rose-200/30 bg-purple-400/10 text-purple-300">
                             <Button
                                 variant="secondary"
@@ -68,7 +68,7 @@ export function Social() {
                         </Card>
                     </a>
 
-                    <a href="https://www.linkedin.com/in/danilojsx" target="_blank">
+                    <a href="https://www.linkedin.com/in/danilojsx" target="_blank" rel="noopener noreferrer">
                         <Card className="start-center flex h-full flex-col gap-5 p-4 max-lg:w-full border-rose-200/10 transition group-hover:border-rose-200/30 bg-purple-400/10 text-purple-300">
                             <Button
                                 variant="secondary"
@@ -80,7 +80,7 @@ export function Social() {
                             <h6>Check my LinkedIn profile 🔥</h6>
                         </Card>
                     </a>
-                    <a href="https://discord.com/users/392627986140102657" target="_blank">
+                    <a href="https://discord.com/users/392627986140102657" target="_blank" rel="noopener noreferrer">
                         <Card className="start-center flex h-full flex-col  gap-5 p-4 max-lg:w-full border-rose-200/10 transition group-hover:border-rose-200/30 bg-purple-400/10 text-purple-300">
                             <Button
                                 variant="secondary"
@@ -92,19 +92,19 @@ export function Social() {
                             <h6>Connect with me on Discord 🌐</h6>
                         </Card>
                     </a>
-                    <a href="https://instagram.com/danilojsx" target="_blank">
-                        <Card className="start-center flex  h-full flex-col  gap-5 p-4 max-lg:w-full border-rose-200/10 transition group-hover:border-rose-200/30 bg-purple-400/10 text-purple-300">
+                    <a href="https://www.youtube.com/@daniilomello" target="_blank" rel="noopener noreferrer">
+                        <Card className="start-center flex h-full flex-col  gap-5 p-4 max-lg:w-full border-rose-200/10 transition group-hover:border-rose-200/30 bg-purple-400/10 text-purple-300">
                             <Button
                                 variant="secondary"
                                 size="icon"
                                 className="pointer-events-none h-14 w-14 rounded-xl border bg-pink-600/10 border-rose-200/10 transition group-hover:border-rose-200/30"
                             >
-                                <FaInstagram size={24} className="text-white" />
+                                <FaYoutube size={24} className="text-white" />
                             </Button>
-                            <h6>Random Reels 💡</h6>
+                            <h6>YouTube 💡</h6>
 
                             <Button variant="outline" size="sm" className="gap-2.5 rounded-sm bg-pink-600/80 hover:bg-pink-600/50">
-                                Follow
+                                Watch
                             </Button>
                         </Card>
                     </a>
