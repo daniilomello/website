@@ -1,4 +1,4 @@
-import Meteors from "@/components/magicui/meteors";
+import Meteors from "@/components/magicui/Meteors";
 import Link from "next/link";
 import { InteractiveHoverButton } from "./magicui/InteractiveHoverButton";
 import { SpinningText } from "./magicui/SpinningText";

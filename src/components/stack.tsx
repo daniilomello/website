@@ -1,4 +1,4 @@
-import { Marquee } from "./magicui/marquee";
+import { Marquee } from "./magicui/Marquee";
 
 export function Stack() {
   return (
