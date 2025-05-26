@@ -1,7 +1,7 @@
 import { CookiePopup } from "@/components/CookiePopup";
 import Spotlight, { SpotlightCard } from "@/components/Spotlight";
 import { ThemeProvider } from "@/components/ThemeProvider";
-import { TooltipProvider } from "@/components/ui/tooltip";
+import { TooltipProvider } from "@/components/ui/Tooltip";
 import { DATA } from "@/data/resume";
 import { cn } from "@/lib/utils";
 import type { Metadata } from "next";

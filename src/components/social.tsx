@@ -1,6 +1,6 @@
-import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
-import { MapCard } from "@/components/ui/map";
+import { Button } from "@/components/ui/Button";
+import { Card } from "@/components/ui/Card";
+import { MapCard } from "@/components/ui/Map";
 import Image from "next/image";
 import { FaDiscord, FaGithub, FaLinkedin, FaYoutube } from 'react-icons/fa';
 
