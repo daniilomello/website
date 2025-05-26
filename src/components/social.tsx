@@ -2,7 +2,9 @@ import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { MapCard } from "@/components/ui/Map";
 import Image from "next/image";
-import { FaDiscord, FaGithub, FaLinkedin, FaYoutube } from 'react-icons/fa';
+import { FaDiscord, FaGithub, FaLinkedin } from 'react-icons/fa';
+import { SiPeerlist } from "react-icons/si";
+
 
 export function Social() {
     return (
@@ -55,7 +57,7 @@ export function Social() {
                 </Card>
 
                 <div className="row-span-2 grid max-h-[400px] max-w-[400px] grid-cols-2 grid-rows-2 gap-4 sm:gap-10">
-                    <a href="https://github.com/projectsdanilo" target="_blank" rel="noopener noreferrer">
+                    <a href="https://github.com/daniilomello" target="_blank" rel="noopener noreferrer">
                         <Card className="start-center flex h-full flex-col gap-5 p-4 max-lg:w-full border-rose-200/10 transition group-hover:border-rose-200/30 bg-purple-400/10 text-purple-300">
                             <Button
                                 variant="secondary"
@@ -92,19 +94,19 @@ export function Social() {
                             <h6>Connect with me on Discord 🌐</h6>
                         </Card>
                     </a>
-                    <a href="https://www.youtube.com/@daniilomello" target="_blank" rel="noopener noreferrer">
+                    <a href="https://peerlist.io/scroll" target="_blank" rel="noopener noreferrer">
                         <Card className="start-center flex h-full flex-col  gap-5 p-4 max-lg:w-full border-rose-200/10 transition group-hover:border-rose-200/30 bg-purple-400/10 text-purple-300">
                             <Button
                                 variant="secondary"
                                 size="icon"
-                                className="pointer-events-none h-14 w-14 rounded-xl border bg-pink-600/10 border-rose-200/10 transition group-hover:border-rose-200/30"
+                                className="pointer-events-none h-14 w-14 rounded-xl border bg-lime-600/10 border-green-200/10 transition group-hover:border-green-200/30"
                             >
-                                <FaYoutube size={24} className="text-white" />
+                                <SiPeerlist size={24} className="text-white" />
                             </Button>
-                            <h6>YouTube 💡</h6>
+                            <h6>Peerlist 💡</h6>
 
-                            <Button variant="outline" size="sm" className="gap-2.5 rounded-sm bg-pink-600/80 hover:bg-pink-600/50">
-                                Watch
+                            <Button variant="outline" size="sm" className="gap-2.5 rounded-sm bg-lime-600/80 hover:bg-lime-600/50">
+                                Follow
                             </Button>
                         </Card>
                     </a>

@@ -21,8 +21,6 @@ export default function Page() {
         </h1>
 
         <article>
-          <p>Well, let me tell you.</p>
-
           <p>First, welcome to this little corner of my world! I&rsquo;m glad you&rsquo;re here.</p>
 
           <p>I&rsquo;ve been thinking a lot about who I am, what drives me, and what I&rsquo;m building toward. Life has been a mix of growth and self-discovery, and honestly, I&rsquo;ve loved every messy part of it, even the bad ones.</p>
