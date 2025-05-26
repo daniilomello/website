@@ -94,7 +94,7 @@ export function Social() {
                             <h6>Connect with me on Discord 🌐</h6>
                         </Card>
                     </a>
-                    <a href="https://peerlist.io/scroll" target="_blank" rel="noopener noreferrer">
+                    <a href="https://peerlist.io/daniilomello" target="_blank" rel="noopener noreferrer">
                         <Card className="start-center flex h-full flex-col  gap-5 p-4 max-lg:w-full border-rose-200/10 transition group-hover:border-rose-200/30 bg-purple-400/10 text-purple-300">
                             <Button
                                 variant="secondary"
