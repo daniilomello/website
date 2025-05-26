@@ -2,7 +2,7 @@ import Meteors from "@/components/magicui/Meteors";
 import Link from "next/link";
 import { InteractiveHoverButton } from "./magicui/InteractiveHoverButton";
 import { SpinningText } from "./magicui/SpinningText";
-import Stories, { Story } from "./Stories";
+import { Story } from "./Stories";
 
 
 const storiesData: Story[] = [
@@ -19,9 +19,22 @@ export function Header() {
             <div className="flex items-center gap-9 justify-center sm:justify-normal relative -left-6 sm:-left-0">
                 <div className="relative">
                     <span className="block w-[80px] h-[80px] relative left-6 -top-2">
-                        <Stories storiesData={storiesData} />
+                        <div className="relative w-24 h-24">
+                            <div className="absolute inset-0 rounded-full animate-gradient-border bg-instagram-gradient" />
+                            <div className="absolute inset-0.5 rounded-full overflow-hidden">
+                                <div
+                                className="relative z-10 w-full h-full cursor-pointer shadow-md hover:shadow-lg transition-shadow"
+                                >
+                                    <img
+                                        src="https://github.com/daniilomello.png"
+                                        alt="profile picture"
+                                        className="object-cover w-full h-full rounded-full"
+                                    />
+                                </div> 
+                            </div>
+                        </div>
                     </span>
-                    <SpinningText className="absolute top-12 left-16 text-lg">
+                    <SpinningText className="absolute top-10 left-[71px]  text-lg">
                         Frontend ⚡ Backend ⚡ Mobile ⚡ UI & UX ⚡
                     </SpinningText>
                 </div>

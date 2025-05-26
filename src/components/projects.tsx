@@ -68,7 +68,7 @@ export function Projects() {
                 <div className="h-[25rem] w-full flex items-center justify-center ">
                     <a
                         title="/daniilabs"
-                        href="https://github.com/orgs/projectsdanilo/repositories/?origin=daniilodev"
+                        href="https://github.com/daniilomello"
                         className="rounded-2xl  shadow-[0_8px_16px_rgb(0_0_0/0.4)] bg-black/30 border border-white/[0.1] group-hover/pin:border-white/[0.2] transition duration-700 overflow-hidden pb-4 hover:-translate-y-4 hover:border-white/[0.8]"
                     >
                         <div className="flex basis-full flex-col p-4 tracking-tight text-slate-100/50 sm:basis-1/2 w-[18rem] h-[20rem] ">
