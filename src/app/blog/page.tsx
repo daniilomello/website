@@ -1,5 +1,5 @@
 import BlogClient from "@/components/BlogClient";
-import { Header } from "@/components/header";
+import { Header } from "@/components/Header";
 import { getBlogPosts } from "@/data/blog";
 
 export const metadata = {

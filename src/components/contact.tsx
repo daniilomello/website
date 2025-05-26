@@ -1,6 +1,6 @@
 import SparklesText from "@/components/magicui/SparklesText";
 import Link from "next/link";
-import { Game } from "./game";
+import { Game } from "./Game";
 import { InteractiveHoverButton } from "./magicui/InteractiveHoverButton";
 
 export function Contact() {

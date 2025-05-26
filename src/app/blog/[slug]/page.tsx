@@ -1,5 +1,5 @@
 import CodeBlock from "@/components/CodeBlock";
-import { Header } from "@/components/header";
+import { Header } from "@/components/Header";
 import { getPost } from "@/data/blog";
 import { DATA } from "@/data/resume";
 import parse from "html-react-parser";

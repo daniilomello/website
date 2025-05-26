@@ -1,6 +1,6 @@
 import { CookiePopup } from "@/components/CookiePopup";
-import Spotlight, { SpotlightCard } from "@/components/spotlight";
-import { ThemeProvider } from "@/components/theme-provider";
+import Spotlight, { SpotlightCard } from "@/components/Spotlight";
+import { ThemeProvider } from "@/components/ThemeProvider";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { DATA } from "@/data/resume";
 import { cn } from "@/lib/utils";

@@ -1,9 +1,9 @@
-import { Contact } from "@/components/contact";
-import { Header } from "@/components/header";
-import { Hero } from "@/components/hero";
-import { Projects } from "@/components/projects";
-import { Social } from "@/components/social";
-import { Stack } from "@/components/stack";
+import { Contact } from "@/components/Contact";
+import { Header } from "@/components/Header";
+import { Hero } from "@/components/Hero";
+import { Projects } from "@/components/Projects";
+import { Social } from "@/components/Social";
+import { Stack } from "@/components/Stack";
 import { Testimonials } from "@/components/Testimonials";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
 
