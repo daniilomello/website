@@ -1,12 +1,12 @@
 import { CookiePopup } from "@/components/CookiePopup";
-import Spotlight, { SpotlightCard } from "@/components/Spotlight";
 import { ThemeProvider } from "@/components/ThemeProvider";
-import { TooltipProvider } from "@/components/ui/Tooltip";
 import { DATA } from "@/data/resume";
 import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
 import { Inter as FontSans } from "next/font/google";
 import Script from "next/script";
+import Spotlight, { SpotlightCard } from "../components/Spotlight";
+import { TooltipProvider } from "../components/ui/Tooltip";
 import "./globals.css";
 
 

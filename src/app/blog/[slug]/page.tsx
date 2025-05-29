@@ -1,5 +1,4 @@
 import CodeBlock from "@/components/CodeBlock";
-import { Header } from "@/components/Header";
 import { getPost } from "@/data/blog";
 import { DATA } from "@/data/resume";
 import parse from "html-react-parser";
@@ -7,6 +6,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { FaArrowLeft } from "react-icons/fa";
+import { Header } from "../../../components/Header";
 
 export async function generateMetadata({
   params,
