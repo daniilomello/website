@@ -1,6 +1,6 @@
+import { Header } from "@/components/Header";
 import Link from "next/link";
 import { FaArrowLeft } from "react-icons/fa";
-import { Header } from "../../components/Header";
 
 export const metadata = {
   title: "About Me",
