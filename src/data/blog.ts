@@ -1,3 +1,5 @@
+import he from "he";
+
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0"; 
 
 export async function getPost(slug: string) {
@@ -19,14 +21,14 @@ export async function getPost(slug: string) {
   return {
     slug: post.slug,
     metadata: {
-      title: post.title.rendered,
+      title: he.decode(post.title.rendered),
       publishedAt: post.date,
-      summary: post.excerpt.rendered,
+      summary: he.decode(post.excerpt.rendered),
       image:
         post._embedded?.["wp:featuredmedia"]?.[0]?.source_url || undefined,
       language: languageTag?.name || "🇺🇸",
     },
-    source: post.content.rendered,
+    source: he.decode(post.content.rendered),
   };
 }
 
@@ -65,20 +67,18 @@ export async function getBlogPosts() {
       .filter((tag: any) => tag.taxonomy === "category")
       .map((tag: any) => tag.name);
 
-    console.log(categories[0]);
-
     return {
       slug: post.slug,
       metadata: {
-        title: post.title.rendered,
+        title: he.decode(post.title.rendered),
         publishedAt: post.date,
         category: categories[0],
-        summary: post.excerpt.rendered,
+        summary: he.decode(post.excerpt.rendered),
         image:
           post._embedded?.["wp:featuredmedia"]?.[0]?.source_url || undefined,
         language: languageTag?.name || "🇺🇸",
       },
-      content: post.content.rendered,
+      content: he.decode(post.content.rendered),
     };
   });
 }
