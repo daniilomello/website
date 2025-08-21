@@ -4,7 +4,7 @@ import { InteractiveHoverButton } from "./magicui/InteractiveHoverButton";
 import { SpinningText } from "./magicui/SpinningText";
 import { Story } from "./Stories";
 
-
+// TODO: update the component to be an floating bottom menu header for desktop and mobile
 const storiesData: Story[] = [
     {
         id: 1,
