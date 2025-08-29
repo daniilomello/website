@@ -1,6 +1,5 @@
 import SparklesText from "@/components/magicui/SparklesText";
 import Link from "next/link";
-import { Game } from "./Game";
 import { InteractiveHoverButton } from "./magicui/InteractiveHoverButton";
 
 export function Contact() {
@@ -17,8 +16,6 @@ export function Contact() {
                         Challenge Accepted
                     </InteractiveHoverButton>
                 </Link>
-
-                <Game />
 
                 <p className="text-center text-white mt-2 text-xs font-bold">
                     &copy; {new Date().getFullYear()} - Created with 💜 by Danilo

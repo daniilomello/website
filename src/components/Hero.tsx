@@ -7,16 +7,16 @@ export function Hero() {
         <section className="px-8 sm:px-0 py-18 mb-10 sm:mb-32">
             <div className="my-8 sm:my-0 sm:mb-4">
                 <div className="scale-75 origin-top-left group relative flex max-w-fit flex-row items-center justify-center rounded-2xl px-4 py-1.5 text-sm font-medium shadow-[inset_0_-8px_10px_#8fdfff1f] backdrop-blur-sm transition-shadow duration-500 ease-out [--bg-size:300%] hover:shadow-[inset_0_-5px_10px_#8fdfff3f]">
-                    <div className="absolute inset-0 block h-full w-full animate-gradient bg-gradient-to-r from-green-300/50 via-purple-300/50 to-green-300/50 bg-[length:var(--bg-size)_100%] p-[1px] ![mask-composite:subtract] [border-radius:inherit] [mask:linear-gradient(#fff_0_0)_content-box,linear-gradient(#fff_0_0)]">
+                    <div className="absolute inset-0 block h-full w-full animate-gradient bg-gradient-to-r from-red-300/50 via-purple-300/50 to-red-300/50 bg-[length:var(--bg-size)_100%] p-[1px] ![mask-composite:subtract] [border-radius:inherit] [mask:linear-gradient(#fff_0_0)_content-box,linear-gradient(#fff_0_0)]">
                     </div>
-                    <div className="absolute inset-0 block h-full w-full animate-gradient bg-gradient-to-r from-green-300/50 via-purple-300/50 to-green-300/50 bg-[length:var(--bg-size)_100%] [border-radius:inherit] [mask:linear-gradient(#fff_0_0)_content-box,linear-gradient(#fff_0_0)] p-[1px] ![mask-composite:subtract]">
+                    <div className="absolute inset-0 block h-full w-full animate-gradient bg-gradient-to-r from-red-300/50 via-purple-300/50 to-red-300/50 bg-[length:var(--bg-size)_100%] [border-radius:inherit] [mask:linear-gradient(#fff_0_0)_content-box,linear-gradient(#fff_0_0)] p-[1px] ![mask-composite:subtract]">
                     </div>
                     <span className="text-[10px] opacity-75">
-                        🟢
+                        🔴
                     </span>
                     <div data-orientation="vertical" role="none" className="shrink-0 bg-border w-[1px] mx-2 h-4"></div>
 
-                    <span className="animate-gradient bg-gradient-to-r from-green-300 via-purple to-purple-300 bg-[length:var(--bg-size)_100%] bg-clip-text text-transparent inline">Open to Work</span>
+                    <span className="animate-gradient bg-gradient-to-r from-red-300 via-purple to-purple-300 bg-[length:var(--bg-size)_100%] bg-clip-text text-transparent inline">Close to Work</span>
                 </div>
             </div>
 
