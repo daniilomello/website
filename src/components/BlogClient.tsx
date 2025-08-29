@@ -47,13 +47,6 @@ export default function BlogClient({ posts }: { posts: Post[] }) {
 
   return (
     <>
-      <Link
-        href="/"
-        className="flex items-center gap-2 mb-4 sm:-mt-8 px-8 sm:px-0 hover:text-rose-500 transition"
-      >
-        <FaArrowLeft size={12} /> Go back
-      </Link>
-
       <section className="min-h-screen px-8 sm:px-0">
         <h1 className="font-bold text-2xl text-purple-100">
           Welcome to my articles and notes ✍️

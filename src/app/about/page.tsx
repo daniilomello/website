@@ -1,6 +1,5 @@
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { Header } from "@/components/Header";
-import Link from "next/link";
-import { FaArrowLeft } from "react-icons/fa";
 
 export const metadata = {
   title: "About Me",
@@ -11,9 +10,7 @@ export default function Page() {
   return (
     <main className="flex flex-col min-h-[100dvh]">
       <Header />
-      <Link href="/" className="flex items-center gap-2 mb-4 px-8 sm:px-0 hover:text-rose-500 transition">
-        <FaArrowLeft size={12} /> Go back
-      </Link>
+      <Breadcrumbs />
 
       <section id="blog" className="blog h-min-screen px-8 sm:px-0 sm:max-w-2xl pb-8">
         <h1 className="font-bold text-3xl mb-8 text-purple-100">

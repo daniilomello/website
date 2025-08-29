@@ -1,4 +1,5 @@
 import BlogClient from "@/components/BlogClient";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { Header } from "@/components/Header";
 import { getBlogPosts } from "@/data/blog";
 
@@ -13,6 +14,7 @@ export default async function BlogPage() {
   return (
     <>
       <Header />
+      <Breadcrumbs />
       <BlogClient posts={posts} />
     </>
   );

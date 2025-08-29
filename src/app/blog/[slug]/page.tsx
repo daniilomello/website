@@ -1,12 +1,11 @@
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 import CodeBlock from "@/components/CodeBlock";
 import { Header } from "@/components/Header";
 import { getPost } from "@/data/blog";
 import { DATA } from "@/data/resume";
 import parse from "html-react-parser";
 import type { Metadata } from "next";
-import Link from "next/link";
 import { notFound } from "next/navigation";
-import { FaArrowLeft } from "react-icons/fa";
 
 export async function generateMetadata({
   params,
@@ -69,12 +68,7 @@ export default async function Blog({
   return (
     <>
       <Header />
-      <Link
-        href="/blog"
-        className="flex items-center gap-2 mb-4 sm:-mt-8 px-8 sm:px-0 hover:text-rose-500 transition"
-      >
-        <FaArrowLeft size={12} /> Go Back
-      </Link>
+      <Breadcrumbs />
       <section
         id="blog"
         className="blog h-min-screen px-8 sm:px-0 sm:max-w-[45.5rem] pb-8 sm:mx-auto sm:mt-10"
