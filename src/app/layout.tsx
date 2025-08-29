@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/inline-script-id */
 import { CookiePopup } from "@/components/CookiePopup";
 import Spotlight, { SpotlightCard } from "@/components/Spotlight";
 import { ThemeProvider } from "@/components/ThemeProvider";
@@ -103,6 +104,15 @@ export default function RootLayout({
                 "${DATA.contact.social.LinkedIn.url}"
               ]
             }
+          `}
+        </Script>
+        <Script type="text/javascript">
+          {`
+            (function(c,l,a,r,i,t,y){
+              c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+              t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+              y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+            })(window, document, "clarity", "script", "t27hk6lfxy");
           `}
         </Script>
       </head>
