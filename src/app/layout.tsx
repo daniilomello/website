@@ -20,6 +20,9 @@ export const metadata: Metadata = {
   metadataBase: new URL(DATA.url),
   alternates: {
     canonical: './',
+    types: {
+      "application/rss+xml": [{ url: "blog/rss.xml", title: "RSS Feed" }],
+    }
   },
   title: {
     default: DATA.name,
