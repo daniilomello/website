@@ -17,6 +17,9 @@ const fontSans = FontSans({
 
 export const metadata: Metadata = {
   metadataBase: new URL(DATA.url),
+  alternates: {
+    canonical: './',
+  },
   title: {
     default: DATA.name,
     template: `%s | ${DATA.name}`,
@@ -86,6 +89,20 @@ export default function RootLayout({
             gtag('js', new Date());
 
             gtag('config', 'G-98RLHESESB');
+          `}
+        </Script>
+        <Script id="person-schema" type="application/ld+json" strategy="afterInteractive">
+          {`
+            {
+              "@context": "https://schema.org",
+              "@type": "Person",
+              "name": "${DATA.name}",
+              "url": "${DATA.url}",
+              "sameAs": [
+                "${DATA.contact.social.GitHub.url}",
+                "${DATA.contact.social.LinkedIn.url}"
+              ]
+            }
           `}
         </Script>
       </head>

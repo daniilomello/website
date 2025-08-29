@@ -22,7 +22,7 @@ export function CookiePopup() {
   return (
     <div className="fixed bottom-4 left-4 right-4 max-w-md mx-auto bg-gray-800 text-white p-4 rounded-lg shadow-lg z-50">
       <p className="text-sm inline">
-        🍪 This site uses cookies. By continuing to browse, you accept our use of cookies.
+        🍪 This site uses cookies. By continuing, you accept our use of cookies.
       </p>
       <button
         onClick={acceptCookies}
