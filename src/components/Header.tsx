@@ -24,8 +24,6 @@ export function Header() {
                     </Link>
                     <span>•</span>
                     <Link href="/resume.pdf" target="_blank" className="hover:text-rose-300">Resume</Link>
-                    <span>•</span>
-                    <Link href="/rss" className="hover:text-rose-300">RSS</Link>
                     <span className="hidden sm:inline-block">•</span>
                     <Link href="https://wa.me/5534984424459" target="_blank" className="hidden sm:inline-block">
                         <InteractiveHoverButton className="text-xs">
