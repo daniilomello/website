@@ -36,7 +36,7 @@ export async function generateMetadata({
       locale: post!.metadata.language === "🇧🇷" ? "pt_BR" : "en_US",
       images: [
         {
-          url: "https://daniilo.dev/og.png",
+          url: post!.metadata.image || `https://daniilo.dev/og.png`,
           width: 1200,
           height: 630,
           alt: "Full Stack Developer Creates Digital Products",
@@ -47,7 +47,11 @@ export async function generateMetadata({
       card: "summary_large_image",
       title,
       description,
-      images: [ogImage],
+      images: [
+        {
+          url: post!.metadata.image || `https://daniilo.dev/og.png`,
+        }
+      ],
     },
   };
 }
