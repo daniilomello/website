@@ -26,10 +26,10 @@ export async function generateMetadata({
 
   return {
     title,
-    description: post!.metadata.summary,
+    description: post!.metadata.summary.replace(/^<p>/, "").replace(/<\/p>$/, ""),
     openGraph: {
       title,
-      description: post!.metadata.summary,
+      description: post!.metadata.summary.replace(/^<p>/, "").replace(/<\/p>$/, ""),
       type: "article",
       publishedTime,
       url: `${DATA.url}/blog/${post!.slug}`,
@@ -46,7 +46,7 @@ export async function generateMetadata({
     twitter: {
       card: "summary_large_image",
       title,
-      description,
+      description: post!.metadata.summary.replace(/^<p>/, "").replace(/<\/p>$/, ""),
       images: [
         {
           url: post!.metadata.image || `https://daniilo.dev/og.png`,
