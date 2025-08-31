@@ -4,7 +4,7 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 
 export async function getPost(slug: string) {
   const res = await fetch(
-    `https://ghostwhite-starling-589299.hostingersite.com/wp-json/wp/v2/posts?slug=${slug}`
+    `https://ghostwhite-starling-589299.hostingersite.com/wp-json/wp/v2/posts?_embed&slug=${slug}`
   );
   if (!res.ok) {
     return null;
