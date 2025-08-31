@@ -26,10 +26,10 @@ export async function generateMetadata({
 
   return {
     title,
-    description,
+    description: post!.metadata.summary,
     openGraph: {
       title,
-      description,
+      description: post!.metadata.summary,
       type: "article",
       publishedTime,
       url: `${DATA.url}/blog/${post!.slug}`,
