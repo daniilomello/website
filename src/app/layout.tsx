@@ -1,6 +1,5 @@
 /* eslint-disable @next/next/inline-script-id */
 import { CookiePopup } from "@/components/CookiePopup";
-import Spotlight, { SpotlightCard } from "@/components/Spotlight";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { TooltipProvider } from "@/components/ui/Tooltip";
 import { DATA } from "@/data/resume";
@@ -74,7 +73,7 @@ export default function RootLayout({
 
 
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning> 
       <head>
         <Script id="gtm-head" strategy="afterInteractive">
           {`
@@ -121,7 +120,7 @@ export default function RootLayout({
       </head>
       <body
         className={cn(
-          "overscroll-y-none selection:bg-violet-600/90 min-h-screen bg-gray-900 font-sans antialiased relative",
+          "overscroll-y-none selection:bg-violet-600/90 bg-background font-sans antialiased relative",
           fontSans.variable
         )}
       >
@@ -129,25 +128,14 @@ export default function RootLayout({
           display: 'none',
           visibility: 'hidden',
         }}></iframe></noscript>
-        <Spotlight>
-          <SpotlightCard>
-            <div className="absolute top-0 translate-y-3/2 left-1/2 -translate-x-1/2 pointer-events-none -z-0 w-1/2 aspect-square" aria-hidden="true">
-              <div className="absolute inset-0 translate-z-0 bg-rose-900/5 rounded-full blur-[80px]"></div>
-            </div>
-            <div className="absolute bottom-0 translate-y-1/2 left-1/2 -translate-x-1/2 pointer-events-none -z-0 w-1/2 aspect-square" aria-hidden="true">
-              <div className="absolute inset-0 translate-z-0 bg-rose-800/10 rounded-full blur-[80px]"></div>
-            </div>
-            <svg className="pointer-events-none fixed isolate z-50 opacity-70 mix-blend-soft-light" width="100%" height="100%"><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.80" numOctaves="4" stitchTiles="stitch"></feTurbulence></filter><rect width="100%" height="100%" filter="url(#noise)"></rect></svg>
-            <ThemeProvider attribute="class" defaultTheme="dark">
-              <TooltipProvider delayDuration={0}>
-                <main className="max-w-5xl mx-auto py-24">
-                  {children}
-                  <CookiePopup />
-                </main>
-              </TooltipProvider>
-            </ThemeProvider>
-          </SpotlightCard>
-        </Spotlight>
+        <ThemeProvider attribute="class" defaultTheme="light">
+          <TooltipProvider delayDuration={0}>
+            <main className="max-w-5xl mx-auto pt-[20vh] pb-24">
+              {children}
+              <CookiePopup />
+            </main>
+          </TooltipProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

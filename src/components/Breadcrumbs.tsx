@@ -9,8 +9,8 @@ export function Breadcrumbs() {
   const segments = pathname.split("/").filter(Boolean);
 
   return (
-    <nav className="flex items-center gap-2 px-8 sm:px-0 mb-4 text-sm text-gray-400">
-      <Link href="/" className="hover:text-rose-300">
+    <nav className="flex items-center gap-2 px-8 sm:px-0 mb-4 text-sm text-muted-foreground">
+      <Link href="/" className="hover:text-foreground">
         Home
       </Link>
       {segments.map((segment, index) => {
@@ -22,9 +22,9 @@ export function Breadcrumbs() {
           <div key={href} className="flex items-center gap-2">
             <FaChevronRight size={10} />
             {isLast ? (
-              <span className="font-semibold text-white">This Page 👇</span>
+              <span className="font-semibold text-foreground">This Page 👇</span>
             ) : (
-              <Link href={href} className="hover:text-rose-300">
+                <Link href={href} className="hover:text-foreground/20">
                 {name}
               </Link>
             )}

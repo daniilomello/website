@@ -13,11 +13,11 @@ export default function Page() {
       <Breadcrumbs />
 
       <section id="blog" className="blog h-min-screen px-8 sm:px-0 sm:max-w-2xl pb-8">
-        <h1 className="font-bold text-3xl mb-8 text-purple-100">
+        <h1 className="font-bold text-3xl mb-8">
           Who Am I?
         </h1>
 
-        <article>
+        <article className="prose max-w-none">
           <p>First, welcome to this little corner of my world! I&rsquo;m glad you&rsquo;re here.</p>
 
           <p>I&rsquo;ve been thinking a lot about who I am, what drives me, and what I&rsquo;m building toward. Life has been a mix of growth and self-discovery, and honestly, I&rsquo;ve loved every messy part of it, even the bad ones.</p>
@@ -51,6 +51,8 @@ export default function Page() {
           <p>We&rsquo;re all figuring it out, step by step. Let&rsquo;s keep building something amazing.</p>
 
           <p>Thanks for being part of this.</p>
+
+          <p>-Dan</p>
         </article>
       </section>
     </main>

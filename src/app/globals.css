@@ -188,7 +188,7 @@ pre.wp-block-code code[data-line-numbers-max-digits="3"]>[data-line]::before {
 
 .blog p a,
 .blog a {
-  @apply underline text-rose-500 font-medium;
+  @apply underline text-foreground font-medium;
 }
 
 .blog hr {

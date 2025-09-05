@@ -13,14 +13,14 @@ export default function RSSPage() {
       <Header />
       <Breadcrumbs />
       <section className="px-8 sm:px-0 sm:max-w-2xl pb-8">
-        <h1 className="font-bold text-3xl mb-8 text-purple-100">
+        <h1 className="font-bold text-3xl mb-8">
           RSS Feed
         </h1>
-        <article className="prose prose-invert max-w-none">
+        <article className="prose max-w-none">
           <p>
             If you&apos;d like to stay up-to-date with my latest blog posts, you can subscribe to my RSS feed. RSS (Really Simple Syndication) is a web feed that allows users and applications to access updates to websites in a standardized, computer-readable format.
           </p>
-          <h2 className="text-2xl font-bold text-purple-100">
+          <h2 className="text-2xl font-bold">
             How to Subscribe
           </h2>
           <p>
@@ -28,17 +28,17 @@ export default function RSSPage() {
           </p>
           <ul className="list-disc list-inside">
             <li>
-              <Link href="https://feedly.com/" target="_blank" rel="noopener noreferrer" className="text-rose-300 hover:underline">
+              <Link href="https://feedly.com/" target="_blank" rel="noopener noreferrer" className="hover:underline">
                 Feedly
               </Link>
             </li>
             <li>
-              <Link href="https://theoldreader.com/" target="_blank" rel="noopener noreferrer" className="text-rose-300 hover:underline">
+              <Link href="https://theoldreader.com/" target="_blank" rel="noopener noreferrer" className="hover:underline">
                 The Old Reader
               </Link>
             </li>
             <li>
-              <Link href="https://netnewswire.com/" target="_blank" rel="noopener noreferrer" className="text-rose-300 hover:underline">
+              <Link href="https://netnewswire.com/" target="_blank" rel="noopener noreferrer" className="hover:underline">
                 NetNewsWire
               </Link> (for Apple devices)
             </li>
@@ -46,8 +46,8 @@ export default function RSSPage() {
           <p>
             Once you have an RSS reader, you can subscribe to my feed by adding the following URL:
           </p>
-          <div className="bg-gray-800 p-4 rounded-lg">
-            <Link href="/blog/rss.xml" className="text-rose-300 hover:underline">
+          <div className="bg-foreground p-4 rounded-lg">
+            <Link href="/blog/rss.xml" className="text-background hover:underline">
               https://daniilo.dev/blog/rss.xml
             </Link>
           </div>

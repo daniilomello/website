@@ -4,7 +4,6 @@ import LanguageFilter from "@/components/LanguageFilter";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { useState } from "react";
-import { FaArrowLeft } from "react-icons/fa";
 import { Story } from "./Stories";
 
 type Post = {
@@ -47,11 +46,11 @@ export default function BlogClient({ posts }: { posts: Post[] }) {
 
   return (
     <>
-      <section className="min-h-screen px-8 sm:px-0">
-        <h1 className="font-bold text-2xl text-purple-100">
+      <section className="px-8 sm:px-0">
+        <h1 className="font-bold text-2xl text-foreground">
           Welcome to my articles and notes ✍️
         </h1>
-        <p className="mb-8 text-sm text-white/50">
+        <p className="mb-8 text-sm text-muted-foreground">
           Code snippets, ideas, reviews, explorations, and how-to guides.
         </p>
 
@@ -59,13 +58,13 @@ export default function BlogClient({ posts }: { posts: Post[] }) {
 
         <div className="flex flex-col gap-3">
           {sortedPosts.length === 0 ? (
-            <p className="text-white/50">No posts found for this language.</p>
+            <p className="text-muted-foreground">No posts found for this language.</p>
           ) : (
             sortedPosts.map((post) => (
               <div key={post.slug}>
                 <Link
                   href={`/blog/${post.slug}`}
-                  className="hover:text-purple-500/50 transition text-lg"
+                  className="hover:text-purple-500 transition text-lg"
                 >
                   <strong className="flex items-center justify-between">
                     <span>

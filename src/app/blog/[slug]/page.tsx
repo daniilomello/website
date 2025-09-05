@@ -99,11 +99,11 @@ export default async function Blog({
             }),
           }}
         />
-        <h1 className="font-bold text-3xl sm:text-5xl mb-8 text-purple-100">
+        <h1 className="font-bold text-3xl sm:text-5xl mb-8 text-foreground">
           {post.metadata.title}
         </h1>
 
-        <article className="prose prose-invert max-w-none">
+        <article className="max-w-none">
           {parse(post.source, {
             replace: (domNode: any) => {
               if (

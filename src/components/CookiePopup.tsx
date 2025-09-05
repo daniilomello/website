@@ -20,13 +20,13 @@ export function CookiePopup() {
   if (!isVisible) return null;
 
   return (
-    <div className="fixed bottom-24 left-4 right-4 max-w-lg mx-auto bg-gray-800 text-white p-2 rounded-lg shadow-lg z-50 text-center">
+    <div className="fixed bottom-24 left-4 right-4 max-w-lg mx-auto bg-background text-foreground p-2 rounded-lg shadow-lg z-50 text-center">
       <p className="text-xs inline">
         🍪 This site uses cookies, by continuing, you accept our use of cookies.
       </p>
       <button
         onClick={acceptCookies}
-        className="ml-1 text-xs inline bg-transaparent hover:text-rose-300/80 text-white"
+        className="ml-1 text-xs inline bg-transaparent hover:text-rose-300/80 text-foreground"
       >
         <span className="underline mr-1">I understand</span>
       </button>

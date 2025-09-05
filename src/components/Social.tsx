@@ -18,7 +18,7 @@ export function Social() {
                 </span>
             </h2>
             <section className="px-4 start w-full py-0 mt-8 sm:py-8 max-w-[840px] grid-cols-1 gap-4 sm:gap-8 flex flex-col sm:flex-row mx-auto">
-                <Card className="start-center relative row-span-2  flex h-[400px] w-[400px] flex-col gap-5 overflow-hidden p-0 max-lg:w-full border-rose-200/10 transition group-hover:border-rose-200/30">
+                <Card className="start-center relative row-span-2  flex h-[400px] w-[400px] flex-col gap-5 overflow-hidden p-0 max-lg:w-full border-foreground/10 transition group-hover:border-foreground/30">
                     <div className="absolute bottom-40 left-40">
                         <div className="center relative inset-x-0 z-10 flex">
                             <div className="h-4 w-4 rounded-full bg-purple-500 ring-4 ring-white" />
@@ -58,24 +58,24 @@ export function Social() {
 
                 <div className="row-span-2 grid max-h-[400px] max-w-[400px] grid-cols-2 grid-rows-2 gap-4 sm:gap-10">
                     <a href="https://github.com/daniilomello" target="_blank" rel="noopener noreferrer">
-                        <Card className="start-center flex h-full flex-col gap-5 p-4 max-lg:w-full border-rose-200/10 transition group-hover:border-rose-200/30 bg-purple-400/10 text-purple-300">
+                        <Card className="start-center flex h-full flex-col gap-5 p-4 max-lg:w-full border-foreground/10 transition group-hover:border-foreground bg-foreground/5">
                             <Button
                                 variant="secondary"
                                 size="icon"
-                                className="pointer-events-none h-14 w-14 rounded-xl border bg-black/20 border-rose-200/10 transition group-hover:border-rose-200/30"
+                                className="pointer-events-none h-14 w-14 rounded-xl border border-foreground/10 transition group-hover:border-foreground"
                             >
-                                <FaGithub size={24} className="text-white" />
+                                <FaGithub size={24} className="text-foreground" />
                             </Button>
                             <h6>Check my projects on Github 🚀</h6>
                         </Card>
                     </a>
 
                     <a href="https://www.linkedin.com/in/danilojsx" target="_blank" rel="noopener noreferrer">
-                        <Card className="start-center flex h-full flex-col gap-5 p-4 max-lg:w-full border-rose-200/10 transition group-hover:border-rose-200/30 bg-purple-400/10 text-purple-300">
+                        <Card className="start-center flex h-full flex-col gap-5 p-4 max-lg:w-full border-foreground/10 transition group-hover:border-foreground bg-foreground/5">
                             <Button
                                 variant="secondary"
                                 size="icon"
-                                className="pointer-events-none h-14 w-14 rounded-xl border bg-sky-700 border-rose-200/10 transition group-hover:border-rose-200/30"
+                                className="pointer-events-none h-14 w-14 rounded-xl border bg-sky-700 border-foreground/10 transition group-hover:border-foreground"
                             >
                                 <FaLinkedin size={24} className="text-white" />
                             </Button>
@@ -83,11 +83,11 @@ export function Social() {
                         </Card>
                     </a>
                     <a href="https://discord.com/users/392627986140102657" target="_blank" rel="noopener noreferrer">
-                        <Card className="start-center flex h-full flex-col  gap-5 p-4 max-lg:w-full border-rose-200/10 transition group-hover:border-rose-200/30 bg-purple-400/10 text-purple-300">
+                        <Card className="start-center flex h-full flex-col  gap-5 p-4 max-lg:w-full border-foreground/10 transition group-hover:border-foreground bg-foreground/5">
                             <Button
                                 variant="secondary"
                                 size="icon"
-                                className="pointer-events-none h-14 w-14 rounded-xl border bg-blue-900 border-rose-200/10 transition group-hover:border-rose-200/30"
+                                className="pointer-events-none h-14 w-14 rounded-xl border bg-blue-900 border-foreground/10 transition group-hover:border-foreground"
                             >
                                 <FaDiscord size={24} className="text-white" />
                             </Button>
@@ -95,13 +95,13 @@ export function Social() {
                         </Card>
                     </a>
                     <a href="https://peerlist.io/daniilomello" target="_blank" rel="noopener noreferrer">
-                        <Card className="start-center flex h-full flex-col  gap-5 p-4 max-lg:w-full border-rose-200/10 transition group-hover:border-rose-200/30 bg-purple-400/10 text-purple-300">
+                        <Card className="start-center flex h-full flex-col  gap-5 p-4 max-lg:w-full border-foreground/10 transition group-hover:border-foreground bg-foreground/5">
                             <Button
                                 variant="secondary"
                                 size="icon"
-                                className="pointer-events-none h-14 w-14 rounded-xl border bg-lime-600/10 border-green-200/10 transition group-hover:border-green-200/30"
+                                className="pointer-events-none h-14 w-14 rounded-xl border border-foreground/10 transition group-hover:border-green-200/30"
                             >
-                                <SiPeerlist size={24} className="text-white" />
+                                <SiPeerlist size={24} className="text-forground" />
                             </Button>
                             <h6>Peerlist 💡</h6>
 
