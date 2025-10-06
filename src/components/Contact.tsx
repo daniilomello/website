@@ -6,7 +6,7 @@ export function Contact() {
     return (
         <section className="pt-8 pb-12 text-center">
             <div className="flex flex-col gap-8 justify-center">
-                <SparklesText text="Got an idea in mind?" className="opacity-75" />
+                <SparklesText text="Got an idea in mind?" className="opacity-75 font-title font-bold" />
                 <p className="text-xl">
                     Let me help you bring it to life 💡
                 </p>

@@ -47,7 +47,7 @@ export default function BlogClient({ posts }: { posts: Post[] }) {
   return (
     <>
       <section className="px-8 sm:px-0">
-        <h1 className="font-bold text-2xl text-foreground">
+        <h1 className=" font-title font-bold text-2xl text-foreground">
           Welcome to my articles and notes ✍️
         </h1>
         <p className="mb-8 text-sm text-muted-foreground">

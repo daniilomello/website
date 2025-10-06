@@ -27,7 +27,7 @@ export function Hero() {
                 <span className="text-sm leading-8 sm:text-2xl block mb-2">
                     Yoo! I&apos;m Dan, welcome! 👋
                 </span>
-                <span className="text-4xl leading-10 sm:leading-none sm:text-8xl block">
+                <span className="text-4xl font-title font-bold leading-10 sm:leading-none sm:text-8xl block">
                     I Build Cool Digital Products.
                     Like Web and Mobile Apps.
                 </span>

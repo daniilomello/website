@@ -2,6 +2,48 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: "Peachi";
+  src: url("/fonts/Peachi-Thin.woff2") format("woff2");
+  font-weight: 100;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Peachi";
+  src: url("/fonts/Peachi-Light.woff2") format("woff2");
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Peachi";
+  src: url("/fonts/Peachi-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Peachi";
+  src: url("/fonts/Peachi-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Peachi";
+  src: url("/fonts/Peachi-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Peachi";
+  src: url("/fonts/Peachi-Black.woff2") format("woff2");
+  font-weight: 900;
+  font-style: normal;
+}
+
 @layer utilities {
   .scrollbar-custom::-webkit-scrollbar {
     width: 1px;
@@ -50,6 +92,7 @@
     --ring: 0 0% 3.9%;
 
     --radius: 0.5rem;
+    --font-heading: "Peachi", sans-serif;
   }
 
   .dark {
@@ -242,11 +285,11 @@ pre.wp-block-code code[data-line-numbers-max-digits="3"]>[data-line]::before {
 }
 
 .blog h2 {
-  @apply text-3xl font-bold mt-12 mb-1;
+  @apply text-3xl font-bold mt-12 mb-1 font-title;
 }
 
 .blog h3 {
-  @apply text-2xl font-bold mt-12 mb-1;
+  @apply text-2xl font-semibold mt-12 mb-1 font-title;
 }
 
 .blog ul {

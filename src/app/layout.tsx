@@ -5,7 +5,7 @@ import { TooltipProvider } from "@/components/ui/Tooltip";
 import { DATA } from "@/data/resume";
 import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
-import { Inter as FontSans } from "next/font/google";
+import { Karla as FontSans } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 

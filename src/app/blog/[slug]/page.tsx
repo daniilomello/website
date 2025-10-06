@@ -99,7 +99,7 @@ export default async function Blog({
             }),
           }}
         />
-        <h1 className="font-bold text-3xl sm:text-5xl mb-8 text-foreground">
+        <h1 className="font-title font-bold text-3xl sm:text-5xl mb-8 text-foreground">
           {post.metadata.title}
         </h1>
 

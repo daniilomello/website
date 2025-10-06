@@ -7,7 +7,7 @@ export function Projects() {
                 <span className="text-sm leading-8 sm:text-base block">
                     Apps that I&apos;ve worked on 🚀
                 </span>
-                <span className="text-3xl leading-8 sm:text-6xl block">
+                <span className="text-3xl font-title font-bold leading-8 sm:text-6xl block">
                     Projects
                 </span>
             </h2>

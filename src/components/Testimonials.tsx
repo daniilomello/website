@@ -22,7 +22,7 @@ export function Testimonials() {
             />
             <blockquote className="mt-4 text-center w-[65%] flex flex-col gap-3">
               <p className="font-light">{item.description}</p>
-              <p className="font-bold">{item.name}</p>
+              <p className="font-title font-bold">{item.name}</p>
               <p className="text-xs -mt-2">{item.job} at <span className="font-bold">{item.company}</span></p>
             </blockquote>
           </article>

@@ -7,7 +7,7 @@ export function Stack() {
         <span className="text-sm leading-8 sm:text-base block">
           Creating great apps with modern technologies 🔥
         </span>
-        <span className="text-3xl leading-8 sm:text-6xl block">
+        <span className="text-3xl font-title font-bold leading-8 sm:text-6xl block">
           Tech Stack
         </span>
       </h2>
