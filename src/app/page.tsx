@@ -1,24 +1,20 @@
-import { Contact } from "@/components/Contact";
+import BlogClient from "@/components/BlogClient";
 import { Header } from "@/components/Header";
-import { Hero } from "@/components/Hero";
-import { Projects } from "@/components/Projects";
-import { Social } from "@/components/Social";
-import { Stack } from "@/components/Stack";
-import { Testimonials } from "@/components/Testimonials";
-import { WhatsAppButton } from "@/components/WhatsAppButton";
+import { getBlogPosts } from "@/data/blog";
 
-export default function Page() {
+export const metadata = {
+  title: "Blog - Danilo Mello - Software Engineer",
+  description: "My thoughts on software development, life, and more.",
+};
+
+export default async function Page() {
+  const posts = await getBlogPosts();
+
   return (
-    <main className="flex flex-col min-h-[100dvh]">
+    <>
       <Header />
-      <Hero />
-      <Projects />
-      <Testimonials />
-      <Stack />
-      <Social />
-      <Contact />
-      <WhatsAppButton />
-    </main>
+      <BlogClient posts={posts} />
+    </>
   );
 }
 

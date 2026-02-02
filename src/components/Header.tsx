@@ -1,6 +1,6 @@
 import Link from "next/link";
-import { InteractiveHoverButton } from "./magicui/InteractiveHoverButton";
 import { AvatarProfile } from "./AvatarProfile";
+import { InteractiveHoverButton } from "./magicui/InteractiveHoverButton";
 import { Icons } from "./WhatsAppButton";
 
 export function Header() {
@@ -9,11 +9,7 @@ export function Header() {
             <nav className="flex items-center gap-3 sm:gap-6 justify-center sm:justify-normal">
                 <AvatarProfile className="w-8 h-8 sm:w-12 sm:h-12" />
                 <div className="flex items-center gap-3 text-sm sm:text-base">
-                    <Link href="/" className="hidden hover:text-foreground/70 sm:flex items-center gap-1 relative">
-                        Home
-                    </Link>
-                    <span>•</span>
-                    <Link href="/blog" className="hover:text-foreground/70 flex items-center gap-1 relative">
+                    <Link href="/" className="hover:text-foreground/70 flex items-center gap-1 relative">
                         Posts
                     </Link>
                     <span>•</span>
