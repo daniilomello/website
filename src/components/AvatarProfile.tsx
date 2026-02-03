@@ -1,9 +1,9 @@
 "use client";
 
+import { cn } from "@/lib/utils";
 import { useTheme } from "next-themes";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { cn } from "@/lib/utils";
 
 interface AvatarProfileProps {
   className?: string;
@@ -31,7 +31,7 @@ export const AvatarProfile = ({ className }: AvatarProfileProps) => {
       className="relative group rounded-full flex items-center justify-center border border-foreground/30"
     >
       <Image
-        src={theme === "light" ? "/profile-light.png" : "/profile-dark.png"}
+        src="http://github.com/daniilomello.png"
         alt="Avatar"
         width={200}
         height={200}
@@ -42,7 +42,7 @@ export const AvatarProfile = ({ className }: AvatarProfileProps) => {
         priority
       />
       <Image
-        src={theme === "light" ? "/profile-dark.png" : "/profile-light.png"}
+        src="http://github.com/daniilomello.png"
         alt="Avatar"
         width={200}
         height={200}
