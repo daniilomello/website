@@ -1,5 +1,6 @@
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import CodeBlock from "@/components/CodeBlock";
+import { GiscusComments } from "@/components/GiscusComments";
 import { Header } from "@/components/Header";
 import { getPost } from "@/data/blog";
 import { DATA } from "@/data/resume";
@@ -122,6 +123,10 @@ export default async function Blog({
             },
           })}
         </article>
+
+        <div className="mt-16">
+          <GiscusComments />
+        </div>
       </section>
     </>
   );
