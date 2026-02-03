@@ -2,9 +2,11 @@ import { Breadcrumbs } from "@/components/Breadcrumbs";
 import CodeBlock from "@/components/CodeBlock";
 import { GiscusComments } from "@/components/GiscusComments";
 import { Header } from "@/components/Header";
+import { ViewTracker } from "@/components/ViewTracker";
 import { getPost } from "@/data/blog";
 import { DATA } from "@/data/resume";
 import parse from "html-react-parser";
+import { Eye } from "lucide-react";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
@@ -100,9 +102,33 @@ export default async function Blog({
             }),
           }}
         />
-        <h1 className="font-title font-bold text-3xl sm:text-5xl mb-8 text-foreground">
+        <h1 className="font-title font-bold text-3xl sm:text-5xl mb-4 text-foreground">
           {post.metadata.title}
         </h1>
+
+        <div className="flex items-center gap-4 text-sm text-muted-foreground mb-8">
+          <time dateTime={post.metadata.publishedAt}>
+            {new Date(post.metadata.publishedAt).toLocaleDateString(
+              post.metadata.language === "🇧🇷" ? "pt-BR" : "en-US",
+              {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              }
+            )}
+          </time>
+          {(post.views ?? 0) > 1 && (
+            <>
+              <span>•</span>
+              <div className="flex items-center gap-1.5">
+                <Eye className="w-4 h-4" />
+                <span>{post.views.toLocaleString()} views</span>
+              </div>
+            </>
+          )}
+        </div>
+
+        <ViewTracker slug={post.slug} />
 
         <article className="max-w-none">
           {parse(post.source, {

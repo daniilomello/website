@@ -20,6 +20,7 @@ export async function getPost(slug: string) {
 
   return {
     slug: post.slug,
+    views: post.post_views || post.meta?.post_views_count || 0,
     metadata: {
       title: he.decode(post.title.rendered),
       publishedAt: post.date,
@@ -69,6 +70,7 @@ export async function getBlogPosts() {
 
     return {
       slug: post.slug,
+      views: post.post_views || post.meta?.post_views_count || 0,
       metadata: {
         title: he.decode(post.title.rendered),
         publishedAt: post.date,
