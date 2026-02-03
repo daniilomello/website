@@ -89,7 +89,7 @@ export default function BlogClient({ posts }: { posts: Post[] }) {
                           &bull;
                           <span className="flex items-center gap-1">
                             <Eye className="w-3 h-3" />
-                            {post.views.toLocaleString()}
+                            {(post.views ?? 0).toLocaleString()}
                           </span>
                         </>
                       )}
