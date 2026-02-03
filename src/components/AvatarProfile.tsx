@@ -31,7 +31,7 @@ export const AvatarProfile = ({ className }: AvatarProfileProps) => {
       className="relative group rounded-full flex items-center justify-center border border-foreground/30"
     >
       <Image
-        src="http://github.com/daniilomello.png"
+        src="https://avatars.githubusercontent.com/u/41456384?v=4"
         alt="Avatar"
         width={200}
         height={200}
@@ -42,7 +42,7 @@ export const AvatarProfile = ({ className }: AvatarProfileProps) => {
         priority
       />
       <Image
-        src="http://github.com/daniilomello.png"
+        src="https://avatars.githubusercontent.com/u/41456384?v=4"
         alt="Avatar"
         width={200}
         height={200}
