@@ -1,0 +1,64 @@
+---
+title: "Creating a new repository on GitHub via Terminal"
+publishedAt: "2024-06-17"
+summary: "How to quickly create a GitHub repository from the terminal using the GitHub CLI."
+category: "code"
+language: "🇺🇸"
+image: ""
+---
+
+Hi Friend!
+
+Today I wanna share with you how I quickly create new repositories on GitHub just using my Terminal.
+
+If you didn’t know, GitHub has a [CLI](https://cli.github.com/), that enable you to create and manipulate your repositories. Which make your life easier when you are creating new repositories for your projects, prototypes and POCs. [You can Install here](https://cli.github.com/).
+
+Once you install the CLI follow the steps below to create a new repository.
+
+01 – First, initialize Git:
+
+```bash
+git init
+```
+
+02 – Second, create a new branch called main:
+
+```bash
+git checkout -b main
+```
+
+03 – Now create a new repository using the `gh` command.
+
+```bash
+gh repo create repo-name --public --source=. --remote=origin
+```
+
+- The flag `--remote` define origin name for the repository
+- The flag `--source` define the path/folder for the repository
+- The flag `--public` make the repository public
+
+04 – Once you create the repository, add all files to staged:
+
+```bash
+git add .
+```
+
+05 – Now create your first commit:
+
+```bash
+git commit -m "feat: add initial files"
+```
+
+06 – And push all your updates to the main branch:
+
+```bash
+git push -u origin main
+```
+
+07 – Now to see if it worked it properly, try to access the repository:
+
+```bash
+gh browse
+```
+
+Great! You did it! You just create a repository via terminal.

@@ -1,0 +1,314 @@
+---
+title: "Programação Orientada a Objetos em JavaScript"
+publishedAt: "2025-06-03"
+summary: "Uma introdução aos conceitos de POO em JavaScript: objetos, classes, encapsulamento, herança e polimorfismo."
+category: "code"
+language: "🇧🇷"
+image: ""
+---
+
+Essa é uma introdução básica de como programação orientada objetos funciona em JavaScript. Por ser um paradigma bem utilizado no universo JavaScript e em outras linguagens também, acredito que seja importante saber pelo menos o básico.
+
+Em um projeto que trabalhei recentemente, com Angular (Front-end) e NestJS (Back-end). Percebi ainda mais a importância, e decidir escrever essa introdução.
+
+## O que é Programação Orientada a Objetos (POO)?
+
+POO é um paradigma ou estilo de programação que organiza o código em torno de objetos, ao invés de programação funcional ou procedural.
+
+Ele tem como objetivo melhorar a estrutura do código, legibilidade, manutenção e a reutilização do código, dividindo o código em pedaços menores e reutilizáveis (objetos), cada pedaço contém dados (propriedades) e comportamentos (métodos).
+
+### Qual a diferença entre programação procedural, funcional e orientada a objetos?
+
+A programação procedural é baseada em funções e procedimentos, onde o código é executado de forma sequencial (cima para baixo), as funções são usadas para organizar tarefas reutilizáveis, e os dados são em sua maioria variáveis globais ou passado entre as funções.
+
+```javascript
+const numbers = [5, 8, 12, 3, 20];
+
+let newNumbers = [];
+for (let i = 0; i < numbers.length; i++) {
+  newNumbers.push(numbers[i] + 2);
+}
+
+let sum = 0;
+for (let i = 0; i < filteredNumbers.length; i++) {
+  sum += filteredNumbers[i];
+}
+console.log(sum);
+```
+
+A programação funcional é declarativa, descreve o que fazer, mas não como fazer. Ela utiliza funções puras, onde as mesmas entradas sempre dão as mesmas saídas, sem ter nada modificado fora da função, trabalhando com imutabilidade sem alterar as variáveis.
+
+```javascript
+const numbers = [5, 8, 12, 3, 20];
+
+const sum = numbers.map((n) => n + 2).reduce((acc, n) => acc + n, 0);
+
+console.log(sum);
+```
+
+A programação orientada a objetos, agrupa os dados em classes e instâncias (objetos), usando conceitos como encapsulamento, herança e polimorfismo, tornando o código mais modular, reutilizável e escalável.
+
+```javascript
+class Nums {
+  constructor(numbers) {
+    this.numbers = numbers;
+  }
+
+  add(value) {
+    this.numbers = this.numbers.map((n) => n + value);
+    return this.numbers;
+  }
+}
+
+const numbers = new Nums([5, 8, 12, 3, 20]);
+const sum = processor.add(2).sum();
+
+console.log(sum);
+```
+
+## Objetos em JavaScript
+
+JavaScript é baseado em objetos, onde a maioria da sua estrutura de dados e tipos são definidos como objetos (strings, array, DOM, etc.).
+
+Para criar um objeto, basta utilizar sua sintaxe literal de objeto `{}`. Esses objetos são coleções de pares chave-valor, onde os valores podem ser propriedades (variáveis) ou métodos (funções).
+
+```javascript
+const user = {
+  name: "Danilo",
+  getName: function () {
+    return this.name;
+  },
+};
+```
+
+Em POO as variáveis dentro de um objetivos são chamadas de propriedades, ou seja, `name` é uma propriedade. Funções dentro de um objeto são chamadas de métodos, então, `getName` é um método.
+
+Em JavaScript, é possível acessar os membros de um objeto usando a notação de ponto, `objeto.propriedade` ou `objeto.metodo()` ou notação de colchetes, `objeto["propriedade"]`. A notação de colchetes é usada para acessar propriedades dinâmicas.
+
+## Classes
+
+Classes é uma maneira mais organizada, estruturada e reutilizável de criar objetos com propriedades e métodos. Servem como um modelo para criar múltiplas instâncias de um tipo de objeto.
+
+Objetos podem ser criados através de funções construtoras e protótipo, porém esse método é antigo, e a classe serve como um substituto padrão para se criar objetos.
+
+Para criar uma classe é utilizada a palavra-chave `class` com o nome do objeto começando geralmente com a letra maiúscula.
+
+```javascript
+class Person {
+  // corpo da classe
+}
+```
+
+Classes podem ser declaradas usando `class NomeDaClasse{}` ou em forma de expressão `const NomeDaClasse = class {}`. As classes não podem ser acessadas antes de sua declaração.
+
+## Construtor
+
+O `construtor` é um método especial dentro de uma classe. Ele é executado quando uma nova classe é criada (instanciada). Ele normalmente é usado para inicializar o estado da classe atribuindo valores as propriedades do objeto.
+
+Ele geralmente recebe argumentos que representam os dados necessários para criar uma classe específica. Esses argumentos são atribuídos às propriedades da instância criada usando a palavra-chave `this.`
+
+```javascript
+class Person {
+  constructor(name, age) {
+    this.name = name;
+    this.age = age;
+  }
+}
+
+const user = new Person(Jane Doe, 29);
+```
+
+Dentro do `constructor`, o `this` se refere à nova instância do objeto que está sendo criada.
+
+## Instanciando Objetos (new)
+
+Para instanciar um novo objeto (criar um novo objeto) a partir de uma classe, é utilizado a palavra-chave `new`, seguida do nome da classe e os argumentos necessários para o `constructor`.
+
+O operador `new`, cria um novo objeto vazio na memória, define dentro do `constructor` o `this`, para apontar para esse novo objeto, executa o código no `constructor`, inicializando o objeto com as propriedades e valores fornecidos e retorna o objeto criado.
+
+Sempre que você criar um novo objeto utilizando a palavra-chave `new`, uma nova instância é criada, mesmo que os valores passados sejam os mesmos.
+
+```javascript
+class Person {
+  constructor(name, age) {
+    this.name = name;
+    this.age = age;
+  }
+}
+
+const user_01 = new Person(Jane Doe, 29);
+const user_02 = new Person(Jane Doe, 29);
+```
+
+## Métodos de uma Instância
+
+Os métodos são funções definidas dentro da classe, que fornecem comportamentos que manipulam as propriedades do objeto.
+
+Métodos são definidos diretamente no corpo da classe, não dentro do `construtor`, a menos que você queira criar uma nova função para cada instância.
+
+```javascript
+class Person {
+  constructor(name, age) {
+    this.name = name;
+    this.age = age;
+  }
+  getName() {
+    return this.name;
+  }
+  getAge() {
+    return this.age;
+  }
+}
+```
+
+Os métodos são chamados em uma instância específica do objeto usando a notação de ponto, **instancia.metodo()**.
+
+Os métodos são compartilhados entre todas as suas instâncias de uma classe, o que é melhor do que definir um método dentro de cada `construtor` de toda nova instância criada.
+
+O `this` dentro de um método, se refere a instância específica na qual o método está sendo chamado, permitindo que o método manipule as propriedades dessa classe.
+
+## Encapsulamento
+
+Um dos pilares do POO é o agrupamento (encapsulamento) de propriedades e métodos que operam em um único objeto, protegendo as propriedades internas do acesso externo direto.
+
+O encapsulamento serve para controlar como as propriedades são acessadas e modificadas, visando garantir a integridade do objeto. Dessa forma impede que propriedades sejam manipuladas de forma inesperada, facilitando refatorações futuras.
+
+No JavaScript, é possível deixar um campo privado utilizando `#` no início do nome da propriedade para forçar um errado de sintaxe. Assim essa propriedade só pode ser acessada por métodos dentro e não fora da classe.
+
+_É comum no TypeScript utilizarmos a palavra-chave `private` para indicar que a propriedade é privada._
+
+```javascript
+class Person {
+  #futurAge;
+
+  constructor(name, age) {
+    this.name = name;
+    this.age = age;
+    this.#futurAge = age + 18;
+  }
+
+  getSecretAge() {
+    return this.#futurAge;
+  }
+}
+```
+
+### Getters e Setters
+
+É comum em encapsulamento utilizar métodos para acessar e modificar propriedades internas. Eles ajudam a controlar os acessos e permitem validação, tornando o código mais robusto.
+
+No JavaScript existe a sintaxe `get` e `set` para criar campos de acessos que parecem propriedades, porém não são implementadas com funções e assim permitem lógica de validação ou transformação de dados.
+
+```javascript
+class Person {
+  #futurAge;
+
+  constructor(name, age) {
+    this.name = name;
+    this.age = age;
+    this.#futurAge = age + 18;
+  }
+
+  get secretAge() {
+    return this.#futurAge;
+  }
+
+  set secretAge(newAge) {
+    if (newAge > 60) {
+      return console.log("You have futur age");
+    }
+
+    this.#futurAge += newAge;
+  }
+}
+
+const user = new Person("John Doe", 30);
+user.secretAge = 61;
+
+conso.log(user.secretAge);
+```
+
+É convenção comum entre desenvolvedores utilizar um sublinhado no início do nome das propriedades (`_nomeDaPropriedade`) para indicar que elas eram propriedades privadas, mesmo que fossem acessíveis externamente.
+
+## Abstração
+
+Um dos pilares do POO é a abstração. O objetivo é esconder todas a complexidade da classe, e expor apenas as funcionalidades relevantes para os usuários do objeto. Assim eles podem utilizar o objeto sem precisar entender todos os detalhes de como eles funcionam internamente.
+
+Nós utilizamos no JavaScript o método `getTime()` que pode ser usado sem se preocupar como a classe `Date()` funciona. Dessa forma, o nosso usuário deveria ser capaz de utilizar os métodos da classe `Person`, sem se preocupar como ela funciona.
+
+## Herança
+
+Outro pilar do POO é a Herança, que permite que uma classe herde propriedades e métodos de outra classe, permitindo a reutilização de código e criando relacionamentos.
+
+Para criar uma classe que herda as propriedades e métodos de outra classe, é utilizado a palavra-chave `extends`.
+
+Uma classe criada através de uma herança é chamada de classe derivada. Classes derivadas herdam todos os métodos e propriedades públicas da classe base.
+
+```javascript
+class Player extends Person {
+  // Corpo da Classe
+}
+```
+
+Classes derivadas devem possuir um `constructor`, mesmo que não adicionem novas propriedades. No `constructor` de uma classe derivada, deve ser chamado o `super()` antes de acessar o `this`.
+
+O `super()` chama o `constructor` da classe base e inicializa o `this` com as propriedades e métodos da classe base. Os argumentos passados no `super()` são passados para `constructor` da classe base.
+
+```javascript
+class Player extends Person {
+  constructor(name, age, team) {
+    super(name, age);
+    this.team = team;
+  }
+}
+```
+
+Métodos estáticos também são herdados pela classe derivada, e essas classes derivadas não têm acesso direto aos campos privados da classe base.
+
+A palavra-chave `super` também pode ser usado em métodos de classe derivada para acessar método da classe base, permitindo estender ou modificar o comportamento herdado sendo duplicar código.
+
+## Polimorfismo
+
+Um dos pilares do POO, Polimorfismo, se refere à capacidade de objetos de diferentes classes responderem ao mesmo método de maneira diferente, ou seja, um método pode se comportar de forma diferente dependendo do tipo de objeto em que ele é chamado.
+
+Se uma classe derivada sobrescreve o método da classe base, o método chamado dependerá do tipo real do objeto. Por exemplo, suponhamos que na nossa classe `Person` e `Player` existem os métodos `Welcome()`, em uma instância de `Person`, o método `Welcome()` executará a versão de `Person`, e na de `Player` a versão de `Player` caso ela seja sobrescrita.
+
+## Propriedades públicas
+
+Permitem criar propriedades diretamente no corpo da classe, usado geralmente para valores que não dependem diretamente de um argumento do construtor ou para definir valores padrões.
+
+```javascript
+class Game {
+  randomNumber = Math.random();
+}
+```
+
+## Propriedades estáticas
+
+Propriedades que são definidos com a palavra-chave `static` pertencem à classe em si, e não há uma instância individual. Elas são acessadas diretamente no nome da classe.
+
+Geralmente são usadas como propriedades ou métodos utilitários relevantes para a classe como um todo ao invés de uma instância específica.
+
+```javascript
+class Company {
+  static brandColor = "#fb5634";
+}
+```
+
+## Tipos Primitivos vs Tipos de Referência
+
+Tipos primitivos como: `number, string, boolean, symbol, undefined e null`, são armazenados diretamente na variável e copiados por valor.
+
+Tipos de referência como: `object, function, array`, são armazenados na memória e a variável armazena a referência (o endereço na memória) daquele objeto, ou seja, são copiados por referência.
+
+Quando um tipo primitivo é copiado, uma nova cópia do valor é criada, sendo assim quando uma variável é alterada ela não afeta a outra.
+
+Quando um tipo de referência é copiado, a referência é copiada também e ambas apontam para o mesmo objeto na memória, ou seja, ao alterar esse objeto em uma variável, outra variável também é alterada.
+
+Ao passar um tipo primitivo para uma função, o valor é copiado para o parâmetro local, e as alterações nesse parâmetro local não afeta a variável original.
+
+A passar um tipo de referência para uma função, a referência é copiada, e as alterações no objeto através do parâmetro local afetam o objeto original.
+
+## Conclusão
+
+Com isso, você agora tem uma base de como programação orientada a objetos funcionam no JavaScript. Agora é colocar esse conhecimento em prática e se aprofundar cada vez mais.

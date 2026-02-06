@@ -2,14 +2,12 @@
 
 import LanguageFilter from "@/components/LanguageFilter";
 import { cn } from "@/lib/utils";
-import { Eye } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 import { Story } from "./Stories";
 
 type Post = {
   slug: string;
-  views?: number;
   metadata: {
     title: string;
     language: string;
@@ -84,15 +82,6 @@ export default function BlogClient({ posts }: { posts: Post[] }) {
                       &bull;
                       <span>
                         {new Date(post.metadata.publishedAt).getFullYear()}</span>
-                      {(post.views ?? 0) > 1 && (
-                        <>
-                          &bull;
-                          <span className="flex items-center gap-1">
-                            <Eye className="w-3 h-3" />
-                            {(post.views ?? 0).toLocaleString()}
-                          </span>
-                        </>
-                      )}
                     </span>
                   </strong>
                 </Link>

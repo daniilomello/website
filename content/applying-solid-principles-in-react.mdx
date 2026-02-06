@@ -1,0 +1,612 @@
+---
+title: "Applying SOLID principles in React"
+publishedAt: "2026-02-06"
+summary: "A React-friendly adaptation of SOLID principles, focusing on components and hooks."
+category: "code"
+language: "🇺🇸"
+image: ""
+---
+Robert C. Martins created five software design principles with the goal of making code more readable, sustainable, and testable. These principles are known as SOLID.
+
+Initially, these principles were designed for object-oriented programming, but today I want to bring an adaptation to the React ecosystem, thinking about components and hooks. 
+
+Before we make the most robust to-do list ever, remember that these are suggestions and principles that need to be carefully considered when applied to your project.
+
+You don't have to apply all the principles to all components and refactor everything. Okay?
+
+## Single Responsibility Principle (SRP)
+
+In the original definition of this principle, it is stated that a class should have only one reason to change. In the context of React, the rule is that each component, hook, or function should do only one thing.
+
+To check if your component or hook violates this principle, ask yourself:
+
+- Should this component display the UI or handle data?
+- What single type of data should this hook handle?
+- Does it belong to the data storage layer or the UI?
+
+If the hook or component does not have a single answer to these questions, it is violating the principle. Try to separate logic from visual presentation. Put logic in hooks with single responsibilities and separate components in isolation.
+
+Components and hooks that follow this principle are more likely to be reusable, easier to test, and easier to maintain. They are decoupled components and elements that avoid conflicts.
+
+Below is an example of bad code that violates SRP. In this example, the `TodoList` component does four things at once: it manages the list state, makes the API call, contains the filtering logic, and defines the entire visual interface.
+
+```tsx
+// TodoListBAD.tsx
+import React, { useState, useEffect, useMemo } from 'react';
+import axios from 'axios';
+
+export function TodoList() {
+  const [todos, setTodos] = useState<any[]>([]);
+  const [filter, setFilter] = useState('all');
+
+  // Responsibility 1: Retrieve data from the API
+  useEffect(() => {
+    axios.get('https://api.exemplo.com/todos').then(res => setTodos(res.data));
+  }, []);
+
+  // Responsibility 2: Filtering logic
+  const filteredTodos = useMemo(() => {
+    return todos.filter(todo => 
+      filter === 'all' ? true : todo.status === filter
+    );
+  }, [todos, filter]);
+
+  // Responsibilities 3 and 4: Render filter UI and item list
+  return (
+    <div>
+      <h1>Minhas Tarefas</h1>
+      <select onChange={(e) => setFilter(e.target.value)}>
+        <option value="all">Todas</option>
+        <option value="completed">Concluídas</option>
+      </select>
+
+      <ul>
+        {filteredTodos.map(todo => (
+          <li key={todo.id} style={{ padding: '10px', borderBottom: '1px solid #ccc' }}>
+            <input type="checkbox" checked={todo.completed} readOnly />
+            <span>{todo.title}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+```
+
+Now let's refactor this code, applying SRP. To apply SRP, we must break the large component into smaller parts with unique responsibilities.
+
+First, we deal with the logic. We extract data search and state management to a custom hook.
+
+```tsx
+// useTodos.ts
+export function useTodos() {
+  const [todos, setTodos] = useState([]);
+  useEffect(() => {
+    axios.get('https://api.exemplo.com/todos').then(res => setTodos(res.data));
+  }, []);
+  return todos;
+}
+```
+
+Second, we create components to handle only the display, dealing with the visual part.
+
+```tsx
+// TodoItem.tsx (Only renders a single item)
+export function TodoItem({ todo }: { todo: any }) {
+  return (
+    <li className="todo-item">
+      <input type="checkbox" checked={todo.completed} readOnly />
+      <span>{todo.title}</span>
+    </li>
+  );
+}
+
+// TodoFilter.tsx (Only handles filter changes)
+export function TodoFilter({ onFilterChange }: { onFilterChange: (f: string) => void }) {
+  return (
+    <select onChange={(e) => onFilterChange(e.target.value)}>
+      <option value="all">Todas</option>
+      <option value="completed">Concluídas</option>
+    </select>
+  );
+}
+```
+
+Finally, we created the main component, which composes the parts, making it much more readable and easier to maintain.
+
+```tsx
+// TodoListGOOD.tsx
+export function TodoList() {
+  const todos = useTodos(); // Specialized hook
+  const [filter, setFilter] = useState('all');
+
+  const filteredTodos = todos.filter(t => filter === 'all' || t.status === filter);
+
+  return (
+    <div>
+      <h1>Minhas Tarefas</h1>
+      <TodoFilter onFilterChange={setFilter} />
+      <ul>
+        {filteredTodos.map(todo => (
+          <TodoItem key={todo.id} todo={todo} />
+        ))}
+      </ul>
+    </div>
+  );
+}
+```
+
+With this refactoring, we have a `TodoItem` component and a `useTodos` hook, which can be used in other parts of the application.
+
+The `useTodos` hook is now easy to test, with its logic separated from the component rendering.
+
+Both the component and the hook can be updated and maintained without conflict issues, changing the styling or the API used.
+## Open/Closed Principle (OCP)
+
+The idea behind this principle is that components, hooks, and functions should be open for extension but closed for modification.
+
+In the context of React, this means that you should be able to add new functionality or visual variations to a component without modifying its original code.
+
+In practice, when thinking about components, this principle can be applied by using props to manipulate components, customize or extend them, or create components following the compound components pattern.
+
+In the case of hooks, we can use custom hooks that call other hooks without having to manipulate the original code of the hook to be used.
+
+Still using our Todo List, below is a bad example that violates OCP. Here, the `TodoItem` component attempts to handle all possible types of tasks internally. If a new type of task arises tomorrow, you will need to modify this file, running the risk of breaking the types that already work.
+
+```tsx
+// TodoItemBAD.tsx
+import React from 'react';
+
+type TodoType = 'simple' | 'deadline' | 'link';
+
+interface Todo {
+  id: number;
+  type: TodoType;
+  title: string;
+  completed: boolean;
+  meta?: any; // Extra data (date, URL, etc.)
+}
+
+export function TodoItem({ todo, onToggle }: { todo: Todo; onToggle: () => void }) {
+  return (
+    <li className="todo-item">
+      <input type="checkbox" checked={todo.completed} onChange={onToggle} />
+      
+      {/* OCP VIOLATION: Rigid conditional logic within the component */}
+      <div className="content">
+        <span>{todo.title}</span>
+        
+        {todo.type === 'deadline' && (
+          <span className="date"> 📅 {todo.meta.dueDate}</span>
+        )}
+        
+        {todo.type === 'link' && (
+          <a href={todo.meta.url} className="link"> 🔗 Abrir Link</a>
+        )}
+        
+        {/* If we need a ‘shopping’ type, we will have to edit this file and add another IF */}
+      </div>
+    </li>
+  );
+}
+```
+
+Now let's refactor this code by applying the OCP principle. First, we transform `TodoItem` into a generic base component that accepts dynamic content through children or props. This way, it remains closed to modifications but open to extension/customization.
+
+```tsx
+// TodoItemBase.tsx
+import React, { ReactNode } from 'react';
+
+interface TodoItemBaseProps {
+  completed: boolean;
+  onToggle: () => void;
+  children: ReactNode; // Extension point
+}
+
+export function TodoItemBase({ completed, onToggle, children }: TodoItemBaseProps) {
+  return (
+    <li className="todo-item">
+      <input type="checkbox" checked={completed} onChange={onToggle} />
+      <div className="content">
+        {children} 
+      </div>
+    </li>
+  );
+}
+```
+
+Now, we create components that use the base, and if a new type of task arises, we create a new file instead of changing the old one.
+
+```tsx
+// TodoItemVariants.tsx
+
+// Simple Task
+export function SimpleTodoItem({ todo, onToggle }: { todo: any; onToggle: () => void }) {
+  return (
+    <TodoItemBase completed={todo.completed} onToggle={onToggle}>
+      <span>{todo.title}</span>
+    </TodoItemBase>
+  );
+}
+
+// Task with Deadline (Extension 1)
+export function DeadlineTodoItem({ todo, onToggle }: { todo: any; onToggle: () => void }) {
+  return (
+    <TodoItemBase completed={todo.completed} onToggle={onToggle}>
+      <span>{todo.title}</span>
+      <span className="date" style={{ color: 'red', marginLeft: '10px' }}>
+        📅 Vence em: {todo.meta.dueDate}
+      </span>
+    </TodoItemBase>
+  );
+}
+
+// Task with Link (Extension 2)
+export function LinkTodoItem({ todo, onToggle }: { todo: any; onToggle: () => void }) {
+  return (
+    <TodoItemBase completed={todo.completed} onToggle={onToggle}>
+      <span>{todo.title}</span>
+      <a href={todo.meta.url} target="_blank" style={{ marginLeft: '10px' }}>
+        🔗 Acessar
+      </a>
+    </TodoItemBase>
+  );
+}
+```
+
+Finally, in the main list, we choose which component to render. Even though we have a logic using the switch, we are not violating SRP, as this is a composition layer, not a presentation layer. 
+
+```tsx
+// TodoList.tsx
+export function TodoList() {
+  const todos = useTodos(); // Hook from the previous example
+
+  const renderTodoItem = (todo: any) => {
+    switch (todo.type) {
+      case 'deadline':
+        return <DeadlineTodoItem key={todo.id} todo={todo} onToggle={() => {}} />;
+      case 'link':
+        return <LinkTodoItem key={todo.id} todo={todo} onToggle={() => {}} />;
+      default:
+        return <SimpleTodoItem key={todo.id} todo={todo} onToggle={() => {}} />;
+    }
+  };
+
+  return (
+    <ul>
+      {todos.map(renderTodoItem)}
+    </ul>
+  );
+}
+```
+
+With this refactoring, we have more flexibility, and the design of each type of task can be different. The `TodoItemBase` component remains clean, focusing only on the structure.
+ 
+We have more security, as we can create a new component such as `ShoppingTodoItem` without fear of breaking the display logic in `LinkTodoItem`.
+## Liskov Substitution Principle (LSP)
+
+This principle states that subtype objects must be replaceable by supertype objects. 
+
+This can be applied in React using TypeScript. By using interfaces and type extensions, and enforcing the contract that the subtype must have all the properties of the supertype
+
+The idea is to be able to swap components or hooks for others of the same type without breaking the application. If a component/hook accepts certain props (inputs), all components/hooks that extend or replace it must accept the same props and return compatible values.
+
+Below is an example of a component that violates the LSP principle, as it renames a standard event and limits the number of props accepted. If a prop such as “placeholder” is passed, the component will break or ignore it, as it does not expect to receive that prop.
+
+```tsx
+// TaskInputBAD.tsx
+import React from 'react';
+
+// Defines a restricted and proprietary interface
+interface TaskInputProps {
+  val: string;
+  onTextChange: (text: string) => void; // Violation: Renaming default behavior
+}
+
+export function TaskInputBad({ val, onTextChange }: TaskInputProps) {
+  return (
+    <input 
+      type="text"
+      className="border p-2 rounded"
+      value={val}
+      // Violation: Internal logic forces a signature different from the native one
+      onChange={(e) => onTextChange(e.target.value)}
+    />
+  );
+}
+
+// Use in TodoList:
+<TaskInputBad val={text} onTextChange={setText} /> 
+// If we try to add placeholder="New task," we will get a TypeScript/Runtime error.
+```
+
+Now let's refactor this code by applying the LSP principle. First, let's extend the native `InputHTMLAttributes` interface. Then we use the spread operator to ensure that any standard prop (e.g., placeholder) works correctly.
+
+```tsx
+// TaskInputGOOD.tsx
+import React, { InputHTMLAttributes } from 'react';
+
+// We extend the native input interface.
+// The component is now a valid “subtype” of an HTMLInputElement.
+interface TaskInputProps extends InputHTMLAttributes<HTMLInputElement> {
+  label?: string; // We can extend with new props (Open-Closed Principle)
+}
+
+export function TaskInputGood({ label, className, ...props }: TaskInputProps) {
+  return (
+    <div className="flex flex-col gap-1">
+      {label && <label className="text-sm font-bold text-gray-700">{label}</label>}
+      <input
+        className={`border p-2 rounded focus:outline-blue-500 ${className || ''}`}
+        {...props} // Passes all native props (Liskov Substitution Principle)
+      />
+    </div>
+  );
+}
+```
+
+Now that our component follows the LSP pattern, we can use keyboard events (`onKeyDown`) and accessibility attributes (`aria-label`) that were not explicitly declared in our component, but work because we respect the base contract it uses. 
+
+```tsx
+// TodoList.tsx
+import React, { useState } from 'react';
+import { TaskInputGood } from './TaskInputGOOD';
+
+export function TodoList() {
+  const [text, setText] = useState('');
+  const [todos, setTodos] = useState<string[]>([]);
+
+  const handleAdd = () => {
+    if (text) {
+      setTodos([...todos, text]);
+      setText('');
+    }
+  };
+
+  return (
+    <div>
+      <h1>Minhas Tarefas</h1>
+      
+      {/* Here we apply LSP: We are using native props (placeholder, onKeyDown)
+         that TaskInputGood naturally accepts by extending the standard input.
+      */}
+      <TaskInputGood
+        label="Nova Tarefa"
+        value={text}
+        onChange={(e) => setText(e.target.value)}
+        placeholder="Digite e pressione Enter..."
+        autoFocus
+        onKeyDown={(e) => {
+          if (e.key === 'Enter') handleAdd();
+        }}
+      />
+
+      <ul style={{ marginTop: '20px' }}>
+        {todos.map((todo, index) => (
+          <li key={index}>{todo}</li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+```
+
+With this refactoring, we gain predictability. Devs on the team know how to use our component and don't need to learn about new events. We also gain flexibility, as our component has native support for properties that may be valuable to us in the future and already works automatically.
+## Interface Segregation Principle (ISP)
+
+The original idea behind this principle is that customers should not be forced to depend on interfaces they do not use. In the case of React, we can think that components should not receive props they do not use. 
+
+It is very common to pass an entire object into a component when it only needs a single element, sometimes defining the properties as optional, but ideally only what is essential should be passed.
+
+In the following example, we have a component that violates the ISP. In it, we pass an entire `todo` object to the child components, even though they only need the `title`, creating unnecessary coupling.
+
+```tsx
+// Definition of the complete object
+interface Todo {
+  id: string;
+  title: string;
+  description: string;
+  isCompleted: boolean;
+  createdAt: Date;
+  userId: string; // Extra data that visual components do not need to know
+}
+
+// The ‘TodoTitle’ component receives the entire object, 
+// but only uses the ‘title’. It “knows” data that it shouldn't (userId, id, etc.).
+const TodoTitle = ({ todo }: { todo: Todo }) => {
+  return <h1>{todo.title}</h1>;
+};
+
+// The ‘TodoDate’ component receives everything, but only uses ‘createdAt’.
+const TodoDate = ({ todo }: { todo: Todo }) => {
+  return <span>Criado em: {todo.createdAt.toLocaleDateString()}</span>;
+};
+
+export const TodoListBad = () => {
+  const myTodo: Todo = {
+    id: "1",
+    title: "Estudar SOLID",
+    description: "Ler a documentação",
+    isCompleted: false,
+    createdAt: new Date(),
+    userId: "user_123"
+  };
+
+  return (
+    <div className="card">
+      {/* We are forcing unnecessary dependencies here */}
+      <TodoTitle todo={myTodo} />
+      <TodoDate todo={myTodo} />
+    </div>
+  );
+};
+```
+
+When refactoring this code, we must break down the interfaces by passing the data necessary for the component to function.
+
+```tsx
+// We define a specific interface only for what the component needs.
+// Or, in this simple case, we pass the string primitive directly.
+interface TitleProps {
+  title: string;
+}
+
+const TodoTitle = ({ title }: TitleProps) => {
+  return <h1>{title}</h1>;
+};
+
+// This component only needs a date, nothing else.
+// Now it can be used to display dates for Tasks, Projects, or Comments.
+interface DateDisplayProps {
+  date: Date;
+}
+
+const TodoDate = ({ date }: DateDisplayProps) => {
+  return <span>Criado em: {date.toLocaleDateString()}</span>;
+};
+
+// Main Component
+export const TodoListGood = () => {
+  const myTodo = {
+    id: "1",
+    title: "Estudar SOLID",
+    description: "Ler a documentação",
+    isCompleted: false,
+    createdAt: new Date(),
+    userId: "user_123"
+  };
+
+  return (
+    <div className="card">
+      {/* Applying ISP: We only pass what is necessary */}
+      <TodoTitle title={myTodo.title} />
+      <TodoDate date={myTodo.createdAt} />
+    </div>
+  );
+};
+```
+
+With this refactoring, the `TodoDate` component becomes generic, accepting any `Date` and not just dates coming from the `Todo` object.
+
+The structure of the `Todo` object can change, such as the `userId`, which the `TodoTitle` component will not break, as it does not depend on this property.
+
+Looking at `<TodoTitle title={...} />`, we can see what data the component consumes.
+
+## Dependency Inversion Principle (DIP)
+
+In this principle, the idea is that components, functions, or modules should not depend on concrete implementations, but rather on common abstractions.
+
+In general, we should focus on decoupling visual interfaces and logic, using props, hooks, and services. Avoid components that contain hardcoded logic within them.
+
+In this last example, we have a `CreateTodo` component, responsible for saving the task. It imports a service directly, creating a coupling, where in order to change the service, we would need to rewrite the component. 
+
+```tsx
+// The component depends on a concrete implementation (axios + specific URL)
+import { useState } from "react";
+import axios from "axios"; // Low-level direct dependency
+
+export const CreateTodoBad = () => {
+  const [title, setTitle] = useState("");
+
+  const handleSave = async () => {
+    try {
+      // The component “knows too much.” If the API changes, the component breaks.
+      await axios.post("https://api.meuapp.com/todos", { title });
+      alert("Tarefa salva!");
+      setTitle("");
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  return (
+    <div>
+      <input 
+        value={title} 
+        onChange={(e) => setTitle(e.target.value)} 
+        placeholder="Nova tarefa..." 
+      />
+      <button onClick={handleSave}>Salvar</button>
+    </div>
+  );
+};
+```
+
+Applying DIP when refactoring the component, it does not define how to save, it only defines an abstraction (prop interface) that says a task needs to be saved. The actual implementation is injected from outside.
+
+To do this, we first define the contract that the service needs to follow, so our component depends on the `ITodoService` interface, rather than `axios`.
+
+```tsx
+import { useState } from "react";
+
+// The component receives the abstraction via props (Dependency Injection)
+interface CreateTodoProps {
+  todoService: ITodoService; 
+}
+
+export const CreateTodoGood = ({ todoService }: CreateTodoProps) => {
+  const [title, setTitle] = useState("");
+
+  const handleSave = async () => {
+    try {
+      // The component only calls the interface method.
+      // It does not know whether it goes to the API, Firebase, or LocalStorage.
+      await todoService.saveTodo(title);
+      alert("Tarefa salva!");
+      setTitle("");
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  return (
+    <div>
+      <input 
+        value={title} 
+        onChange={(e) => setTitle(e.target.value)} 
+        placeholder="Nova tarefa..." 
+      />
+      <button onClick={handleSave}>Salvar</button>
+    </div>
+  );
+};
+```
+
+Finally, we create the actual implementation and inject it into the component. 
+
+```tsx
+import axios from "axios";
+
+// Concrete Implementation 1: Save to the API
+const apiTodoService: ITodoService = {
+  saveTodo: async (title: string) => {
+    await axios.post("https://api.meuapp.com/todos", { title });
+  },
+};
+
+// Concrete Implementation 2: Save to LocalStorage (for testing or offline mode)
+const localTodoService: ITodoService = {
+  saveTodo: async (title: string) => {
+    const current = JSON.parse(localStorage.getItem("todos") || "[]");
+    localStorage.setItem("todos", JSON.stringify([...current, { title }]));
+  },
+};
+
+// Use in Application
+export const App = () => {
+// We can replace “apiTodoService” with “localTodoService” without touching the visual component!
+  return (
+    <div>
+      <h1>Minha Lista</h1>
+      <CreateTodoGood todoService={apiTodoService} />
+    </div>
+  );
+};
+```
+
+With this refactoring, our component can easily inject a mock that does not make real calls to be tested visually.
+
+If the backend changes, a new service can be created and injected, keeping the visual interface intact. This is because the visual component is not responsible for saving data.
+
+˜
+That's all there is to say about SOLID principles. Soon, we'll talk more about Clean Code to further expand your knowledge and help you create incredible code.

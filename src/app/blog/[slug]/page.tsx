@@ -1,14 +1,16 @@
+import { ArticleContent } from "@/components/ArticleContent";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
-import CodeBlock from "@/components/CodeBlock";
 import { GiscusComments } from "@/components/GiscusComments";
 import { Header } from "@/components/Header";
-import { ViewTracker } from "@/components/ViewTracker";
-import { getPost } from "@/data/blog";
+import { getBlogPosts, getPost } from "@/data/blog";
 import { DATA } from "@/data/resume";
-import parse from "html-react-parser";
-import { Eye } from "lucide-react";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+
+export async function generateStaticParams() {
+  const posts = await getBlogPosts();
+  return posts.map((post) => ({ slug: post.slug }));
+}
 
 export async function generateMetadata({
   params,
@@ -18,28 +20,30 @@ export async function generateMetadata({
   };
 }): Promise<Metadata | undefined> {
   let post = await getPost(params.slug);
+  if (!post) return;
 
   let {
     title,
     publishedAt: publishedTime,
     summary: description,
     image,
-  } = post!.metadata;
+  } = post.metadata;
+
   let ogImage = image ? `${DATA.url}${image}` : `${DATA.url}/og?title=${title}`;
 
   return {
     title,
-    description: post!.metadata.summary.replace(/^<p>/, "").replace(/<\/p>$/, ""),
+    description,
     openGraph: {
       title,
-      description: post!.metadata.summary.replace(/^<p>/, "").replace(/<\/p>$/, ""),
+      description,
       type: "article",
       publishedTime,
-      url: `${DATA.url}/blog/${post!.slug}`,
-      locale: post!.metadata.language === "🇧🇷" ? "pt_BR" : "en_US",
+      url: `${DATA.url}/blog/${post.slug}`,
+      locale: post.metadata.language === "🇧🇷" ? "pt_BR" : "en_US",
       images: [
         {
-          url: post!.metadata.image || `https://daniilo.dev/og.png`,
+          url: post.metadata.image || `https://daniilo.dev/og.png`,
           width: 1200,
           height: 630,
           alt: "Full Stack Developer Creates Digital Products",
@@ -49,11 +53,11 @@ export async function generateMetadata({
     twitter: {
       card: "summary_large_image",
       title,
-      description: post!.metadata.summary.replace(/^<p>/, "").replace(/<\/p>$/, ""),
+      description,
       images: [
         {
-          url: post!.metadata.image || `https://daniilo.dev/og.png`,
-        }
+          url: post.metadata.image || `https://daniilo.dev/og.png`,
+        },
       ],
     },
   };
@@ -68,7 +72,7 @@ export default async function Blog({
 }) {
   let post = await getPost(params.slug);
 
-  if (!post) {
+  if (!post || post.metadata.draft) {
     notFound();
   }
 
@@ -117,38 +121,9 @@ export default async function Blog({
               }
             )}
           </time>
-          {(post.views ?? 0) > 1 && (
-            <>
-              <span>•</span>
-              <div className="flex items-center gap-1.5">
-                <Eye className="w-4 h-4" />
-                <span>{post.views.toLocaleString()} views</span>
-              </div>
-            </>
-          )}
         </div>
 
-        <ViewTracker slug={post.slug} />
-
-        <article className="max-w-none">
-          {parse(post.source, {
-            replace: (domNode: any) => {
-              if (
-                domNode.name === "pre" &&
-                domNode.children?.[0]?.name === "code"
-              ) {
-                const codeContent =
-                  domNode.children[0].children?.[0]?.data || "";
-                const className =
-                  domNode.children[0].attribs?.class || "";
-                const languageMatch = className.match(/language-(\w+)/);
-                const language = languageMatch ? languageMatch[1] : "javascript";
-
-                return <CodeBlock code={codeContent} language={language} />;
-              }
-            },
-          })}
-        </article>
+        <ArticleContent html={post.source} />
 
         <div className="mt-16">
           <GiscusComments />

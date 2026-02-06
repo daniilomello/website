@@ -1,0 +1,314 @@
+---
+title: "Object-Oriented Programming in JavaScript"
+publishedAt: "2025-06-03"
+summary: "A basic introduction to OOP in JavaScript: objects, classes, encapsulation, inheritance, and polymorphism."
+category: "code"
+language: "🇺🇸"
+image: ""
+---
+
+This is a basic introduction to how object-oriented programming works in JavaScript. Since it is a paradigm widely used in the JavaScript universe and in other languages as well, I believe it is important to know at least the basics.
+
+In a project I recently worked on, with Angular (Front-end) and NestJS (Back-end). I realized even more the importance, and decided to write this introduction.
+
+## What is Object-Oriented Programming (OOP)?
+
+OOP is a programming paradigm or style that organizes code around objects, rather than functional or procedural programming.
+
+It aims to improve code structure, readability, maintainability and code reuse by dividing the code into smaller, reusable pieces (objects), each piece containing data (properties) and behaviors (methods).
+
+### What is the difference between procedural, functional and object-oriented programming?
+
+Procedural programming is based on functions and procedures, where code is executed sequentially (top to bottom), functions are used to organize reusable tasks, and data is mostly global variables or passed between functions.
+
+```javascript
+const numbers = [5, 8, 12, 3, 20];
+
+let newNumbers = [];
+for (let i = 0; i < numbers.length; i++) {
+  newNumbers.push(numbers[i] + 2);
+}
+
+let sum = 0;
+for (let i = 0; i < filteredNumbers.length; i++) {
+  sum += filteredNumbers[i];
+}
+console.log(sum);
+```
+
+Functional programming is declarative, it describes what to do, but not how to do it. It uses pure functions, where the same inputs always give the same outputs, without having data being modified outside the function, working with immutability without changing the variables.
+
+```javascript
+const numbers = [5, 8, 12, 3, 20];
+
+const sum = numbers.map((n) => n + 2).reduce((acc, n) => acc + n, 0);
+
+console.log(sum);
+```
+
+Object-oriented programming groups data into classes and instances (objects), using concepts such as encapsulation, inheritance and polymorphism, making the code more modular, reusable and scalable.
+
+```javascript
+class Nums {
+  constructor(numbers) {
+    this.numbers = numbers;
+  }
+
+  add(value) {
+    this.numbers = this.numbers.map((n) => n + value);
+    return this.numbers;
+  }
+}
+
+const numbers = new Nums([5, 8, 12, 3, 20]);
+const sum = processor.add(2).sum();
+
+console.log(sum);
+```
+
+## Objects in JavaScript
+
+JavaScript is object-based, where most of its data structures and types are defined as objects (strings, arrays, DOM, etc.).
+
+To create an object, simply use its object literal syntax `{}`. These objects are collections of key-value pairs, where the values can be properties (variables) or methods (functions).
+
+```javascript
+const user = {
+  name: "Danilo",
+  getName: function () {
+    return this.name;
+  },
+};
+```
+
+In OOP, variables within an object are called properties, so `name` is a property. Functions within an object are called methods, so `getName` is a method.
+
+In JavaScript, you can access the members of an object using either the dot notation, `object.property` or `object.method()` the square bracket notation, `object["property"]`. Square bracket notation is used to access dynamic properties.
+
+## Classes
+
+Classes are a more organized, structured, and reusable way to create objects with properties and methods. They serve as a template for creating multiple instances of an object type.
+
+Objects can be created through constructor and prototype functions, but this method is old, and the class serves as a standard replacement for creating objects.
+
+To create a class, the keyword `class` is used with the name of the object, generally starting with a capital letter.
+
+```javascript
+class Person {
+  // data...
+}
+```
+
+Classes can be declared using `class className{}` or in expression form `const className = class {}`. Classes cannot be accessed before their declaration.
+
+## Constructor
+
+The `constructor` is a special method within a class. It is executed when a new class is created (instantiated). It is typically used to initialize the state of the class by assigning values to the object’s properties.
+
+It usually receives arguments that represent the data needed to create a specific class. These arguments are assigned to the properties of the created instance using the keyword `this.`
+
+```javascript
+class Person {
+  constructor(name, age) {
+    this.name = name;
+    this.age = age;
+  }
+}
+
+const user = new Person(Jane Doe, 29);
+```
+
+Within `constructor`, `this` refers to the new instance of the object being created.
+
+## Instantiating Objects (new)
+
+To instantiate a new object (create a new object) from a class, the keyword `new` is used, followed by the name of the class and the arguments required for the `constructor`.
+
+The operator `new` creates a new empty object in memory, sets inside the `constructor` `this` to point to this new object, executes the code in `constructor`, initializing the object with the given properties and values, and returns the created object.
+
+Whenever you create a new object using the keyword `new`, a new instance is created, even if the values passed are the same.
+
+```javascript
+class Person {
+  constructor(name, age) {
+    this.name = name;
+    this.age = age;
+  }
+}
+
+const user_01 = new Person(Jane Doe, 29);
+const user_02 = new Person(Jane Doe, 29);
+```
+
+## Methods of an Instance
+
+Methods are functions defined within the class, which provide behaviors that manipulate the object’s properties.
+
+Methods are defined directly in the class body, not inside the `constructor`, unless you want to create a new function for each instance.
+
+```javascript
+class Person {
+  constructor(name, age) {
+    this.name = name;
+    this.age = age;
+  }
+  getName() {
+    return this.name;
+  }
+  getAge() {
+    return this.age;
+  }
+}
+```
+
+Methods are called on a specific instance of the object using the dot notation, `instance.method()`.
+
+Methods are shared among all instances of a class, which is better than defining a method inside each `constructor` new instance you create.
+
+The `this` inside of a method refers to the specific instance on which the method is being called, allowing the method to manipulate the properties of that class.
+
+## Encapsulation
+
+One of the pillars of OOP is the grouping (encapsulation) of properties and methods that operate on a single object, protecting internal properties from direct external access.
+
+Encapsulation is used to control how properties are accessed and modified, aiming to guarantee the integrity of the object. This prevents properties from being manipulated in unexpected ways, facilitating future refactoring.
+
+In JavaScript, it is possible to make a field private by using `#` at the beginning of the property name to force a syntax error. This way, this property can only be accessed by methods inside and not outside the class.
+
+It is common in TypeScript to use the keyword `private` to indicate that the property is private.
+
+```javascript
+class Person {
+  #futurAge;
+
+  constructor(name, age) {
+    this.name = name;
+    this.age = age;
+    this.#futurAge = age + 18;
+  }
+
+  getSecretAge() {
+    return this.#futurAge;
+  }
+}
+```
+
+### Getters and Setters
+
+It is common in encapsulation to use methods to access and modify internal properties. They help control access and allow validation, making the code more robust.
+
+In JavaScript there is syntax `get` and `set` to create access fields that look like properties, but are not implemented with functions and thus allow validation logic or data transformation.
+
+```javascript
+class Person {
+  #futurAge;
+
+  constructor(name, age) {
+    this.name = name;
+    this.age = age;
+    this.#futurAge = age + 18;
+  }
+
+  get secretAge() {
+    return this.#futurAge;
+  }
+
+  set secretAge(newAge) {
+    if (newAge > 60) {
+      return console.log("You have futur age");
+    }
+
+    this.#futurAge += newAge;
+  }
+}
+
+const user = new Person("John Doe", 30);
+user.secretAge = 61;
+
+conso.log(user.secretAge);
+```
+
+It is a common convention among developers to use an underscore at the beginning of property names (`_propertyName`) to indicate that they were private properties, even if they were externally accessible.
+
+## Abstraction
+
+One of the pillars of OOP is abstraction. The goal is to hide all the complexity of the class, and expose only the relevant functionalities to the object’s users. This way, they can use the object without needing to understand all the details of how it works internally.
+
+In JavaScript, we use the method `getTime()` that can be used without worrying about how the class `Date()` works. In this way, our user should be able to use the class methods `Person` without worrying about how it works.
+
+## Inheritance
+
+Another pillar of OOP is Inheritance, which allows a class to inherit properties and methods from another class, allowing code reuse and creating relationships.
+
+To create a class that inherits the properties and methods of another class, the keyword `extends` is used.
+
+A class created through inheritance is called a derived class. Derived classes inherit all the public methods and properties of the base class.
+
+```javascript
+class Player extends Person {
+  // Class body
+}
+```
+
+Derived classes must have a `constructor`, even if they do not add new properties. In the `constructor` of a derived class, `super()` must be called before accessing `this`.
+
+The `super()` calls the base class `constructor` and initializes `this` with the base class properties and methods. The arguments passed in `super()` are passed to the base class `constructor`.
+
+```javascript
+class Player extends Person {
+  constructor(name, age, team) {
+    super(name, age);
+    this.team = team;
+  }
+}
+```
+
+Static methods are also inherited by the derived class, and these derived classes do not have direct access to the private fields of the base class.
+
+The keyword `super` can also be used in derived class methods to access base class methods, allowing you to extend or modify inherited behavior without duplicating code.
+
+## Polymorphism
+
+One of the pillars of OOP, Polymorphism, refers to the ability of objects of different classes to respond to the same method differently, that is, a method can behave differently depending on the type of object on which it is called.
+
+If a derived class overrides a base class method, the method called will depend on the actual type of the object. For example, suppose that in our classes `Person` and `Player` there are methods `Welcome()`. On an instance of `Person`, the method `Welcome()` will execute the version of `Person`, and on the instance of `Player` the version of `Player` if it is overridden.
+
+## Public properties
+
+They allow you to create properties directly in the class body, generally used for values that do not directly depend on a constructor argument or to define default values.
+
+```javascript
+class Game {
+  randomNumber = Math.random();
+}
+```
+
+## Static properties
+
+Properties that are defined with the keyword `static` belong to the class itself, and not to an individual instance. They are accessed directly from the class name.
+
+They are generally used as properties or utility methods relevant to the class as a whole rather than a specific instance.
+
+```javascript
+class Company {
+  static brandColor = "#fb5634";
+}
+```
+
+## Primitive Types vs Reference Types
+
+Primitive types, like: `number, string, boolean, symbol, undefined and null`, are stored directly in the variable and copied by value.
+
+Reference types, such as: `object, function, array`, are stored in memory and the variable stores the reference (the address in memory) of that object, that is, they are copied by reference.
+
+When a primitive type is copied, a new copy of the value is created, so when one variable is changed it does not affect the other.
+
+When a reference type is copied, the reference is also copied and both point to the same object in memory, that is, when changing this object in a variable, another variable is also changed.
+
+When passing a primitive type to a function, the value is copied to the local parameter, and changes to that local parameter do not affect the original variable.
+
+By passing a reference type to a function, the reference is copied, and changes to the object through the local parameter affect the original object.
+
+## Conclusion
+
+With that, you now have a foundation of how object-oriented programming works in JavaScript. Now it’s time to put this knowledge into practice and delve deeper and deeper.

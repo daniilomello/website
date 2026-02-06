@@ -1,0 +1,61 @@
+---
+title: "Working with alias on Git"
+publishedAt: "2024-06-18"
+summary: "A list of useful Git aliases to speed up common commands."
+category: "code"
+language: "🇺🇸"
+image: ""
+---
+
+Hi Friend!
+
+In order to make my life easy when I’m working, I have some alias for Git commands that I use on a daily basis. Sounds silly, but these alias give me some valuable extra seconds when I am typing.
+
+So I thought if it is valuable to me, it may be valuable for someone else too. That’s why I’m gonna share with you today my personal alias.
+
+01 – Open your Terminal and the first thing you have to do, is to access the Git configuration.
+
+```bash
+git config --global --edit
+```
+
+02 – The first alias you are going to create, it’s to add items to staged and commit at the same time. For that, I use the letter `c`. Use the code below to create alias.
+
+```gitconfig
+c = !git add --all && git commit -m
+```
+
+03 – The second one that I like to use is to check the status, and for that one I use the letter `s`.
+
+```gitconfig
+s = !git status -s
+```
+
+04 – The next one is the git log, but we are going to format in a more organized and clean and away. We’re going to bring the branch, the name of the person, the short hash, description, and date of the commit. We are going to apply some colors too.
+
+```gitconfig
+l = !git log --pretty=format:'%C(blue)%h%C(red)%d %C(white)%s - %C(cyan)%cn, %C(white)$cr'
+```
+
+05 – Another one that I use very often, is the git amend, he combines the current commit with the previous one. Perfect for situations where you forget to add a file on the previous commit.
+
+```gitconfig
+amend = !git add --all && git commit --amend --no-edit
+```
+
+06 – I also like to create an alias to check my history of commits based on a specific word. It’s perfect if you’re using semantic commits, and you want to see how many specific commits you did it.
+
+```gitconfig
+count = !git shortlog -s --grep feat
+```
+
+07 – Lastly, it’s a series of alias that help me navigate through my branches. I’m able to create, enter or delete one branch.
+
+```gitconfig
+b = !git checkout
+bc = !git checkout -b
+bl = !git branch
+bd = !git branch -D
+```
+
+And there we go! Feel free to change their name of the alias to your needs, but this is basic how I like to use it.

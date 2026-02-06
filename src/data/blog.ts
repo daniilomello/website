@@ -1,86 +1,124 @@
-import he from "he";
+import fs from "fs";
+import matter from "gray-matter";
+import path from "path";
+import rehypePrettyCode from "rehype-pretty-code";
+import rehypeStringify from "rehype-stringify";
+import remarkParse from "remark-parse";
+import remarkRehype from "remark-rehype";
+import { unified } from "unified";
 
-process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0"; 
+type Metadata = {
+  title: string;
+  publishedAt: string;
+  summary: string;
+  category: string;
+  language: string;
+  image?: string;
+  draft?: boolean;
+};
+
+function getContentDirectory() {
+  return path.join(process.cwd(), "content");
+}
+
+function getMdxFiles() {
+  const dir = getContentDirectory();
+  if (!fs.existsSync(dir)) return [];
+  return fs
+    .readdirSync(dir)
+    .filter((file) => path.extname(file) === ".mdx" || path.extname(file) === ".md");
+}
+
+function readMdxFile(filePath: string) {
+  const raw = fs.readFileSync(filePath, "utf-8");
+  return matter(raw);
+}
+
+async function markdownToHtml(markdown: string) {
+  const result = await unified()
+    .use(remarkParse)
+    .use(remarkRehype)
+    .use(rehypePrettyCode, {
+      theme: "one-dark-pro",
+      keepBackground: true,
+    })
+    .use(rehypeStringify)
+    .process(markdown);
+
+  return result.toString();
+}
+
+function getMdxData(dir: string) {
+  const mdxFiles = getMdxFiles();
+  return mdxFiles.map((file) => {
+    const { data, content } = readMdxFile(path.join(dir, file));
+    const slug = path.basename(file, path.extname(file));
+    return {
+      slug,
+      metadata: data as Metadata,
+      content,
+    };
+  });
+}
+
+function parseMetadata(data: Record<string, unknown>): Metadata {
+  return {
+    title: data.title as string,
+    publishedAt: data.publishedAt as string,
+    summary: (data.summary as string) || "",
+    image: (data.image as string) || undefined,
+    language: (data.language as string) || "🇺🇸",
+    category: (data.category as string) || "notes",
+    draft: (data.draft as boolean) || false,
+  };
+}
 
 export async function getPost(slug: string) {
-  const res = await fetch(
-    `https://ghostwhite-starling-589299.hostingersite.com/wp-json/wp/v2/posts?_embed&slug=${slug}`
+  const dir = getContentDirectory();
+  const mdxFile = getMdxFiles().find(
+    (file) => path.basename(file, path.extname(file)) === slug
   );
-  if (!res.ok) {
-    return null;
-  }
-  const posts = await res.json();
-  if (!posts.length) return null;
 
-  const post = posts[0];
-  const tags = post._embedded?.["wp:term"]?.flat() || [];
-  const languageTag = tags.find((tag: any) =>
-    ["🇺🇸", "🇧🇷"].includes(tag.name)
-  );
+  if (!mdxFile) return null;
+
+  const { data, content } = readMdxFile(path.join(dir, mdxFile));
+  const source = await markdownToHtml(content);
 
   return {
-    slug: post.slug,
-    views: post.post_views || post.meta?.post_views_count || 0,
-    metadata: {
-      title: he.decode(post.title.rendered),
-      publishedAt: post.date,
-      summary: he.decode(post.excerpt.rendered),
-      image:
-        post._embedded?.["wp:featuredmedia"]?.[0]?.source_url || undefined,
-      language: languageTag?.name || "🇺🇸",
-    },
-    source: he.decode(post.content.rendered),
+    slug,
+    metadata: parseMetadata(data),
+    source,
   };
 }
 
 export async function getBlogPosts() {
-  const allPosts: any[] = [];
-  let page = 1;
-  const perPage = 100;
+  const dir = getContentDirectory();
+  const posts = getMdxData(dir);
 
-  while (true) {
-    const res = await fetch(
-      `https://ghostwhite-starling-589299.hostingersite.com/wp-json/wp/v2/posts?_embed&per_page=${perPage}&page=${page}`
-    );
-
-    // Interrompe se a página não existe
-    if (res.status === 400 || res.status === 404) break;
-
-    if (!res.ok) {
-      throw new Error(`Failed to fetch posts on page ${page}`);
-    }
-
-    const posts = await res.json();
-
-    if (posts.length === 0) break;
-
-    allPosts.push(...posts);
-    page++;
-  }
-
-  return allPosts.map((post: any) => {
-    const tags = post._embedded?.["wp:term"]?.flat() || [];
-    const languageTag = tags.find((tag: any) =>
-      ["🇺🇸", "🇧🇷"].includes(tag.name)
-    );
-
-    const categories = post._embedded?.["wp:term"]?.flat()
-      .filter((tag: any) => tag.taxonomy === "category")
-      .map((tag: any) => tag.name);
-
-    return {
+  return posts
+    .map((post) => ({
       slug: post.slug,
-      views: post.post_views || post.meta?.post_views_count || 0,
-      metadata: {
-        title: he.decode(post.title.rendered),
-        publishedAt: post.date,
-        category: categories[0],
-        summary: he.decode(post.excerpt.rendered),
-        image:
-          post._embedded?.["wp:featuredmedia"]?.[0]?.source_url || undefined,
-        language: languageTag?.name || "🇺🇸",
-      },
-      content: he.decode(post.content.rendered),
-    };
-  });
+      metadata: parseMetadata(post.metadata as unknown as Record<string, unknown>),
+      content: post.content,
+    }))
+    .filter((post) => !post.metadata.draft);
+}
+
+export async function getDraftPosts() {
+  const dir = getContentDirectory();
+  const posts = getMdxData(dir);
+
+  return posts
+    .map((post) => ({
+      slug: post.slug,
+      metadata: parseMetadata(post.metadata as unknown as Record<string, unknown>),
+      content: post.content,
+    }))
+    .filter((post) => post.metadata.draft);
+}
+
+export async function getDraftPost(slug: string) {
+  const post = await getPost(slug);
+  if (!post || !post.metadata.draft) return null;
+  return post;
 }

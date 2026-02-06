@@ -1,0 +1,336 @@
+---
+title: "Criando uma API na AWS com Serverless Framework"
+publishedAt: "2025-10-04"
+summary: "Introdução ao Serverless Framework v4 criando uma API HTTP na AWS com Lambda, API Gateway e DynamoDB."
+category: "code"
+language: "🇧🇷"
+image: ""
+---
+
+## Introdução
+
+Nesse artigo vamos fazer uma introdução ao Serverless Framework na versão 4 como uma ferramenta de IaC para criarmos uma infraestrutura na AWS de forma rápida sem gerenciar os recurso manualmente no console, ou escrever grande scripts para ferrametas de IaC nativas como CloudFormation ou Terraform.
+
+Eu não irei detalhar o que cada item faz, o objetivo é mostrar como é rápido e fácil subir um ambiente na AWS com o Serverless Framework.
+
+## Requisitos
+
+Para seguir com esse artigo, é importante que você preencha os requistos a seguir:
+
+- Ter instalado o Serverless Framework (`npm install -g serverless`)
+- Ter configurado a CLI da AWS na sua maquina
+- Ter uma conta ativa na AWS
+- Ter o Node.js instalado
+
+## O que é Serverless Framework
+
+Ele é uma ferramenta que abstrai a complexidade dos serviços nativos da nuvem como o CloudFormation da AWS, permitindo que você gerencie sua arquitetura de forma elegante e concisa.
+
+Diferente de outras ferramentas, ele, além de gerenciar sua infraestrutura, também gerencia o seu código. Outro ponto, é que ele suporta diferentes tipos de linguagens como Python, Node.js e Go.
+
+## Funções, eventos e recursos
+
+O Serverless Framework é gerenciado em arquivo de serviço chamado: `serverless.yml` nele você controla os seus recursos, funções e eventos, funcionando da seguinte maneira:
+
+O código é lançado e executado na AWS como uma **função lambda**. Cada função é subida e executada individualmente com uma única responsabilidade, funcionando quase como um microserviço. Por exemplo: uma função para salvar o usuário em um banco de dados.
+
+Essas funções são disparadas através de **eventos** que vem de recursos da AWS. Por exemplo: quando uma requisição HTTP é feita no API Gateway, uma lambda é disparada.
+
+As funções criadas podem precisar de um **recursos** da AWS, como um banco de dados, um bucket de armazenamento, um bucket de arquivos, etc. Dentro do Serverless é possível provisionar esses recursos.
+
+## Começando nossa API
+
+Para usar os comandos serverless na versão 4, é necessário fazer o login na plataforma, então crie uma conta e utilize o comando a seguir:
+
+```bash
+serverless login
+```
+
+Vamos começar criando um novo projeto. Uma vez que você digitar o comando abaixo, será necessário escolher uma opção, vamos seguir com: “AWS – Node.js – HTTP API”.
+
+Depois, escolha um nome para o projeto, no meu caso estarei usando o nome: `customers-api`.
+
+Por fim, ele deve pedir para você vincular esse projeto a um app da dashboard, pode selecionar o ‘Skip Adding an App’ e continuar.
+
+```bash
+serverless
+```
+
+Uma vez que o projeto foi iniciado, vamos entrar na pasta e instalar as depedências necessárias:
+
+```bash
+cd customers-api
+npm install
+```
+
+O deploy dos serviços podem demorar um pouco, então mesmo que nenhuma função tenha sido criada, vamos fazer o primeiro deploy com a estrutura inicial da nossa API.
+
+A partir de agora vamos usar a abreviação do comando serverless como `sls`.
+
+```bash
+sls deploy
+```
+
+_Se tiver algum tipo de problema com o deploy, revise suas configurações de CLI da AWS e tente novamente os passos anteriores._
+
+Agora vamos testar nosso endpoint para ver se esta funcionando corretamente.
+
+_Lembre-se de utilizar a sua URL._
+
+```bash
+curl https://zxwwdsj8ol.execute-api.us-east-1.amazonaws.com/
+# output
+# {"message":"Go Serverless v4! Your function executed successfully!"}
+```
+
+## Criando os endpoints e organizando o projeto
+
+Antes de atualizar o arquivo `serverless.yml`, vamos criar os endpoints da nossa aplicação.
+
+Eu gosto de organizar o projeto colocando as funções dentro de uma `src`. Dentro dela, vamos nossa primeira função chamada `createCustomer.js` que irá salvar um novo cliente no nosso banco de dados usando o DynamoDB.
+
+Para facilitar nosso desenvolvimento vamos instalar os pacotes da AWS.
+
+```bash
+npm install @aws-sdk/client-dynamodb @aws-sdk/lib-dynamodb
+```
+
+Agora vamos criar o arquivo `createCustomer.js`.
+
+```javascript
+"use strict";
+const { DynamoDBClient } = require("@aws-sdk/client-dynamodb");
+const { DynamoDBDocumentClient, PutCommand } = require("@aws-sdk/lib-dynamodb");
+
+module.exports.handler = async (event) => {
+  const body = JSON.parse(Buffer.from(event.body, "base64").toString());
+
+  const ddb = DynamoDBDocumentClient.from(new DynamoDBClient({}));
+  const putParams = {
+    TableName: process.env.DYNAMODB_CUSTOMER_TABLE,
+    Item: {
+      primary_key: body.name,
+      email: body.email,
+    },
+  };
+
+  await ddb.send(new PutCommand(putParams));
+
+  return {
+    statusCode: 201,
+  };
+};
+```
+
+Agora vamos criar o arquivo para exibir a lista de clientes `getCustomers.js`.
+
+```javascript
+"use strict";
+const { DynamoDBClient } = require("@aws-sdk/client-dynamodb");
+const { DynamoDBDocumentClient, ScanCommand } = require("@aws-sdk/lib-dynamodb");
+
+module.exports.handler = async () => {
+  const ddb = DynamoDBDocumentClient.from(new DynamoDBClient({}));
+  const result = await ddb.send(
+    new ScanCommand({
+      TableName: process.env.DYNAMODB_CUSTOMER_TABLE,
+    })
+  );
+
+  if (!result.Count || result.Count === 0) {
+    return {
+      statusCode: 404,
+    };
+  }
+
+  return {
+    statusCode: 200,
+    body: JSON.stringify({
+      total: result.Count,
+      items: result.Items.map((customer) => ({
+        name: customer.primary_key,
+        email: customer.email,
+      })),
+    }),
+  };
+};
+```
+
+## Atualizando o arquivo `serverless.yml`
+
+Agora vamos atualizar o arquivo `serverless.yml` adicionando os endpoints e recursos necessários.
+
+Nosso `serverless.yml` deve começar da seguinte igual o arquivo abaixo, caso seu esteja diferente faça as modificações:
+
+```yaml
+org: daniilomello
+service: customers-api
+
+provider:
+  name: aws
+  runtime: nodejs20.x
+  architecture: arm64
+
+package:
+  individually:
+```
+
+Agora vamos adicionar os endpoints, que são funções lambdas integradas com o API Gateway. Para isso vamos adicionar o seguinte:
+
+```yaml
+functions:
+  createCustomer:
+    handler: src/createCustomer.handler
+    events:
+      - httpApi:
+          path: /customers
+          method: post
+  getCustomers:
+    handler: src/getCustomers.handler
+    events:
+      - httpApi:
+          path: /customers
+          method: get
+```
+
+Agora vamos adicionar o nosso recuso do DynamoDB para usarmos como banco de dados:
+
+```yaml
+resources:
+  Resources:
+    CustomerTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        AttributeDefinitions:
+          - AttributeName: primary_key
+            AttributeType: S
+        BillingMode: PAY_PER_REQUEST
+        KeySchema:
+          - AttributeName: primary_key
+            KeyType: HASH
+        TableName: CustomerTable
+```
+
+Para que as nossas funções tenham permissão de realizar operações no nosso banco de dados, precisamos configura o IAM da AWS no nosso provider. Para isso faça o seguite:
+
+```yaml
+provider:
+  iam:
+    role:
+      statements:
+        - Effect: "Allow"
+          Action:
+            - "dynamodb:PutItem"
+            - "dynamodb:Get*"
+            - "dynamodb:Scan*"
+            - "dynamodb:UpdateItem"
+            - "dynamodb:DeleteItem"
+          Resource: !GetAtt CustomerTable.Arn
+```
+
+Além disso, nossas funções chamam o nome da tabela através de uma variável de ambiente. Vamos configura essa variável dentro do nosso provider:
+
+```yaml
+provider:
+  environment:
+    DYNAMODB_CUSTOMER_TABLE: !Ref CustomerTable
+```
+
+Nosso arquivo final `yml` deve ficar da seguinte forma:
+
+```yaml
+org: daniilomello
+service: customers-api
+
+provider:
+  name: aws
+  runtime: nodejs20.x
+  architecture: arm64
+  environment:
+    DYNAMODB_CUSTOMER_TABLE: !Ref CustomerTable
+  iam:
+    role:
+      statements:
+        - Effect: "Allow"
+          Action:
+            - "dynamodb:PutItem"
+            - "dynamodb:Get*"
+            - "dynamodb:Scan*"
+            - "dynamodb:UpdateItem"
+            - "dynamodb:DeleteItem"
+          Resource: !GetAtt CustomerTable.Arn
+
+package:
+  individually: true
+
+custom:
+  esbuild:
+    bundle: true
+    minify: false
+    sourcemap: false
+    exclude:
+      - "@aws-sdk/*"
+    target: node20
+
+functions:
+  createCustomer:
+    handler: src/createCustomer.handler
+    events:
+      - httpApi:
+          path: /customers
+          method: post
+  getCustomers:
+    handler: src/getCustomers.handler
+    events:
+      - httpApi:
+          path: /customers
+          method: get
+
+resources:
+  Resources:
+    CustomerTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        AttributeDefinitions:
+          - AttributeName: primary_key
+            AttributeType: S
+        BillingMode: PAY_PER_REQUEST
+        KeySchema:
+          - AttributeName: primary_key
+            KeyType: HASH
+        TableName: CustomerTable
+```
+
+Agora que está tudo configurado, vamos testar criar um novo cliente, e exibir a lista de clientes.
+
+_Lembre-se de utilizar a sua URL._
+
+Criando um cliente:
+
+```bash
+curl -X POST -d '{"name":"Danilo Mello","email":"mello@daniilo.dev"}' --url https://zxwwdsj8ol.execute-api.us-east-1.amazonaws.com/customers
+# output
+# {"statusCode":201}%
+```
+
+Listando os clientes:
+
+```bash
+curl --url https://zxwwdsj8ol.execute-api.us-east-1.amazonaws.com/customers
+# output
+# {"total":1,"items":[{"name":"Danilo Mello","email":"mello@daniilo.dev"}]}%
+```
+
+## Conclusão
+
+Nesse artigo você viu como é rapido e simples subir um ambiente na AWS com o Serverless Framework.
+
+Agora com o Serverless Framework você consegue:
+
+- Fazer o deploy da sua infraestrutura por linha de comando
+- Criar permissões usando o IAM
+- Criar funções lambdas na AWS
+- Criar bancos de dados no DynamoDB
+- Criar APIs com o API Gateway
+
+Agora vai de você explorar e se aprofundar mais nessa ferramenta.
