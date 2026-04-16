@@ -17,12 +17,13 @@ type Metadata = {
   draft?: boolean;
 };
 
+const DRAFT_CONTENT_DIRECTORY = "/Users/danilo/Documents/obsidian/02-draft";
+
 function getContentDirectory() {
   return path.join(process.cwd(), "content");
 }
 
-function getMdxFiles() {
-  const dir = getContentDirectory();
+function getMdxFiles(dir: string) {
   if (!fs.existsSync(dir)) return [];
   return fs
     .readdirSync(dir)
@@ -49,7 +50,7 @@ async function markdownToHtml(markdown: string) {
 }
 
 function getMdxData(dir: string) {
-  const mdxFiles = getMdxFiles();
+  const mdxFiles = getMdxFiles(dir);
   return mdxFiles.map((file) => {
     const { data, content } = readMdxFile(path.join(dir, file));
     const slug = path.basename(file, path.extname(file));
@@ -73,9 +74,8 @@ function parseMetadata(data: Record<string, unknown>): Metadata {
   };
 }
 
-export async function getPost(slug: string) {
-  const dir = getContentDirectory();
-  const mdxFile = getMdxFiles().find(
+export async function getPost(slug: string, dir = getContentDirectory()) {
+  const mdxFile = getMdxFiles(dir).find(
     (file) => path.basename(file, path.extname(file)) === slug
   );
 
@@ -105,20 +105,16 @@ export async function getBlogPosts() {
 }
 
 export async function getDraftPosts() {
-  const dir = getContentDirectory();
+  const dir = DRAFT_CONTENT_DIRECTORY;
   const posts = getMdxData(dir);
 
-  return posts
-    .map((post) => ({
-      slug: post.slug,
-      metadata: parseMetadata(post.metadata as unknown as Record<string, unknown>),
-      content: post.content,
-    }))
-    .filter((post) => post.metadata.draft);
+  return posts.map((post) => ({
+    slug: post.slug,
+    metadata: parseMetadata(post.metadata as unknown as Record<string, unknown>),
+    content: post.content,
+  }));
 }
 
 export async function getDraftPost(slug: string) {
-  const post = await getPost(slug);
-  if (!post || !post.metadata.draft) return null;
-  return post;
+  return getPost(slug, DRAFT_CONTENT_DIRECTORY);
 }
